@@ -28,10 +28,13 @@ PERSONALITY:
 - Professional but conversational
 - Empathetic to travel concerns
 
-LANGUAGE:
-- Auto-detect the user's language from their messages
-- ALWAYS respond in the SAME language the user writes in (Spanish or English or other)
-- If unsure, use Spanish first
+LANGUAGE RULES (CRITICAL — follow strictly):
+- Detect the language of EVERY user message
+- If the user writes in Spanish → you MUST respond in Spanish. No exceptions.
+- If the user writes in English → respond in English
+- If the user writes in any other language → respond in that language
+- NEVER respond in a different language than the one the user used
+- Default language is Spanish if unclear
 
 CONVERSATION FLOW (follow this order naturally):
 1. Greet warmly (bilingual first message only)
@@ -311,11 +314,15 @@ function openQuoteModal(planId, price) {
 
 // ---------- DETECT LANGUAGE ----------
 function detectLanguage(text) {
-  const spanishWords = /\b(el|la|los|las|un|una|para|viaje|seguro|necesito|quiero|tengo|fecha|destino|viajero|cobertura|gracias|hola|si|no|por favor|cómo|cuándo|cuánto|qué)\b/i;
-  if (spanishWords.test(text)) return 'es';
-  const englishWords = /\b(the|a|an|for|travel|insurance|need|want|have|date|destination|traveler|coverage|thank|hello|hi|yes|no|please|how|when|how much|what)\b/i;
-  if (englishWords.test(text)) return 'en';
-  return state.lang; // keep current
+  const t = text.toLowerCase();
+  // Strong Spanish signals
+  const spanishWords = /\b(el|la|los|las|un|una|para|viaje|seguro|necesito|quiero|tengo|fecha|destino|viajero|cobertura|gracias|hola|español|habla|sí|también|qué|cómo|cuándo|cuánto|dónde|personas|años|salida|regreso|médica|cancelación|ambas|planeas|viajar|quiero|necesito|días|semanas)\b/i;
+  if (spanishWords.test(t)) return 'es';
+  // Strong English signals
+  const englishWords = /\b(the|travel|insurance|need|want|have|destination|traveler|coverage|thank|hello|hi|please|how|when|what|english|speak|departure|return|medical|cancellation|both|days|weeks|people|years)\b/i;
+  if (englishWords.test(t)) return 'en';
+  // If message is very short (like "España", "París") keep current language
+  return state.lang;
 }
 
 // ---------- EXTRACT QUOTE DATA ----------
