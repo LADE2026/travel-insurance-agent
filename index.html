@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+
   <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="header-inner">
@@ -26,7 +27,15 @@
           <span class="logo-tagline">Seguros de Viaje · Travel Insurance</span>
         </div>
       </div>
-      <div class="header-badges">
+      <div class="header-right">
+        <!-- LANGUAGE BUTTONS -->
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn active" data-lang="es">🇪🇸 ES</button>
+          <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+          <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-btn" data-lang="pt">🇧🇷 PT</button>
+          <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
+        </div>
         <div class="badge-live">
           <span class="pulse-dot"></span>
           24/7 Live
@@ -37,45 +46,107 @@
 
   <!-- ===== CHAT CONTAINER ===== -->
   <main class="chat-wrapper">
-    <div class="chat-container" id="chatContainer">
-      <!-- Messages injected by JS -->
-    </div>
+    <div class="chat-container" id="chatContainer"></div>
   </main>
+
+  <!-- ===== BOOKING WIDGET (airline style) ===== -->
+  <div class="booking-bar" id="bookingBar">
+    <div class="booking-inner">
+
+      <!-- DATE PICKER trigger -->
+      <button class="bk-btn" id="openCalendar">
+        <span class="bk-icon">📅</span>
+        <div class="bk-info">
+          <span class="bk-label" id="calLabel">Fechas / Dates</span>
+          <span class="bk-value" id="calValue">Seleccionar fechas</span>
+        </div>
+      </button>
+
+      <div class="bk-divider"></div>
+
+      <!-- PASSENGERS trigger -->
+      <button class="bk-btn" id="openPassengers">
+        <span class="bk-icon">👥</span>
+        <div class="bk-info">
+          <span class="bk-label" id="pasLabel">Viajeros / Travelers</span>
+          <span class="bk-value" id="pasValue">1 viajero</span>
+        </div>
+      </button>
+
+      <div class="bk-divider"></div>
+
+      <!-- SEARCH button -->
+      <button class="bk-search" id="bkSearch">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+    </div>
+  </div>
 
   <!-- ===== INPUT AREA ===== -->
   <footer class="input-area">
     <div class="input-inner">
       <div class="input-row">
-        <textarea
-          id="userInput"
-          placeholder="Escribe tu mensaje... / Type your message..."
-          rows="1"
-          autocomplete="off"
-        ></textarea>
-        <button id="sendBtn" class="send-btn" title="Enviar / Send">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <textarea id="userInput" placeholder="Escribe tu mensaje... / Type your message..." rows="1" autocomplete="off"></textarea>
+        <button id="sendBtn" class="send-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <p class="input-disclaimer">
-        Powered by Claude AI · TravelSafe AI no almacena datos de pago
-      </p>
+      <p class="input-disclaimer">Powered by Claude AI · TravelSafe AI no almacena datos de pago</p>
     </div>
   </footer>
+
+  <!-- ===== CALENDAR MODAL ===== -->
+  <div class="modal-overlay" id="calendarModal" style="display:none">
+    <div class="modal modal-cal">
+      <button class="modal-close" id="closeCalendar">✕</button>
+      <h2 class="modal-title" id="calModalTitle">📅 Selecciona tus fechas</h2>
+      <div class="cal-tabs">
+        <button class="cal-tab active" id="tabDep">✈️ <span id="tabDepLabel">Ida / Departure</span></button>
+        <button class="cal-tab" id="tabRet">🏠 <span id="tabRetLabel">Vuelta / Return</span></button>
+      </div>
+      <div class="cal-selected-row">
+        <div class="cal-selected-box" id="depBox">
+          <span class="cal-sel-label" id="depLabel">Salida</span>
+          <span class="cal-sel-date" id="depDisplay">—</span>
+        </div>
+        <div class="cal-arrow">→</div>
+        <div class="cal-selected-box" id="retBox">
+          <span class="cal-sel-label" id="retLabel">Regreso</span>
+          <span class="cal-sel-date" id="retDisplay">—</span>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <div class="modal-actions">
+        <button class="btn-email" id="confirmDates">✅ <span id="confirmDatesLabel">Confirmar fechas</span></button>
+        <button class="btn-close-modal" id="cancelDates"><span id="cancelDatesLabel">Cancelar</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PASSENGERS MODAL ===== -->
+  <div class="modal-overlay" id="passengersModal" style="display:none">
+    <div class="modal modal-sm">
+      <button class="modal-close" id="closePassengers">✕</button>
+      <h2 class="modal-title" id="pasModalTitle">👥 Viajeros</h2>
+      <div class="pas-list" id="passengerList"></div>
+      <button class="btn-add-pas" id="addPassenger">+ <span id="addPasLabel">Agregar viajero</span></button>
+      <div class="modal-actions">
+        <button class="btn-email" id="confirmPassengers">✅ <span id="confirmPasLabel">Confirmar</span></button>
+        <button class="btn-close-modal" id="cancelPassengers"><span id="cancelPasLabel">Cancelar</span></button>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== QUOTE MODAL ===== -->
   <div class="modal-overlay" id="quoteModal" style="display:none">
     <div class="modal">
       <button class="modal-close" id="closeQuoteModal">✕</button>
-      <h2 class="modal-title">📋 Resumen de Cotización / Quote Summary</h2>
+      <h2 class="modal-title">📋 <span id="quoteModalTitle">Resumen de Cotización</span></h2>
       <div id="quoteContent"></div>
       <div class="modal-actions">
-        <button class="btn-email" id="sendEmailBtn">
-          📧 Enviar por email / Send by email
-        </button>
-        <button class="btn-close-modal" id="closeQuoteModal2">Cerrar / Close</button>
+        <button class="btn-email" id="sendEmailBtn">📧 <span id="sendEmailLabel">Enviar por email</span></button>
+        <button class="btn-close-modal" id="closeQuoteModal2"><span id="closeQuoteLabel">Cerrar</span></button>
       </div>
     </div>
   </div>
@@ -84,23 +155,23 @@
   <div class="modal-overlay" id="emailModal" style="display:none">
     <div class="modal modal-sm">
       <button class="modal-close" id="closeEmailModal">✕</button>
-      <h2 class="modal-title">📧 Enviar Cotización</h2>
-      <p class="modal-sub">Te enviaremos el resumen a tu correo electrónico.</p>
+      <h2 class="modal-title">📧 <span id="emailModalTitle">Enviar Cotización</span></h2>
+      <p class="modal-sub" id="emailModalSub">Te enviaremos el resumen a tu correo electrónico.</p>
       <input type="email" id="emailInput" class="email-input" placeholder="tu@email.com" />
       <div class="modal-actions">
-        <button class="btn-email" id="confirmSendEmail">Enviar / Send</button>
-        <button class="btn-close-modal" id="cancelEmailModal">Cancelar</button>
+        <button class="btn-email" id="confirmSendEmail"><span id="sendBtnLabel">Enviar</span></button>
+        <button class="btn-close-modal" id="cancelEmailModal"><span id="cancelBtnLabel">Cancelar</span></button>
       </div>
     </div>
   </div>
 
-  <!-- ===== CONFIG ===== -->
+  <!-- ===== SCRIPTS ===== -->
   <script src="config.js"></script>
-  <!-- config.local.js is gitignored — put your real API key there -->
   <script src="config.local.js" onerror="void 0"></script>
-  <!-- ===== INSURANCE DATA ===== -->
   <script src="insurance.js"></script>
-  <!-- ===== MAIN APP ===== -->
+  <script src="i18n.js"></script>
+  <script src="calendar.js"></script>
+  <script src="passengers.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

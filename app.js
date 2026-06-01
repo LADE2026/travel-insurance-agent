@@ -2,12 +2,12 @@
 // TRAVELSAFE AI — MAIN APPLICATION
 // =============================================
 
-// ---------- STATE ----------
-const state = {
-  messages: [],          // {role, content}
-  lang: 'es',            // detected language
-  step: 'greeting',      // conversation step
-  quoteData: {           // collected quote info
+// ---------- STATE (exposed globally) ----------
+window.appState = {
+  messages: [],
+  lang: 'es',
+  step: 'greeting',
+  quoteData: {
     destination: null,
     departureDate: null,
     returnDate: null,
@@ -16,54 +16,48 @@ const state = {
     coverageType: null,
     selectedPlan: null,
   },
-  typingTimer: null,
 };
+const state = window.appState;
 
 // ---------- SYSTEM PROMPT ----------
 function buildSystemPrompt() {
-  return `You are TravelSafe AI, a friendly and professional travel insurance sales agent. You help users find the best travel insurance plan.
+  const lang = state.lang;
+  const langName = I18N[lang] ? I18N[lang].name : 'Spanish';
+  return `You are TravelSafe AI, a friendly and professional travel insurance sales agent.
+
+CRITICAL LANGUAGE RULE:
+- The user's selected interface language is: ${langName} (code: ${lang})
+- You MUST ALWAYS respond in ${langName}. No exceptions.
+- Even if the user writes a single word in another language, respond in ${langName}.
+- Never switch languages mid-conversation.
 
 PERSONALITY:
 - Warm, helpful and concise
 - Professional but conversational
-- Empathetic to travel concerns
+- Keep responses to 2-4 sentences max
 
-LANGUAGE RULES (CRITICAL — follow strictly):
-- Detect the language of EVERY user message
-- If the user writes in Spanish → you MUST respond in Spanish. No exceptions.
-- If the user writes in English → respond in English
-- If the user writes in any other language → respond in that language
-- NEVER respond in a different language than the one the user used
-- Default language is Spanish if unclear
-
-CONVERSATION FLOW (follow this order naturally):
-1. Greet warmly (bilingual first message only)
-2. Ask for travel destination
-3. Ask for departure and return dates
-4. Ask for number of travelers and their ages
-5. Ask what coverage they need: medical, cancellation, or both
-6. Recommend plans (you will trigger the JS card display — just say you'll show them options)
-7. Answer any questions, help them choose
+CONVERSATION FLOW:
+1. Ask for travel destination
+2. Ask for departure and return dates (tell them to use the calendar button 📅)
+3. Ask for number of travelers and ages (tell them to use the travelers button 👥)
+4. Ask what coverage: medical, cancellation, or both
+5. When you have destination + dates + travelers + coverage, output [SHOW_PLANS] on its own line
 
 RULES:
-- Keep responses SHORT (2-4 sentences max unless explaining coverage)
-- Never make up prices — the system will show real cards
-- When the user has provided destination + dates + travelers + coverage type, output EXACTLY this tag on its own line: [SHOW_PLANS]
-- When collecting info, ask ONE thing at a time
-- Be encouraging about their travel plans
-- If they ask something off-topic, gently redirect to the insurance flow
-
-IMPORTANT: When you output [SHOW_PLANS], the system will automatically display the insurance plan cards. Just say something like "Here are the plans I recommend for you!" before or after the tag.`;
+- When asking for dates, mention the calendar button (📅) in the booking bar below
+- When asking for travelers, mention the travelers button (👥) in the booking bar below
+- Never make up prices
+- Output [SHOW_PLANS] only once all 4 data points are collected
+- Be encouraging about their travel plans`;
 }
 
-// ---------- DOM HELPERS ----------
+// ---------- DOM ----------
 const chatContainer = document.getElementById('chatContainer');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
 function scrollToBottom() {
-  const wrapper = document.querySelector('.chat-wrapper');
-  wrapper.scrollTo({ top: wrapper.scrollHeight, behavior: 'smooth' });
+  document.querySelector('.chat-wrapper').scrollTo({ top: 99999, behavior: 'smooth' });
 }
 
 function getTime() {
@@ -71,9 +65,7 @@ function getTime() {
 }
 
 function addMessage(role, content, skipHistory = false) {
-  if (!skipHistory) {
-    state.messages.push({ role, content });
-  }
+  if (!skipHistory) state.messages.push({ role, content });
 
   const row = document.createElement('div');
   row.className = `msg-row ${role === 'user' ? 'user' : 'bot'}`;
@@ -84,10 +76,9 @@ function addMessage(role, content, skipHistory = false) {
 
   const bubble = document.createElement('div');
   bubble.className = `bubble ${role === 'user' ? 'bubble-user' : 'bubble-bot'}`;
-
-  // Render simple markdown-ish: bold, line breaks
   const formatted = content
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/\n/g, '<br>');
   bubble.innerHTML = `${formatted}<span class="bubble-time">${getTime()}</span>`;
 
@@ -102,15 +93,12 @@ function showTyping() {
   const row = document.createElement('div');
   row.className = 'msg-row bot';
   row.id = 'typingRow';
-
   const avatar = document.createElement('div');
   avatar.className = 'avatar avatar-bot';
   avatar.textContent = '🤖';
-
   const bubble = document.createElement('div');
   bubble.className = 'bubble bubble-bot';
   bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
-
   row.appendChild(avatar);
   row.appendChild(bubble);
   chatContainer.appendChild(row);
@@ -118,17 +106,14 @@ function showTyping() {
 }
 
 function removeTyping() {
-  const existing = document.getElementById('typingRow');
-  if (existing) existing.remove();
+  const el = document.getElementById('typingRow');
+  if (el) el.remove();
 }
 
 function showQuickReplies(options) {
-  const existing = document.querySelector('.quick-replies');
-  if (existing) existing.remove();
-
+  document.querySelector('.quick-replies')?.remove();
   const container = document.createElement('div');
   container.className = 'quick-replies';
-
   options.forEach(opt => {
     const chip = document.createElement('button');
     chip.className = 'chip';
@@ -139,25 +124,61 @@ function showQuickReplies(options) {
     });
     container.appendChild(chip);
   });
-
   chatContainer.appendChild(container);
   scrollToBottom();
+}
+
+// ---------- LANGUAGE SWITCHER ----------
+function initLangSwitcher() {
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      switchLanguage(lang);
+    });
+  });
+}
+
+function switchLanguage(lang) {
+  if (!I18N[lang]) return;
+  state.lang = lang;
+
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  // Update UI text
+  const i = I18N[lang];
+  userInput.placeholder = i.placeholder;
+  document.querySelector('.input-disclaimer').textContent = i.disclaimer;
+  document.getElementById('calLabel').textContent = i.calLabel;
+  document.getElementById('pasLabel').textContent = i.pasLabel;
+
+  // Notify chat
+  const greet = {
+    es: `Cambiando al español 🇪🇸`,
+    en: `Switching to English 🇺🇸`,
+    fr: `Passage au français 🇫🇷`,
+    pt: `Mudando para português 🇧🇷`,
+    de: `Wechsle zu Deutsch 🇩🇪`,
+  };
+  addMessage('assistant', greet[lang] || `Language: ${i.name}`, true);
+  showQuickReplies(i.destChips);
 }
 
 // ---------- INSURANCE CARDS ----------
 function showInsuranceCards() {
   const { travelers, departureDate, returnDate } = state.quoteData;
+  const lang = state.lang;
+  const i = I18N[lang] || I18N.es;
 
   let days = 7;
   if (departureDate && returnDate) {
-    const d1 = new Date(departureDate);
-    const d2 = new Date(returnDate);
-    const diff = Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24));
+    const parse = s => { const [d,m,y] = s.split('/'); return new Date(`${y}-${m}-${d}`); };
+    const diff = Math.ceil((parse(returnDate) - parse(departureDate)) / 86400000);
     if (diff > 0) days = diff;
   }
-
   const numTravelers = parseInt(travelers) || 1;
-  const lang = state.lang;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'cards-wrapper';
@@ -168,22 +189,15 @@ function showInsuranceCards() {
     const features = lang === 'es' ? plan.featuresEs : plan.featuresEn;
     const name = lang === 'es' ? plan.nameEs : plan.nameEn;
     const sub = lang === 'es' ? plan.subtitleEs : plan.subtitleEn;
+    const badgeHtml = plan.badge ? `<span class="card-badge ${plan.badge === 'POPULAR' ? 'popular' : ''}">${plan.badge}</span>` : '';
 
     const card = document.createElement('div');
     card.className = `ins-card card-${planId}`;
-
-    const badgeHtml = plan.badge
-      ? `<span class="card-badge ${plan.badge === 'POPULAR' ? 'popular' : ''}">${plan.badge}</span>`
-      : '';
-
     card.innerHTML = `
       <div class="card-header">
         <div class="card-title-group">
           <span class="card-emoji">${plan.emoji}</span>
-          <div>
-            <div class="card-name">${name}</div>
-            <div class="card-sub">${sub}</div>
-          </div>
+          <div><div class="card-name">${name}</div><div class="card-sub">${sub}</div></div>
         </div>
         ${badgeHtml}
       </div>
@@ -191,123 +205,78 @@ function showInsuranceCards() {
         <div class="card-price">
           <span class="price-currency">$</span>
           <span class="price-amount">${price.toFixed(2)}</span>
-          <span class="price-period">&nbsp;/ ${lang === 'es' ? 'total' : 'total'} (${days} ${lang === 'es' ? 'días' : 'days'}, ${numTravelers} ${numTravelers > 1 ? (lang === 'es' ? 'viajeros' : 'travelers') : (lang === 'es' ? 'viajero' : 'traveler')})</span>
+          <span class="price-period">&nbsp;/ ${i.totalLabel} (${days} ${i.dayLabel}, ${numTravelers} ${numTravelers > 1 ? i.travelers : i.traveler})</span>
         </div>
         <ul class="card-features">
           ${features.map(f => `<li><span class="feat-icon">✓</span><span>${f}</span></li>`).join('')}
         </ul>
-        <button class="btn-buy btn-buy-${planId}" data-plan="${planId}" data-price="${price}">
-          ${lang === 'es' ? '🛒 Comprar ahora' : '🛒 Buy now'}
-        </button>
-        <button class="btn-quote" data-plan="${planId}" data-price="${price}">
-          ${lang === 'es' ? '📋 Ver resumen' : '📋 View summary'}
-        </button>
-      </div>
-    `;
-
+        <button class="btn-buy btn-buy-${planId}" data-plan="${planId}" data-price="${price}">${i.buyBtn}</button>
+        <button class="btn-quote" data-plan="${planId}" data-price="${price}">${i.summaryBtn}</button>
+      </div>`;
     wrapper.appendChild(card);
   });
 
   chatContainer.appendChild(wrapper);
   scrollToBottom();
 
-  // Buy buttons
   wrapper.querySelectorAll('.btn-buy').forEach(btn => {
     btn.addEventListener('click', () => {
-      const planId = btn.dataset.plan;
-      const price = btn.dataset.price;
-      state.quoteData.selectedPlan = planId;
-      handlePurchaseFlow(planId, price);
+      state.quoteData.selectedPlan = btn.dataset.plan;
+      handlePurchaseFlow(btn.dataset.plan, btn.dataset.price);
     });
   });
-
-  // Quote summary buttons
   wrapper.querySelectorAll('.btn-quote').forEach(btn => {
     btn.addEventListener('click', () => {
-      const planId = btn.dataset.plan;
-      const price = btn.dataset.price;
-      state.quoteData.selectedPlan = planId;
-      openQuoteModal(planId, parseFloat(price));
+      state.quoteData.selectedPlan = btn.dataset.plan;
+      openQuoteModal(btn.dataset.plan, parseFloat(btn.dataset.price));
     });
   });
 }
 
 function handlePurchaseFlow(planId, price) {
   const lang = state.lang;
+  const i = I18N[lang] || I18N.es;
   const plan = INSURANCE_PLANS[planId];
   const name = lang === 'es' ? plan.nameEs : plan.nameEn;
-
-  const msg = lang === 'es'
-    ? `¡Excelente elección! 🎉 Seleccionaste el plan **${name}** por $${parseFloat(price).toFixed(2)}.\n\nPara completar tu compra, necesitarás:\n1. Datos personales de todos los viajeros\n2. Información de pago\n3. Confirmación por email\n\n¿Te gustaría que un asesor te llame para finalizar la compra? O puedes continuar en línea.`
-    : `Excellent choice! 🎉 You selected the **${name}** plan for $${parseFloat(price).toFixed(2)}.\n\nTo complete your purchase, you'll need:\n1. Personal info for all travelers\n2. Payment information\n3. Email confirmation\n\nWould you like a representative to call you? Or you can continue online.`;
-
-  addMessage('assistant', msg);
-
-  const opts = lang === 'es'
-    ? ['📞 Llamarme', '💻 Continuar en línea', '📋 Ver resumen', '❓ Tengo preguntas']
-    : ['📞 Call me', '💻 Continue online', '📋 View summary', '❓ I have questions'];
-
-  showQuickReplies(opts);
+  addMessage('assistant', i.purchaseMsg(name, parseFloat(price).toFixed(2)));
+  showQuickReplies(i.purchaseChips);
 }
 
 // ---------- QUOTE MODAL ----------
 function openQuoteModal(planId, price) {
   const lang = state.lang;
+  const i = I18N[lang] || I18N.es;
   const plan = INSURANCE_PLANS[planId];
   const { destination, departureDate, returnDate, travelers, ages, coverageType } = state.quoteData;
   const name = lang === 'es' ? plan.nameEs : plan.nameEn;
 
-  const labelMap = lang === 'es' ? {
-    destination: 'Destino',
-    departure: 'Fecha de salida',
-    return: 'Fecha de regreso',
-    travelers: 'Viajeros',
-    ages: 'Edades',
-    coverage: 'Cobertura',
-    plan: 'Plan seleccionado',
-    medical: lang === 'es' ? plan.highlights.medicalEs : plan.highlights.medicalEn,
-    cancellation: lang === 'es' ? plan.highlights.cancellationEs : plan.highlights.cancellationEn,
-    deductible: 'Deducible',
-    total: 'Precio total',
-  } : {
-    destination: 'Destination',
-    departure: 'Departure date',
-    return: 'Return date',
-    travelers: 'Travelers',
-    ages: 'Ages',
-    coverage: 'Coverage',
-    plan: 'Selected plan',
-    medical: plan.highlights.medicalEn,
-    cancellation: plan.highlights.cancellationEn,
-    deductible: 'Deductible',
-    total: 'Total price',
-  };
+  document.getElementById('quoteModalTitle').textContent = i.quoteTitle;
+  document.getElementById('sendEmailLabel').textContent = i.sendEmail;
+  document.getElementById('closeQuoteLabel').textContent = i.closeBtn;
 
-  const content = document.getElementById('quoteContent');
-  content.innerHTML = `
+  document.getElementById('quoteContent').innerHTML = `
     <div class="quote-section">
-      <div class="quote-section-title">${lang === 'es' ? 'Información del viaje' : 'Trip information'}</div>
-      <div class="quote-row"><span class="quote-key">${labelMap.destination}</span><span class="quote-val">${destination || '—'}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.departure}</span><span class="quote-val">${departureDate || '—'}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.return}</span><span class="quote-val">${returnDate || '—'}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.travelers}</span><span class="quote-val">${travelers || '—'}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.ages}</span><span class="quote-val">${ages || '—'}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.coverage}</span><span class="quote-val">${coverageType || '—'}</span></div>
+      <div class="quote-section-title">${i.tripInfo}</div>
+      <div class="quote-row"><span class="quote-key">${i.destRow}</span><span class="quote-val">${destination || '—'}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.depRow}</span><span class="quote-val">${departureDate || '—'}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.retRow}</span><span class="quote-val">${returnDate || '—'}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.travRow}</span><span class="quote-val">${travelers || '—'}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.agesRow}</span><span class="quote-val">${ages || '—'}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.covRow}</span><span class="quote-val">${coverageType || '—'}</span></div>
     </div>
     <div class="quote-divider"></div>
     <div class="quote-section">
-      <div class="quote-section-title">${lang === 'es' ? 'Plan seleccionado' : 'Selected plan'}</div>
-      <div class="quote-row"><span class="quote-key">${labelMap.plan}</span><span class="quote-val">${plan.emoji} ${name}</span></div>
-      <div class="quote-row"><span class="quote-key">${lang === 'es' ? 'Cobertura médica' : 'Medical coverage'}</span><span class="quote-val">${lang === 'es' ? plan.highlights.medicalEs : plan.highlights.medicalEn}</span></div>
-      <div class="quote-row"><span class="quote-key">${lang === 'es' ? 'Cancelación' : 'Cancellation'}</span><span class="quote-val">${lang === 'es' ? plan.highlights.cancellationEs : plan.highlights.cancellationEn}</span></div>
-      <div class="quote-row"><span class="quote-key">${labelMap.deductible}</span><span class="quote-val">${plan.highlights.deductible}</span></div>
+      <div class="quote-section-title">${i.planInfo}</div>
+      <div class="quote-row"><span class="quote-key">${i.planRow}</span><span class="quote-val">${plan.emoji} ${name}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.medRow}</span><span class="quote-val">${lang === 'es' ? plan.highlights.medicalEs : plan.highlights.medicalEn}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.canRow}</span><span class="quote-val">${lang === 'es' ? plan.highlights.cancellationEs : plan.highlights.cancellationEn}</span></div>
+      <div class="quote-row"><span class="quote-key">${i.dedRow}</span><span class="quote-val">${plan.highlights.deductible}</span></div>
     </div>
     <div class="quote-divider"></div>
     <div class="quote-row" style="font-size:1rem">
-      <span class="quote-key" style="font-weight:700;color:var(--navy)">${labelMap.total}</span>
+      <span class="quote-key" style="font-weight:700;color:var(--navy)">${i.totalRow}</span>
       <span class="quote-val" style="font-size:1.2rem;color:var(--blue)">$${price.toFixed(2)} USD</span>
-    </div>
-  `;
+    </div>`;
 
   document.getElementById('quoteModal').style.display = 'flex';
 }
@@ -315,71 +284,62 @@ function openQuoteModal(planId, price) {
 // ---------- DETECT LANGUAGE ----------
 function detectLanguage(text) {
   const t = text.toLowerCase();
-  // Strong Spanish signals
   const spanishWords = /\b(el|la|los|las|un|una|para|viaje|seguro|necesito|quiero|tengo|fecha|destino|viajero|cobertura|gracias|hola|español|habla|sí|también|qué|cómo|cuándo|cuánto|dónde|personas|años|salida|regreso|médica|cancelación|ambas|planeas|viajar|quiero|necesito|días|semanas)\b/i;
   if (spanishWords.test(t)) return 'es';
-  // Strong English signals
   const englishWords = /\b(the|travel|insurance|need|want|have|destination|traveler|coverage|thank|hello|hi|please|how|when|what|english|speak|departure|return|medical|cancellation|both|days|weeks|people|years)\b/i;
   if (englishWords.test(t)) return 'en';
-  // If message is very short (like "España", "París") keep current language
+  const frenchWords = /\b(bonjour|salut|merci|voyage|assurance|destination|date|voyageur|couverture|départ|retour|médical|annulation|jours|semaines)\b/i;
+  if (frenchWords.test(t)) return 'fr';
+  const portugueseWords = /\b(olá|obrigado|viagem|seguro|destino|data|viajante|cobertura|partida|retorno|médico|cancelamento|dias|semanas)\b/i;
+  if (portugueseWords.test(t)) return 'pt';
+  const germanWords = /\b(hallo|danke|reise|versicherung|reiseziel|datum|reisender|abdeckung|abflug|rückkehr|medizinisch|stornierung|tage|wochen)\b/i;
+  if (germanWords.test(t)) return 'de';
   return state.lang;
 }
 
 // ---------- EXTRACT QUOTE DATA ----------
-function extractQuoteData(userText, assistantText) {
-  const combined = userText + ' ' + assistantText;
-
-  // Destination
-  const destMatch = combined.match(/(?:destination|destino)[:\s]+([A-Za-záéíóúñ\s,]+?)(?:\.|,|\n|$)/i);
-  if (destMatch && !state.quoteData.destination) {
-    state.quoteData.destination = destMatch[1].trim();
-  }
-
-  // Travelers
-  const travMatch = userText.match(/\b(\d+)\s*(?:viajeros?|travelers?|personas?|persons?|people)\b/i);
-  if (travMatch) state.quoteData.travelers = travMatch[1];
-  else if (/^[1-9]$/.test(userText.trim())) state.quoteData.travelers = userText.trim();
-
-  // Dates — look for common formats
-  const datePattern = /(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{4}-\d{2}-\d{2})/g;
+function extractQuoteData(userText) {
+  const datePattern = /(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})/g;
   const dates = userText.match(datePattern);
   if (dates && dates.length >= 2) {
-    state.quoteData.departureDate = dates[0];
-    state.quoteData.returnDate = dates[1];
+    state.quoteData.departureDate = dates[0].replace(/-/g, '/');
+    state.quoteData.returnDate = dates[1].replace(/-/g, '/');
   } else if (dates && dates.length === 1) {
     if (!state.quoteData.departureDate) state.quoteData.departureDate = dates[0];
     else if (!state.quoteData.returnDate) state.quoteData.returnDate = dates[0];
   }
 
-  // Ages
-  const agesMatch = userText.match(/\b(\d{1,2}(?:\s*[,y\/]\s*\d{1,2})*)\s*(?:años?|years?\s*old|age)?\b/i);
-  if (agesMatch && state.quoteData.travelers && !state.quoteData.ages) {
-    state.quoteData.ages = agesMatch[1];
-  }
+  const travMatch = userText.match(/\b(\d+)\s*(?:viajeros?|travelers?|voyageurs?|viajantes?|reisende?|personas?|personne?|pessoa)/i);
+  if (travMatch) state.quoteData.travelers = travMatch[1];
 
-  // Coverage type
-  if (/m[eé]dic|medical/i.test(userText) && /cancel/i.test(userText)) {
+  const agesMatch = userText.match(/(?:edades?|ages?|âges?|idades?|alter)[:\s]+([0-9, ]+)/i);
+  if (agesMatch) state.quoteData.ages = agesMatch[1].trim();
+
+  if (/m[eé]dic|medical|médical|médico/i.test(userText) && /cancel/i.test(userText)) {
     state.quoteData.coverageType = state.lang === 'es' ? 'Médica + Cancelación' : 'Medical + Cancellation';
-  } else if (/m[eé]dic|medical/i.test(userText)) {
+  } else if (/m[eé]dic|medical|médical|médico/i.test(userText)) {
     state.quoteData.coverageType = state.lang === 'es' ? 'Médica' : 'Medical';
   } else if (/cancel/i.test(userText)) {
     state.quoteData.coverageType = state.lang === 'es' ? 'Cancelación' : 'Cancellation';
-  } else if (/ambas|both|todo|all|completa/i.test(userText)) {
+  } else if (/ambas|both|les deux|ambas|beide/i.test(userText)) {
     state.quoteData.coverageType = state.lang === 'es' ? 'Completa' : 'Full';
+  }
+
+  // Destination — capture after known destination words or if destination not yet set
+  if (!state.quoteData.destination) {
+    const destMatch = userText.match(/(?:viajar?\s+a|travel(?:ing)?\s+to|destination[:\s]+|destino[:\s]+|voyager?\s+[àa]|viajar?\s+para|reisen?\s+nach)\s*([A-Za-záéíóúñüàèìòùâêîôûäëïöüç\s,]+?)(?:\.|,|\n|$)/i);
+    if (destMatch) state.quoteData.destination = destMatch[1].trim();
+    else if (/^[A-Za-záéíóúñüàèìòùâêîôûäëïöüç\s,]{3,30}$/.test(userText.trim()) && !userText.match(/\d/)) {
+      state.quoteData.destination = userText.trim();
+    }
   }
 }
 
-// ---------- CLAUDE API CALL ----------
+// ---------- CLAUDE API ----------
 async function callClaude(userMessage) {
-  // Guard for missing API key
   if (!CONFIG.ANTHROPIC_API_KEY || CONFIG.ANTHROPIC_API_KEY === 'YOUR_ANTHROPIC_API_KEY') {
     return simulateBotResponse(userMessage);
   }
-
-  const messages = [
-    ...state.messages.slice(-20), // keep last 20 messages for context
-  ];
-
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -393,177 +353,170 @@ async function callClaude(userMessage) {
         model: CONFIG.MODEL,
         max_tokens: CONFIG.MAX_TOKENS,
         system: buildSystemPrompt(),
-        messages,
+        messages: state.messages.slice(-20),
       }),
     });
-
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      console.error('Claude API error:', err);
-      throw new Error(err.error?.message || 'API error');
-    }
-
+    if (!response.ok) throw new Error('API error');
     const data = await response.json();
     return data.content[0].text;
   } catch (err) {
-    console.error('Claude call failed:', err);
+    console.error('Claude error:', err);
     return simulateBotResponse(userMessage);
   }
 }
 
-// ---------- SIMULATION FALLBACK ----------
+// ---------- SIMULATION ----------
 function simulateBotResponse(userText) {
   const lang = state.lang;
+  const i = I18N[lang] || I18N.es;
   const step = state.step;
+  const stepFlow = ['greeting','destination','dates','travelers','coverage','default'];
+  const idx = stepFlow.indexOf(step);
+  state.step = stepFlow[Math.min(idx + 1, stepFlow.length - 1)];
 
   const responses = {
-    greeting: lang === 'es'
-      ? '¡Hola! 👋 Soy TravelSafe AI, tu asistente de seguros de viaje. ¿A qué destino planeas viajar?'
-      : 'Hello! 👋 I\'m TravelSafe AI, your travel insurance assistant. Where are you planning to travel?',
-    destination: lang === 'es'
-      ? '¡Excelente destino! ✈️ ¿Cuáles son tus fechas de viaje? Por favor indícame la fecha de salida y de regreso.'
-      : 'Great destination! ✈️ What are your travel dates? Please share your departure and return dates.',
-    dates: lang === 'es'
-      ? 'Perfecto. ¿Cuántas personas viajarán y cuáles son sus edades?'
-      : 'Perfect. How many people will be traveling and what are their ages?',
-    travelers: lang === 'es'
-      ? '¿Qué tipo de cobertura necesitan? ¿Médica, cancelación o ambas?'
-      : 'What type of coverage do you need? Medical, cancellation, or both?',
-    coverage: lang === 'es'
-      ? '¡Perfecto! Déjame mostrarte las mejores opciones para tu viaje. [SHOW_PLANS]'
-      : 'Perfect! Let me show you the best options for your trip. [SHOW_PLANS]',
-    default: lang === 'es'
-      ? 'Entendido. ¿Hay algo más en lo que pueda ayudarte con tu seguro de viaje?'
-      : 'Got it. Is there anything else I can help you with regarding your travel insurance?',
+    es: {
+      greeting:    '¡Excelente! ¿A qué destino planeas viajar? ✈️',
+      destination: `¡Perfecto! Ahora usa el botón 📅 en la barra de abajo para seleccionar tus fechas de ida y vuelta.`,
+      dates:       `Entendido. Ahora usa el botón 👥 para agregar los viajeros y sus edades.`,
+      travelers:   `¿Qué tipo de cobertura necesitas? ¿Médica, cancelación o ambas?`,
+      coverage:    `¡Perfecto! Aquí están las mejores opciones para tu viaje. [SHOW_PLANS]`,
+      default:     `¿Hay algo más en lo que pueda ayudarte?`,
+    },
+    en: {
+      greeting:    `Great! Where are you planning to travel? ✈️`,
+      destination: `Perfect! Use the 📅 button below to select your departure and return dates.`,
+      dates:       `Got it. Now use the 👥 button to add travelers and their ages.`,
+      travelers:   `What type of coverage do you need? Medical, cancellation, or both?`,
+      coverage:    `Perfect! Here are the best options for your trip. [SHOW_PLANS]`,
+      default:     `Is there anything else I can help you with?`,
+    },
+    fr: {
+      greeting:    `Parfait ! Où planifiez-vous de voyager ? ✈️`,
+      destination: `Parfait ! Utilisez le bouton 📅 ci-dessous pour sélectionner vos dates.`,
+      dates:       `Compris. Utilisez le bouton 👥 pour ajouter les voyageurs.`,
+      travelers:   `Quel type de couverture souhaitez-vous ? Médicale, annulation ou les deux ?`,
+      coverage:    `Parfait ! Voici les meilleures options pour votre voyage. [SHOW_PLANS]`,
+      default:     `Puis-je vous aider avec autre chose ?`,
+    },
+    pt: {
+      greeting:    `Ótimo! Para onde você planeja viajar? ✈️`,
+      destination: `Perfeito! Use o botão 📅 abaixo para selecionar suas datas.`,
+      dates:       `Entendido. Use o botão 👥 para adicionar os viajantes.`,
+      travelers:   `Que tipo de cobertura você precisa? Médica, cancelamento ou ambas?`,
+      coverage:    `Perfeito! Aqui estão as melhores opções para sua viagem. [SHOW_PLANS]`,
+      default:     `Posso ajudar com mais alguma coisa?`,
+    },
+    de: {
+      greeting:    `Toll! Wohin planen Sie zu reisen? ✈️`,
+      destination: `Perfekt! Verwenden Sie die Schaltfläche 📅 unten, um Ihre Daten auszuwählen.`,
+      dates:       `Verstanden. Verwenden Sie die Schaltfläche 👥, um Reisende hinzuzufügen.`,
+      travelers:   `Welche Art von Deckung benötigen Sie? Medizinisch, Stornierung oder beides?`,
+      coverage:    `Perfekt! Hier sind die besten Optionen für Ihre Reise. [SHOW_PLANS]`,
+      default:     `Kann ich Ihnen noch mit etwas helfen?`,
+    },
   };
 
-  // Step progression
-  const stepFlow = ['greeting', 'destination', 'dates', 'travelers', 'coverage', 'default'];
-  const currentIdx = stepFlow.indexOf(step);
-  const nextStep = stepFlow[Math.min(currentIdx + 1, stepFlow.length - 1)];
-  state.step = nextStep;
-
-  return responses[step] || responses.default;
+  const r = responses[lang] || responses.es;
+  return r[step] || r.default;
 }
 
 // ---------- HANDLE USER MESSAGE ----------
-async function handleUserMessage(text) {
+window.handleUserMessage = async function(text) {
   text = text.trim();
   if (!text) return;
 
-  // Detect language
-  state.lang = detectLanguage(text);
+  // Only auto-detect lang from text input (not from booking bar)
+  const detected = detectLanguage(text);
+  if (detected !== state.lang && ['es','en','fr','pt','de'].includes(detected)) {
+    state.lang = detected;
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === detected);
+    });
+  }
 
-  // Add to UI + history
   addMessage('user', text);
   userInput.value = '';
   userInput.style.height = 'auto';
-
-  // Show typing
+  extractQuoteData(text);
   showTyping();
 
-  // Call Claude (or simulation)
-  let response;
-  try {
-    response = await callClaude(text);
-  } catch {
-    response = simulateBotResponse(text);
-  }
-
+  const response = await callClaude(text);
   removeTyping();
 
-  // Extract data from the exchange
-  extractQuoteData(text, response);
-
-  // Check for [SHOW_PLANS] trigger
   if (response.includes('[SHOW_PLANS]')) {
     const cleaned = response.replace('[SHOW_PLANS]', '').trim();
     if (cleaned) addMessage('assistant', cleaned);
     showInsuranceCards();
   } else {
     addMessage('assistant', response);
-
-    // Contextual quick replies based on step
-    const lang = state.lang;
-    if (state.step === 'coverage' || response.toLowerCase().includes('cobertura') || response.toLowerCase().includes('coverage')) {
-      showQuickReplies(
-        lang === 'es'
-          ? ['🏥 Solo médica', '❌ Solo cancelación', '🌟 Ambas coberturas']
-          : ['🏥 Medical only', '❌ Cancellation only', '🌟 Both coverages']
-      );
+    const i = I18N[state.lang] || I18N.es;
+    if (/cobertura|coverage|couverture|cobertura|deckung/i.test(response)) {
+      showQuickReplies(i.coverageChips);
     }
   }
-}
+};
 
-// ---------- INPUT HANDLING ----------
+// ---------- INPUT HANDLERS ----------
 userInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    handleUserMessage(userInput.value);
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.handleUserMessage(userInput.value); }
 });
-
 userInput.addEventListener('input', () => {
   userInput.style.height = 'auto';
   userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
 });
-
-sendBtn.addEventListener('click', () => handleUserMessage(userInput.value));
+sendBtn.addEventListener('click', () => window.handleUserMessage(userInput.value));
 
 // ---------- MODAL HANDLERS ----------
-document.getElementById('closeQuoteModal').addEventListener('click', () => {
-  document.getElementById('quoteModal').style.display = 'none';
-});
-document.getElementById('closeQuoteModal2').addEventListener('click', () => {
-  document.getElementById('quoteModal').style.display = 'none';
-});
-
+document.getElementById('closeQuoteModal').addEventListener('click', () => { document.getElementById('quoteModal').style.display = 'none'; });
+document.getElementById('closeQuoteModal2').addEventListener('click', () => { document.getElementById('quoteModal').style.display = 'none'; });
 document.getElementById('sendEmailBtn').addEventListener('click', () => {
   document.getElementById('quoteModal').style.display = 'none';
+  const lang = state.lang;
+  const i = I18N[lang] || I18N.es;
+  document.getElementById('emailModalTitle').textContent = i.emailTitle;
+  document.getElementById('emailModalSub').textContent = i.emailSub;
+  document.getElementById('sendBtnLabel').textContent = i.sendBtn;
+  document.getElementById('cancelBtnLabel').textContent = i.cancelBtn;
   document.getElementById('emailModal').style.display = 'flex';
 });
-
-document.getElementById('closeEmailModal').addEventListener('click', () => {
-  document.getElementById('emailModal').style.display = 'none';
-});
-document.getElementById('cancelEmailModal').addEventListener('click', () => {
-  document.getElementById('emailModal').style.display = 'none';
-});
-
+document.getElementById('closeEmailModal').addEventListener('click', () => { document.getElementById('emailModal').style.display = 'none'; });
+document.getElementById('cancelEmailModal').addEventListener('click', () => { document.getElementById('emailModal').style.display = 'none'; });
 document.getElementById('confirmSendEmail').addEventListener('click', () => {
   const email = document.getElementById('emailInput').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('emailInput').style.borderColor = 'var(--red)';
-    return;
-  }
+  if (!email.includes('@')) { document.getElementById('emailInput').style.borderColor = 'var(--red)'; return; }
   document.getElementById('emailModal').style.display = 'none';
-  const lang = state.lang;
-  const msg = lang === 'es'
-    ? `✅ ¡Listo! Tu cotización fue enviada a **${email}**. Revisa tu bandeja de entrada en los próximos minutos.`
-    : `✅ Done! Your quote was sent to **${email}**. Check your inbox in the next few minutes.`;
-  addMessage('assistant', msg);
+  const i = I18N[state.lang] || I18N.es;
+  addMessage('assistant', i.emailSentMsg(email));
+});
+['quoteModal','emailModal','calendarModal','passengersModal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', e => { if (e.target.id === id) e.target.style.display = 'none'; });
 });
 
-// Close modals on overlay click
-['quoteModal', 'emailModal'].forEach(id => {
-  document.getElementById(id).addEventListener('click', e => {
-    if (e.target.id === id) e.target.style.display = 'none';
-  });
+// ---------- BOOKING BAR SEARCH ----------
+document.getElementById('bkSearch').addEventListener('click', () => {
+  const { destination, departureDate, returnDate, travelers } = state.quoteData;
+  if (!departureDate || !returnDate) { document.getElementById('openCalendar').click(); return; }
+  if (!travelers) { document.getElementById('openPassengers').click(); return; }
+  const i = I18N[state.lang] || I18N.es;
+  const msg = state.lang === 'es'
+    ? `Buscar seguro: ${destination || 'destino pendiente'}, ${departureDate} → ${returnDate}, ${travelers} ${parseInt(travelers) > 1 ? i.travelers : i.traveler}`
+    : `Search insurance: ${destination || 'pending destination'}, ${departureDate} → ${returnDate}, ${travelers} ${parseInt(travelers) > 1 ? i.travelers : i.traveler}`;
+  window.handleUserMessage(msg);
 });
 
 // ---------- INIT ----------
 function init() {
-  // Welcome message (bilingual)
-  const welcomeEs = `¡Hola! 👋 Welcome to **TravelSafe AI**\n\nSoy tu asistente de seguros de viaje. Estoy aquí para ayudarte a encontrar la cobertura perfecta para tu próxima aventura.\n\n*I'm also happy to help you in English!*\n\n¿A qué destino planeas viajar? / Where are you planning to travel?`;
+  initLangSwitcher();
+  CalendarModule.init();
+  PassengersModule.init();
+
+  const i = I18N[state.lang] || I18N.es;
+  userInput.placeholder = i.placeholder;
 
   setTimeout(() => {
-    addMessage('assistant', welcomeEs);
-    showQuickReplies([
-      '🇪🇺 Europa / Europe',
-      '🌎 América Latina',
-      '🇺🇸 Estados Unidos / USA',
-      '🌏 Asia / Pacific',
-    ]);
+    addMessage('assistant', i.welcomeMsg);
+    showQuickReplies(i.destChips);
   }, 400);
 }
 
