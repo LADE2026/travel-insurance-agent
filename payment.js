@@ -2,9 +2,14 @@
 // PAYMENT MODULE
 // =============================================
 
+const STRIPE_PK = 'pk_test_51TdYmxJtWi9NDzvpUvqXwPKpAoe2n0BIk0bE2eeK0on4o9rWTgCNeeo3ljyvjA4R8KZmVwgHEgyA2HEc4lqCXvgQ00AEn61YUb';
+
 const PaymentModule = (() => {
   let currentPlan = null;
   let currentPrice = 0;
+  let stripe = null;
+  let stripeElements = null;
+  let stripeCard = null;
 
   // ---- PUBLIC: open modal ----
   function open(planId, price) {
@@ -31,18 +36,16 @@ const PaymentModule = (() => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    // Card number formatting
-    document.getElementById('cardNumber').addEventListener('input', e => {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 16);
-      e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
-    });
-
-    // Expiry formatting
-    document.getElementById('cardExp').addEventListener('input', e => {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 4);
-      if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2);
-      e.target.value = v;
-    });
+    // Init Stripe Elements
+    if (window.Stripe) {
+      stripe = window.Stripe(STRIPE_PK);
+      stripeElements = stripe.elements();
+      const style = { base: { fontSize: '15px', color: '#1e3a5f', '::placeholder': { color: '#aab7c4' } } };
+      stripeCard = stripeElements.create('cardNumber', { style });
+      stripeCard.mount('#stripeCardElement');
+      stripeElements.create('cardExpiry', { style }).mount('#stripeExpElement');
+      stripeElements.create('cardCvc', { style }).mount('#stripeCvcElement');
+    }
 
     // Pay buttons
     document.getElementById('btnPayCard').addEventListener('click', handleCardPayment);
@@ -186,34 +189,51 @@ const PaymentModule = (() => {
   }
 
   // ---- CARD PAYMENT ----
-  function handleCardPayment() {
+  async function handleCardPayment() {
     const l = window._payL || {};
     const name = document.getElementById('cardName').value.trim();
-    const num  = document.getElementById('cardNumber').value.replace(/\s/g,'');
-    const exp  = document.getElementById('cardExp').value.trim();
-    const cvv  = document.getElementById('cardCvv').value.trim();
-    const email= document.getElementById('payEmail').value.trim();
+    const email = document.getElementById('payEmail').value.trim();
 
     clearErrors();
-    let valid = true;
-    if (!name) { showError('cardName', l.errName); valid = false; }
-    if (num.length < 15) { showError('cardNumber', l.errCard); valid = false; }
-    if (!/^\d{2}\/\d{2}$/.test(exp)) { showError('cardExp', l.errExp); valid = false; }
-    if (cvv.length < 3) { showError('cardCvv', l.errCvv); valid = false; }
-    if (!email.includes('@')) { showError('payEmail', l.errEmail); valid = false; }
-    if (!valid) return;
+    const errEl = document.getElementById('stripeError');
+    errEl.style.display = 'none';
+
+    if (!name) { showError('cardName', l.errName); return; }
+    if (!email.includes('@')) { showError('payEmail', l.errEmail); return; }
 
     const btn = document.getElementById('btnPayCard');
     btn.disabled = true;
     btn.querySelector('#btnPayCardLabel').textContent = l.processing || '⏳ Procesando...';
 
-    // Simulate payment processing (1.5s)
-    setTimeout(() => {
+    if (stripe && stripeCard) {
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: stripeCard,
+        billing_details: { name, email },
+      });
+
+      if (error) {
+        btn.disabled = false;
+        btn.querySelector('#btnPayCardLabel').textContent = l.btnPay || '🔒 Pagar ahora';
+        errEl.textContent = error.message;
+        errEl.style.display = 'block';
+        return;
+      }
+
+      // Payment method created successfully — in production send to backend
       btn.disabled = false;
       btn.querySelector('#btnPayCardLabel').textContent = l.btnPay || '🔒 Pagar ahora';
       close();
       showSuccess(email);
-    }, 1800);
+    } else {
+      // Fallback simulation
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.querySelector('#btnPayCardLabel').textContent = l.btnPay || '🔒 Pagar ahora';
+        close();
+        showSuccess(email);
+      }, 1800);
+    }
   }
 
   // ---- PAYPAL ----

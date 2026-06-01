@@ -1541,3 +1541,10 @@ textarea#userInput:focus { border-color: var(--blue); background: var(--white); 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 10px; }
+
+.stripe-element {
+  padding: 10px 12px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}

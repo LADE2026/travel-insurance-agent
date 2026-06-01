@@ -373,28 +373,19 @@
         </div>
         <div class="form-group">
           <label class="form-label" id="labelCard">Número de tarjeta</label>
-          <div class="card-input-wrap">
-            <input class="pay-input card-num-input" id="cardNumber" type="text" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number"/>
-            <div class="card-brand-icons">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" width="32" alt="Visa"/>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="32" alt="MC"/>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" width="28" alt="Amex"/>
-            </div>
-          </div>
+          <div id="stripeCardElement" class="pay-input stripe-element"></div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" id="labelExp">Vencimiento</label>
-            <input class="pay-input" id="cardExp" type="text" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp"/>
+            <div id="stripeExpElement" class="pay-input stripe-element"></div>
           </div>
           <div class="form-group">
             <label class="form-label">CVV</label>
-            <div class="cvv-wrap">
-              <input class="pay-input" id="cardCvv" type="password" placeholder="•••" maxlength="4" autocomplete="cc-csc"/>
-              <span class="cvv-hint" title="3 dígitos al dorso de tu tarjeta">?</span>
-            </div>
+            <div id="stripeCvcElement" class="pay-input stripe-element"></div>
           </div>
         </div>
+        <div id="stripeError" style="color:#e53e3e;font-size:13px;margin-top:4px;display:none"></div>
         <div class="form-group">
           <label class="form-label" id="labelEmail">Email de confirmación</label>
           <input class="pay-input" id="payEmail" type="email" placeholder="tu@email.com" autocomplete="email"/>
@@ -450,6 +441,8 @@
     </div>
   </div>
 
+  <!-- Stripe SDK -->
+  <script src="https://js.stripe.com/v3/"></script>
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AaERrBZg6ZGKJxXc4j4SQX8Syz-Wx1d3zfk_P6iwysMzaoXnQMZRmGhcTs-U-NMk83pFJW919EfC5aPz&currency=USD" data-namespace="paypal_sdk"></script>
 
