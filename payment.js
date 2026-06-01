@@ -216,16 +216,43 @@ const PaymentModule = (() => {
   }
 
   // ---- PAYPAL ----
+  let paypalRendered = false;
+  let lastPaypalPrice = null;
+
+  function renderPayPalButtons() {
+    if (paypalRendered && lastPaypalPrice === currentPrice) return;
+    paypalRendered = false;
+    lastPaypalPrice = currentPrice;
+    if (paypalRendered) return;
+    const container = document.getElementById('paypalButtonContainer');
+    if (!container || !window.paypal_sdk) return;
+    container.innerHTML = '';
+    paypalRendered = true;
+
+    window.paypal_sdk.Buttons({
+      style: { layout: 'vertical', color: 'blue', shape: 'rect', label: 'paypal' },
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: currentPrice.toFixed(2), currency_code: 'USD' },
+            description: currentPlan ? (INSURANCE_PLANS[currentPlan].nameEn + ' Travel Insurance') : 'Travel Insurance',
+          }],
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(details => {
+          close();
+          showSuccess(details.payer.email_address || '');
+        });
+      },
+      onError: (err) => {
+        console.error('PayPal error:', err);
+      },
+    }).render('#paypalButtonContainer');
+  }
+
   function handlePayPal() {
-    const btn = document.getElementById('btnPayPal');
-    btn.style.opacity = '0.7';
-    btn.textContent = '⏳';
-    setTimeout(() => {
-      btn.style.opacity = '1';
-      btn.innerHTML = '<svg viewBox="0 0 124 33" width="80" fill="white"><text x="0" y="26" font-size="24" font-weight="700" font-family="Arial" fill="white">PayPal</text></svg>';
-      close();
-      showSuccess('');
-    }, 2000);
+    renderPayPalButtons();
   }
 
   // ---- TRANSFER ----

@@ -415,9 +415,8 @@
           <span id="paypalAmountLabel">Total a pagar:</span>
           <strong id="paypalAmount"></strong>
         </div>
-        <button class="btn-paypal" id="btnPayPal">
-          <svg viewBox="0 0 124 33" width="80" fill="white"><text x="0" y="26" font-size="24" font-weight="700" font-family="Arial" fill="white">PayPal</text></svg>
-        </button>
+        <div id="paypalButtonContainer" style="margin: 12px 0;"></div>
+        <button class="btn-paypal" id="btnPayPal" style="display:none"></button>
         <div class="pay-security-row">
           <span>🔒</span><span id="paypalSecurity">Protegido por PayPal Buyer Protection</span>
         </div>
@@ -450,6 +449,9 @@
       <button class="btn-email" id="closeSuccess" style="margin-top:16px;width:100%">🏠 <span id="closeSuccessLabel">Volver al inicio</span></button>
     </div>
   </div>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AaERrBZg6ZGKJxXc4j4SQX8Syz-Wx1d3zfk_P6iwysMzaoXnQMZRmGhcTs-U-NMk83pFJW919EfC5aPz&currency=USD" data-namespace="paypal_sdk"></script>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="config.js"></script>
