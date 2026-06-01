@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelSafe AI – Travel Insurance</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="20" fill="#1e3a5f"/>
+            <path d="M20 8 C14 8 10 13 10 18 C10 26 20 33 20 33 C20 33 30 26 30 18 C30 13 26 8 20 8Z" fill="white" opacity="0.9"/>
+            <circle cx="20" cy="18" r="5" fill="#1e3a5f"/>
+            <path d="M14 10 Q20 6 26 10" stroke="white" stroke-width="1.5" fill="none" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">TravelSafe <span class="logo-ai">AI</span></span>
+          <span class="logo-tagline">Seguros de Viaje · Travel Insurance</span>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="badge-live">
+          <span class="pulse-dot"></span>
+          24/7 Live
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CHAT CONTAINER ===== -->
+  <main class="chat-wrapper">
+    <div class="chat-container" id="chatContainer">
+      <!-- Messages injected by JS -->
+    </div>
+  </main>
+
+  <!-- ===== INPUT AREA ===== -->
+  <footer class="input-area">
+    <div class="input-inner">
+      <div class="input-row">
+        <textarea
+          id="userInput"
+          placeholder="Escribe tu mensaje... / Type your message..."
+          rows="1"
+          autocomplete="off"
+        ></textarea>
+        <button id="sendBtn" class="send-btn" title="Enviar / Send">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="input-disclaimer">
+        Powered by Claude AI · TravelSafe AI no almacena datos de pago
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== QUOTE MODAL ===== -->
+  <div class="modal-overlay" id="quoteModal" style="display:none">
+    <div class="modal">
+      <button class="modal-close" id="closeQuoteModal">✕</button>
+      <h2 class="modal-title">📋 Resumen de Cotización / Quote Summary</h2>
+      <div id="quoteContent"></div>
+      <div class="modal-actions">
+        <button class="btn-email" id="sendEmailBtn">
+          📧 Enviar por email / Send by email
+        </button>
+        <button class="btn-close-modal" id="closeQuoteModal2">Cerrar / Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EMAIL MODAL ===== -->
+  <div class="modal-overlay" id="emailModal" style="display:none">
+    <div class="modal modal-sm">
+      <button class="modal-close" id="closeEmailModal">✕</button>
+      <h2 class="modal-title">📧 Enviar Cotización</h2>
+      <p class="modal-sub">Te enviaremos el resumen a tu correo electrónico.</p>
+      <input type="email" id="emailInput" class="email-input" placeholder="tu@email.com" />
+      <div class="modal-actions">
+        <button class="btn-email" id="confirmSendEmail">Enviar / Send</button>
+        <button class="btn-close-modal" id="cancelEmailModal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONFIG ===== -->
+  <script src="config.js"></script>
+  <!-- ===== INSURANCE DATA ===== -->
+  <script src="insurance.js"></script>
+  <!-- ===== MAIN APP ===== -->
+  <script src="app.js"></script>
+</body>
+</html>
