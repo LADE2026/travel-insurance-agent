@@ -86,6 +86,17 @@
 
       <div class="bk-divider"></div>
 
+      <!-- CUSTOMER INFO trigger -->
+      <button class="bk-btn" id="openCustomer">
+        <span class="bk-icon">👤</span>
+        <div class="bk-info">
+          <span class="bk-label" id="custLabel">Cliente / Customer</span>
+          <span class="bk-value" id="custValue">Mis datos</span>
+        </div>
+      </button>
+
+      <div class="bk-divider"></div>
+
       <!-- SEARCH button -->
       <button class="bk-search" id="bkSearch">
         <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -186,6 +197,142 @@
         <button class="btn-email" id="confirmSendEmail"><span id="sendBtnLabel">Enviar</span></button>
         <button class="btn-close-modal" id="cancelEmailModal"><span id="cancelBtnLabel">Cancelar</span></button>
       </div>
+    </div>
+  </div>
+
+  <!-- ===== CUSTOMER INFO MODAL ===== -->
+  <div class="modal-overlay" id="customerModal" style="display:none">
+    <div class="modal modal-customer">
+      <button class="modal-close" id="closeCustomer">✕</button>
+      <h2 class="modal-title" id="custModalTitle">👤 Datos del Cliente</h2>
+      <p class="modal-sub" id="custModalSub">Completa tu información personal para la póliza.</p>
+
+      <!-- Progress steps -->
+      <div class="cust-steps" id="custSteps">
+        <div class="cust-step active" data-step="1"><span class="step-num">1</span><span class="step-label" id="stepLabel1">Personal</span></div>
+        <div class="cust-step-line"></div>
+        <div class="cust-step" data-step="2"><span class="step-num">2</span><span class="step-label" id="stepLabel2">Contacto</span></div>
+        <div class="cust-step-line"></div>
+        <div class="cust-step" data-step="3"><span class="step-num">3</span><span class="step-label" id="stepLabel3">Documento</span></div>
+      </div>
+
+      <!-- STEP 1: Personal -->
+      <div class="cust-panel" id="custPanel1">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lFirstName">Nombre</label>
+            <input class="pay-input" id="custFirstName" type="text" placeholder="Juan" autocomplete="given-name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lLastName">Apellido</label>
+            <input class="pay-input" id="custLastName" type="text" placeholder="García" autocomplete="family-name"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lBirthDate">Fecha de nacimiento</label>
+            <input class="pay-input" id="custBirthDate" type="date" autocomplete="bday"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lGender">Género</label>
+            <select class="pay-input pay-select" id="custGender">
+              <option value="">—</option>
+              <option value="M" id="genderM">Masculino</option>
+              <option value="F" id="genderF">Femenino</option>
+              <option value="O" id="genderO">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="lNationality">Nacionalidad</label>
+          <select class="pay-input pay-select" id="custNationality" autocomplete="country">
+            <option value="">— Seleccionar país —</option>
+          </select>
+        </div>
+        <div class="cust-nav">
+          <div></div>
+          <button class="btn-cust-next" id="step1Next">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Contact -->
+      <div class="cust-panel" id="custPanel2" style="display:none">
+        <div class="form-group">
+          <label class="form-label" id="lEmail">Email</label>
+          <input class="pay-input" id="custEmail" type="email" placeholder="juan@email.com" autocomplete="email"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lPhone">Teléfono</label>
+            <input class="pay-input" id="custPhone" type="tel" placeholder="+1 555 000 0000" autocomplete="tel"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lWhatsapp">WhatsApp</label>
+            <input class="pay-input" id="custWhatsapp" type="tel" placeholder="+1 555 000 0000"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="lAddress">Dirección</label>
+          <input class="pay-input" id="custAddress" type="text" placeholder="Calle 123, Ciudad" autocomplete="street-address"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lCity">Ciudad</label>
+            <input class="pay-input" id="custCity" type="text" placeholder="Madrid" autocomplete="address-level2"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lZip">Código Postal</label>
+            <input class="pay-input" id="custZip" type="text" placeholder="28001" autocomplete="postal-code"/>
+          </div>
+        </div>
+        <div class="cust-nav">
+          <button class="btn-cust-back" id="step2Back">← Atrás</button>
+          <button class="btn-cust-next" id="step2Next">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Document -->
+      <div class="cust-panel" id="custPanel3" style="display:none">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lDocType">Tipo de documento</label>
+            <select class="pay-input pay-select" id="custDocType">
+              <option value="passport" id="docPassport">Pasaporte</option>
+              <option value="id" id="docId">Cédula / DNI</option>
+              <option value="residence" id="docResidence">Residencia</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lDocNum">Número</label>
+            <input class="pay-input" id="custDocNum" type="text" placeholder="AB123456"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="lDocExp">Vencimiento</label>
+            <input class="pay-input" id="custDocExp" type="date"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="lEmergName">Contacto de emergencia</label>
+            <input class="pay-input" id="custEmergName" type="text" placeholder="María García"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="lEmergPhone">Teléfono de emergencia</label>
+          <input class="pay-input" id="custEmergPhone" type="tel" placeholder="+1 555 000 0000"/>
+        </div>
+        <div class="form-group cust-consent">
+          <label class="consent-label">
+            <input type="checkbox" id="custConsent"/>
+            <span id="consentText">Acepto los <a href="#" onclick="return false">Términos y condiciones</a> y la <a href="#" onclick="return false">Política de privacidad</a>.</span>
+          </label>
+        </div>
+        <div class="cust-nav">
+          <button class="btn-cust-back" id="step3Back">← Atrás</button>
+          <button class="btn-cust-save" id="custSave">✅ Guardar datos</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -312,6 +459,7 @@
   <script src="calendar.js"></script>
   <script src="passengers.js"></script>
   <script src="coverage.js"></script>
+  <script src="customer.js"></script>
   <script src="payment.js"></script>
   <script src="app.js"></script>
 </body>

@@ -491,7 +491,7 @@ document.getElementById('confirmSendEmail').addEventListener('click', () => {
   const i = I18N[state.lang] || I18N.es;
   addMessage('assistant', i.emailSentMsg(email));
 });
-['quoteModal','emailModal','calendarModal','passengersModal','coverageModal','successModal'].forEach(id => {
+['quoteModal','emailModal','calendarModal','passengersModal','coverageModal','customerModal','successModal'].forEach(id => {
   document.getElementById(id).addEventListener('click', e => { if (e.target.id === id) e.target.style.display = 'none'; });
 });
 
@@ -513,6 +513,7 @@ function init() {
   CalendarModule.init();
   PassengersModule.init();
   CoverageModule.init();
+  CustomerModule.init();
   PaymentModule.init();
 
   const i = I18N[state.lang] || I18N.es;
