@@ -60,6 +60,7 @@ const PaymentModule = (() => {
     document.getElementById('panelCard').style.display     = tab === 'card'     ? 'block' : 'none';
     document.getElementById('panelPaypal').style.display   = tab === 'paypal'   ? 'block' : 'none';
     document.getElementById('panelTransfer').style.display = tab === 'transfer' ? 'block' : 'none';
+    if (tab === 'paypal') renderPayPalButtons();
   }
 
   function updateAllLabels() {
@@ -221,13 +222,16 @@ const PaymentModule = (() => {
 
   function renderPayPalButtons() {
     if (paypalRendered && lastPaypalPrice === currentPrice) return;
-    paypalRendered = false;
-    lastPaypalPrice = currentPrice;
-    if (paypalRendered) return;
     const container = document.getElementById('paypalButtonContainer');
-    if (!container || !window.paypal_sdk) return;
+    if (!container) return;
+    if (!window.paypal_sdk) {
+      container.innerHTML = '<p style="text-align:center;color:#666;padding:12px">⏳ Cargando PayPal...</p>';
+      setTimeout(renderPayPalButtons, 1000);
+      return;
+    }
     container.innerHTML = '';
     paypalRendered = true;
+    lastPaypalPrice = currentPrice;
 
     window.paypal_sdk.Buttons({
       style: { layout: 'vertical', color: 'blue', shape: 'rect', label: 'paypal' },
