@@ -12,12 +12,25 @@ const PaymentModule = (() => {
   let stripeCard = null;
 
   // ---- PUBLIC: open modal ----
+  function initStripe() {
+    if (stripe || !window.Stripe) return;
+    stripe = window.Stripe(STRIPE_PK);
+    stripeElements = stripe.elements();
+    const style = { base: { fontSize: '15px', color: '#1e3a5f', '::placeholder': { color: '#aab7c4' } } };
+    stripeCard = stripeElements.create('cardNumber', { style });
+    stripeCard.mount('#stripeCardElement');
+    stripeElements.create('cardExpiry', { style }).mount('#stripeExpElement');
+    stripeElements.create('cardCvc', { style }).mount('#stripeCvcElement');
+  }
+
   function open(planId, price) {
     currentPlan = planId;
     currentPrice = parseFloat(price);
     updateAllLabels();
     switchTab('card');
     document.getElementById('paymentModal').style.display = 'flex';
+    // Mount Stripe Elements after modal is visible so they have dimensions
+    setTimeout(initStripe, 50);
   }
 
   function close() {
@@ -35,17 +48,6 @@ const PaymentModule = (() => {
     document.querySelectorAll('.pay-tab').forEach(btn => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
-
-    // Init Stripe Elements
-    if (window.Stripe) {
-      stripe = window.Stripe(STRIPE_PK);
-      stripeElements = stripe.elements();
-      const style = { base: { fontSize: '15px', color: '#1e3a5f', '::placeholder': { color: '#aab7c4' } } };
-      stripeCard = stripeElements.create('cardNumber', { style });
-      stripeCard.mount('#stripeCardElement');
-      stripeElements.create('cardExpiry', { style }).mount('#stripeExpElement');
-      stripeElements.create('cardCvc', { style }).mount('#stripeCvcElement');
-    }
 
     // Pay buttons
     document.getElementById('btnPayCard').addEventListener('click', handleCardPayment);
