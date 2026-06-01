@@ -546,4 +546,27 @@ function init() {
   }, 400);
 }
 
+function restartChat() {
+  state.messages = [];
+  state.step = 'greeting';
+  state.quoteData = { destination: null, departureDate: null, returnDate: null, travelers: null, ages: null, coverageType: null, selectedPlan: null };
+
+  document.getElementById('chatContainer').innerHTML = '';
+  document.getElementById('successModal').style.display = 'none';
+  document.getElementById('paymentModal').style.display = 'none';
+
+  const i = I18N[state.lang] || I18N.es;
+  setTimeout(() => {
+    addMessage('assistant', i.welcomeMsg);
+    showQuickReplies(i.destChips);
+  }, 200);
+
+  document.querySelector('.chat-wrapper').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.restartChat = restartChat;
+
+document.getElementById('btnRestartChat').addEventListener('click', restartChat);
+document.getElementById('btnHomeRestart').addEventListener('click', restartChat);
+
 init();
