@@ -224,7 +224,7 @@ function showInsuranceCards() {
   wrapper.querySelectorAll('.btn-buy').forEach(btn => {
     btn.addEventListener('click', () => {
       state.quoteData.selectedPlan = btn.dataset.plan;
-      handlePurchaseFlow(btn.dataset.plan, btn.dataset.price);
+      PaymentModule.open(btn.dataset.plan, btn.dataset.price);
     });
   });
   wrapper.querySelectorAll('.btn-quote').forEach(btn => {
@@ -491,7 +491,7 @@ document.getElementById('confirmSendEmail').addEventListener('click', () => {
   const i = I18N[state.lang] || I18N.es;
   addMessage('assistant', i.emailSentMsg(email));
 });
-['quoteModal','emailModal','calendarModal','passengersModal','coverageModal'].forEach(id => {
+['quoteModal','emailModal','calendarModal','passengersModal','coverageModal','successModal'].forEach(id => {
   document.getElementById(id).addEventListener('click', e => { if (e.target.id === id) e.target.style.display = 'none'; });
 });
 
@@ -513,6 +513,7 @@ function init() {
   CalendarModule.init();
   PassengersModule.init();
   CoverageModule.init();
+  PaymentModule.init();
 
   const i = I18N[state.lang] || I18N.es;
   userInput.placeholder = i.placeholder;

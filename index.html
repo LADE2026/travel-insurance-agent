@@ -189,6 +189,121 @@
     </div>
   </div>
 
+  <!-- ===== PAYMENT MODAL ===== -->
+  <div class="modal-overlay" id="paymentModal" style="display:none">
+    <div class="modal modal-payment">
+      <button class="modal-close" id="closePayment">✕</button>
+
+      <!-- Order summary strip -->
+      <div class="pay-summary-strip" id="paySummaryStrip"></div>
+
+      <h2 class="modal-title" id="payTitle">💳 Completar Pago</h2>
+
+      <!-- Payment method tabs -->
+      <div class="pay-tabs">
+        <button class="pay-tab active" id="tabCard" data-tab="card">
+          <svg viewBox="0 0 24 24" fill="none" width="16"><rect x="1" y="4" width="22" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M1 10h22" stroke="currentColor" stroke-width="2"/></svg>
+          <span id="tabCardLabel">Tarjeta</span>
+        </button>
+        <button class="pay-tab" id="tabPaypal" data-tab="paypal">
+          <svg viewBox="0 0 24 24" width="16" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.243-8.558 6.243H9.817l-1.24 7.87h3.63c.524 0 .968-.382 1.05-.9l.72-4.566c.083-.518.527-.9 1.05-.9h.663c4.299 0 7.665-1.748 8.648-6.797.418-2.149.088-3.754-.916-4.663z"/></svg>
+          PayPal
+        </button>
+        <button class="pay-tab" id="tabTransfer" data-tab="transfer">
+          🏦 <span id="tabTransferLabel">Transferencia</span>
+        </button>
+      </div>
+
+      <!-- CARD FORM -->
+      <div class="pay-panel" id="panelCard">
+        <div class="stripe-badge">
+          <svg viewBox="0 0 60 25" fill="none" width="40"><text x="0" y="20" font-size="18" font-weight="700" fill="#635bff" font-family="Arial">Stripe</text></svg>
+          <span class="stripe-secure">🔒 Pago seguro</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="labelName">Nombre en la tarjeta</label>
+          <input class="pay-input" id="cardName" type="text" placeholder="Juan García" autocomplete="cc-name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="labelCard">Número de tarjeta</label>
+          <div class="card-input-wrap">
+            <input class="pay-input card-num-input" id="cardNumber" type="text" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number"/>
+            <div class="card-brand-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" width="32" alt="Visa"/>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="32" alt="MC"/>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" width="28" alt="Amex"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" id="labelExp">Vencimiento</label>
+            <input class="pay-input" id="cardExp" type="text" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CVV</label>
+            <div class="cvv-wrap">
+              <input class="pay-input" id="cardCvv" type="password" placeholder="•••" maxlength="4" autocomplete="cc-csc"/>
+              <span class="cvv-hint" title="3 dígitos al dorso de tu tarjeta">?</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="labelEmail">Email de confirmación</label>
+          <input class="pay-input" id="payEmail" type="email" placeholder="tu@email.com" autocomplete="email"/>
+        </div>
+        <button class="btn-pay-now" id="btnPayCard">
+          <span id="btnPayCardLabel">🔒 Pagar ahora</span>
+          <span class="pay-amount-badge" id="payAmountCard"></span>
+        </button>
+        <p class="pay-legal" id="payLegalCard">Al pagar aceptas los <a href="#" onclick="return false">Términos y condiciones</a>. Pago procesado por Stripe.</p>
+      </div>
+
+      <!-- PAYPAL PANEL -->
+      <div class="pay-panel" id="panelPaypal" style="display:none">
+        <div class="paypal-info" id="paypalInfo">
+          <p>Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+        </div>
+        <div class="paypal-amount-box">
+          <span id="paypalAmountLabel">Total a pagar:</span>
+          <strong id="paypalAmount"></strong>
+        </div>
+        <button class="btn-paypal" id="btnPayPal">
+          <svg viewBox="0 0 124 33" width="80" fill="white"><text x="0" y="26" font-size="24" font-weight="700" font-family="Arial" fill="white">PayPal</text></svg>
+        </button>
+        <div class="pay-security-row">
+          <span>🔒</span><span id="paypalSecurity">Protegido por PayPal Buyer Protection</span>
+        </div>
+      </div>
+
+      <!-- TRANSFER PANEL -->
+      <div class="pay-panel" id="panelTransfer" style="display:none">
+        <div class="transfer-info" id="transferInfo">
+          <div class="transfer-row"><span>🏦</span><div><strong id="transferBankLabel">Banco</strong><span>TravelSafe Bank · Cuenta Empresarial</span></div></div>
+          <div class="transfer-row"><span>🔢</span><div><strong id="transferAccLabel">Cuenta</strong><span>001-234-567890</span></div></div>
+          <div class="transfer-row"><span>🌐</span><div><strong>SWIFT / IBAN</strong><span>TSAFUS33 / ES91 2100 0418 4502 0005 1332</span></div></div>
+          <div class="transfer-row" id="transferRefRow"><span>📋</span><div><strong id="transferRefLabel">Referencia</strong><span id="transferRef">TSA-000000</span></div></div>
+        </div>
+        <button class="btn-pay-now" id="btnPayTransfer" style="background:var(--navy)">
+          <span id="btnTransferLabel">✅ Confirmar transferencia</span>
+        </button>
+        <p class="pay-legal" id="transferLegal">Tu póliza se activará al recibir la transferencia (1-2 días hábiles).</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SUCCESS MODAL ===== -->
+  <div class="modal-overlay" id="successModal" style="display:none">
+    <div class="modal modal-sm" style="text-align:center">
+      <div class="success-icon">✅</div>
+      <h2 class="modal-title" style="justify-content:center" id="successTitle">¡Pago Exitoso!</h2>
+      <p class="modal-sub" id="successSub">Tu seguro de viaje ha sido activado. Recibirás los documentos en tu correo en los próximos minutos.</p>
+      <div class="success-ref" id="successRef"></div>
+      <button class="btn-email" id="closeSuccess" style="margin-top:16px;width:100%">🏠 <span id="closeSuccessLabel">Volver al inicio</span></button>
+    </div>
+  </div>
+
   <!-- ===== SCRIPTS ===== -->
   <script src="config.js"></script>
   <script src="config.local.js" onerror="void 0"></script>
@@ -197,6 +312,7 @@
   <script src="calendar.js"></script>
   <script src="passengers.js"></script>
   <script src="coverage.js"></script>
+  <script src="payment.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
