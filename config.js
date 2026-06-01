@@ -5,6 +5,7 @@
 // =============================================
 const CONFIG = {
   // Paste your Anthropic API key here
+  // Paste your Anthropic API key here (never commit this to git)
   ANTHROPIC_API_KEY: 'YOUR_ANTHROPIC_API_KEY',
 
   // Claude model to use
