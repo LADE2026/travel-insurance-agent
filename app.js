@@ -339,18 +339,11 @@ function extractQuoteData(userText) {
 
 // ---------- CLAUDE API ----------
 async function callClaude(userMessage) {
-  if (!CONFIG.ANTHROPIC_API_KEY || CONFIG.ANTHROPIC_API_KEY === 'YOUR_ANTHROPIC_API_KEY') {
-    return simulateBotResponse(userMessage);
-  }
+  // Try serverless proxy first (Vercel deployment)
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('/api/claude', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': CONFIG.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-calls': 'true',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: CONFIG.MODEL,
         max_tokens: CONFIG.MAX_TOKENS,
@@ -358,13 +351,40 @@ async function callClaude(userMessage) {
         messages: state.messages.slice(-20),
       }),
     });
-    if (!response.ok) throw new Error('API error');
-    const data = await response.json();
-    return data.content[0].text;
-  } catch (err) {
-    console.error('Claude error:', err);
-    return simulateBotResponse(userMessage);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.content && data.content[0]) return data.content[0].text;
+    }
+  } catch (_) {}
+
+  // Fallback: direct browser call (local dev with config.local.js)
+  if (CONFIG.ANTHROPIC_API_KEY && CONFIG.ANTHROPIC_API_KEY !== 'YOUR_ANTHROPIC_API_KEY') {
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': CONFIG.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-calls': 'true',
+        },
+        body: JSON.stringify({
+          model: CONFIG.MODEL,
+          max_tokens: CONFIG.MAX_TOKENS,
+          system: buildSystemPrompt(),
+          messages: state.messages.slice(-20),
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.content[0].text;
+      }
+    } catch (err) {
+      console.error('Claude error:', err);
+    }
   }
+
+  return simulateBotResponse(userMessage);
 }
 
 // ---------- SIMULATION ----------
