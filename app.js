@@ -153,6 +153,8 @@ function switchLanguage(lang) {
   document.querySelector('.input-disclaimer').textContent = i.disclaimer;
   document.getElementById('calLabel').textContent = i.calLabel;
   document.getElementById('pasLabel').textContent = i.pasLabel;
+  document.getElementById('covLabel').textContent = i.covLabel;
+  if (!state.quoteData.coverageType) document.getElementById('covValue').textContent = i.covSelectDefault;
 
   // Notify chat
   const greet = {
@@ -489,7 +491,7 @@ document.getElementById('confirmSendEmail').addEventListener('click', () => {
   const i = I18N[state.lang] || I18N.es;
   addMessage('assistant', i.emailSentMsg(email));
 });
-['quoteModal','emailModal','calendarModal','passengersModal'].forEach(id => {
+['quoteModal','emailModal','calendarModal','passengersModal','coverageModal'].forEach(id => {
   document.getElementById(id).addEventListener('click', e => { if (e.target.id === id) e.target.style.display = 'none'; });
 });
 
@@ -510,9 +512,11 @@ function init() {
   initLangSwitcher();
   CalendarModule.init();
   PassengersModule.init();
+  CoverageModule.init();
 
   const i = I18N[state.lang] || I18N.es;
   userInput.placeholder = i.placeholder;
+  document.getElementById('covValue').textContent = i.covSelectDefault;
 
   setTimeout(() => {
     addMessage('assistant', i.welcomeMsg);

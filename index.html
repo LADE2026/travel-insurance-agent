@@ -75,6 +75,17 @@
 
       <div class="bk-divider"></div>
 
+      <!-- COVERAGE TYPE trigger -->
+      <button class="bk-btn" id="openCoverage">
+        <span class="bk-icon">🛡️</span>
+        <div class="bk-info">
+          <span class="bk-label" id="covLabel">Cobertura / Coverage</span>
+          <span class="bk-value" id="covValue">Seleccionar</span>
+        </div>
+      </button>
+
+      <div class="bk-divider"></div>
+
       <!-- SEARCH button -->
       <button class="bk-search" id="bkSearch">
         <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -138,6 +149,19 @@
     </div>
   </div>
 
+  <!-- ===== COVERAGE MODAL ===== -->
+  <div class="modal-overlay" id="coverageModal" style="display:none">
+    <div class="modal modal-sm">
+      <button class="modal-close" id="closeCoverage">✕</button>
+      <h2 class="modal-title" id="covModalTitle">🛡️ Tipo de Cobertura</h2>
+      <p class="modal-sub" id="covModalSub">Selecciona la cobertura que necesitas para tu viaje.</p>
+      <div class="cov-options" id="covOptions"></div>
+      <div class="modal-actions">
+        <button class="btn-close-modal" id="cancelCoverage"><span id="cancelCovLabel">Cancelar</span></button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== QUOTE MODAL ===== -->
   <div class="modal-overlay" id="quoteModal" style="display:none">
     <div class="modal">
@@ -172,6 +196,7 @@
   <script src="i18n.js"></script>
   <script src="calendar.js"></script>
   <script src="passengers.js"></script>
+  <script src="coverage.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
