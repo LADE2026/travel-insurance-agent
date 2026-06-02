@@ -224,7 +224,7 @@ function showInsuranceCards() {
   wrapper.querySelectorAll('.btn-buy').forEach(btn => {
     btn.addEventListener('click', () => {
       state.quoteData.selectedPlan = btn.dataset.plan;
-      PaymentModule.open(btn.dataset.plan, btn.dataset.price);
+      window.open('https://safetywing.com/?referenceID=26538312&utm_source=26538312&utm_medium=Ambassador', '_blank');
     });
   });
   wrapper.querySelectorAll('.btn-quote').forEach(btn => {
