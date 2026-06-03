@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog TravelSafe AI – Consejos de Seguro de Viaje</title>
+  <meta name="description" content="Guías, consejos y estadísticas sobre seguro de viaje. Aprende cómo protegerte en el extranjero con TravelSafe AI." />
+  <meta name="keywords" content="seguro de viaje, emergencias médicas en el extranjero, seguro nómada digital, seguro familia viaje, COVID viaje 2026" />
+  <link rel="canonical" href="https://travel-insurance-agent.vercel.app/blog.html" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Blog TravelSafe AI – Consejos de Seguro de Viaje" />
+  <meta property="og:description" content="Guías expertas sobre seguro de viaje, emergencias médicas en el extranjero, y cómo protegerte donde vayas." />
+  <meta property="og:image" content="https://travel-insurance-agent.vercel.app/og-blog.jpg" />
+  <meta property="og:url" content="https://travel-insurance-agent.vercel.app/blog.html" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog TravelSafe AI" />
+  <meta name="twitter:description" content="Guías expertas sobre seguro de viaje y emergencias médicas en el extranjero." />
+  <!-- Schema.org Blog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog TravelSafe AI",
+    "url": "https://travel-insurance-agent.vercel.app/blog.html",
+    "description": "Guías y consejos sobre seguro de viaje internacional",
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelSafe AI",
+      "url": "https://travel-insurance-agent.vercel.app"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1e3a5f;
+      --blue: #2d6a9f;
+      --blue-light: #e8f1fa;
+      --white: #ffffff;
+      --gray-bg: #f7f9fc;
+      --gray-text: #64748b;
+      --gray-border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 6px 24px rgba(0,0,0,0.13);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: #1e293b; line-height: 1.6; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--navy);
+      padding: 0 24px;
+      position: sticky; top: 0; z-index: 900;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { font-size: 26px; }
+    .logo-text { color: var(--white); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.3px; }
+    .logo-text span { color: #60b8ff; }
+    .header-nav { display: flex; align-items: center; gap: 20px; }
+    .back-link {
+      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+    .lang-toggle {
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; border-radius: 8px; padding: 6px 14px; cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,0.22); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4f8a 50%, var(--blue) 100%);
+      padding: 72px 24px 60px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; max-width: 760px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3); color: #fff;
+      border-radius: 20px; padding: 5px 16px; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hero h1 {
+      color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+      line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: 32px;
+    }
+    .hero-search {
+      display: flex; gap: 0; max-width: 520px; margin: 0 auto 32px;
+      background: #fff; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+    .hero-search input {
+      flex: 1; border: none; outline: none; padding: 14px 18px;
+      font-size: 0.95rem; font-family: 'Inter', sans-serif; color: #1e293b;
+    }
+    .hero-search button {
+      background: var(--blue); color: #fff; border: none; cursor: pointer;
+      padding: 14px 22px; font-weight: 600; font-size: 0.95rem;
+      font-family: 'Inter', sans-serif; transition: background 0.2s;
+    }
+    .hero-search button:hover { background: #1e5a8a; }
+    .hero-stat {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px; padding: 10px 20px; color: #fff; font-size: 0.9rem;
+    }
+    .hero-stat strong { font-weight: 700; color: #ffd700; }
+
+    /* ── MAIN CONTENT ── */
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+    .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+
+    /* ── CATEGORY FILTER ── */
+    .filter-bar { margin-bottom: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .filter-btn {
+      border: 2px solid var(--gray-border); background: #fff; color: var(--gray-text);
+      border-radius: 22px; padding: 8px 18px; cursor: pointer; font-size: 0.875rem;
+      font-weight: 500; font-family: 'Inter', sans-serif; transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-btn.active {
+      background: var(--navy); border-color: var(--navy); color: #fff;
+    }
+
+    /* ── ARTICLE CARDS ── */
+    .articles-section h2 { font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 24px; }
+    .cards-grid { display: flex; flex-direction: column; gap: 28px; }
+
+    .article-card {
+      background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+      overflow: hidden; transition: box-shadow 0.2s, transform 0.2s;
+      border: 1px solid var(--gray-border);
+    }
+    .article-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .article-card.hidden { display: none; }
+
+    .card-top { display: flex; gap: 20px; padding: 24px 24px 0; }
+    .card-emoji-box {
+      width: 72px; height: 72px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .card-meta { flex: 1; }
+    .category-badge {
+      display: inline-block; border-radius: 6px; padding: 3px 10px;
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.4px; margin-bottom: 8px;
+    }
+    .badge-emergencias { background: #fee2e2; color: #b91c1c; }
+    .badge-consejos { background: #dbeafe; color: #1d4ed8; }
+    .badge-nomadas { background: #d1fae5; color: #065f46; }
+    .badge-destinos { background: #fef3c7; color: #92400e; }
+    .badge-familia { background: #fce7f3; color: #9d174d; }
+
+    .card-title {
+      font-size: 1.1rem; font-weight: 700; color: var(--navy); line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .card-reading-time {
+      font-size: 0.78rem; color: var(--gray-text); display: flex; align-items: center; gap: 4px;
+    }
+    .card-excerpt { padding: 12px 24px 0; color: #475569; font-size: 0.9rem; line-height: 1.65; }
+    .card-footer {
+      padding: 16px 24px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .read-more-btn {
+      background: var(--blue); color: #fff; border: none; cursor: pointer;
+      border-radius: 8px; padding: 9px 20px; font-size: 0.875rem; font-weight: 600;
+      font-family: 'Inter', sans-serif; transition: background 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .read-more-btn:hover { background: var(--navy); }
+    .read-more-btn .arrow { transition: transform 0.3s; }
+    .read-more-btn.expanded .arrow { transform: rotate(180deg); }
+
+    /* ── FULL ARTICLE ── */
+    .full-article {
+      display: none; border-top: 1px solid var(--gray-border);
+      padding: 28px 28px 32px; background: var(--gray-bg);
+    }
+    .full-article.open { display: block; }
+    .full-article h3 {
+      font-size: 1.15rem; font-weight: 700; color: var(--navy); margin: 24px 0 10px;
+    }
+    .full-article h3:first-of-type { margin-top: 0; }
+    .full-article p { color: #374151; font-size: 0.92rem; line-height: 1.75; margin-bottom: 14px; }
+    .full-article ul, .full-article ol { padding-left: 22px; margin-bottom: 14px; }
+    .full-article li { color: #374151; font-size: 0.92rem; line-height: 1.75; margin-bottom: 4px; }
+    .full-article strong { color: var(--navy); }
+    .cost-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.875rem; }
+    .cost-table th {
+      background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600;
+    }
+    .cost-table td { padding: 9px 14px; border-bottom: 1px solid var(--gray-border); }
+    .cost-table tr:nth-child(even) td { background: #f1f5f9; }
+    .cost-table tr:hover td { background: var(--blue-light); }
+    .stat-callout {
+      background: var(--blue-light); border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
+      font-size: 0.875rem; color: var(--navy);
+    }
+    .stat-callout strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+    .warning-box {
+      background: #fff7ed; border-left: 4px solid #f97316;
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; font-size: 0.875rem;
+    }
+    .tip-box {
+      background: #f0fdf4; border-left: 4px solid #22c55e;
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; font-size: 0.875rem;
+    }
+    .article-cta {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 12px; padding: 24px; margin-top: 24px; text-align: center; color: #fff;
+    }
+    .article-cta p { color: rgba(255,255,255,0.9); margin-bottom: 14px; font-size: 0.95rem; }
+    .article-cta a {
+      display: inline-block; background: #fff; color: var(--navy);
+      font-weight: 700; border-radius: 8px; padding: 11px 28px;
+      text-decoration: none; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card {
+      background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border); overflow: hidden;
+    }
+    .sidebar-card.navy-bg { background: var(--navy); }
+    .sidebar-card-body { padding: 24px; }
+    .sidebar-card.navy-bg .sidebar-card-body h3 { color: #fff; }
+    .sidebar-card.navy-bg .sidebar-card-body p { color: rgba(255,255,255,0.85); }
+    .sidebar-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .sidebar-cta-btn {
+      display: block; width: 100%; background: #60b8ff; color: var(--navy);
+      font-weight: 700; border-radius: 8px; padding: 13px; text-align: center;
+      text-decoration: none; font-size: 0.95rem; margin-top: 14px; transition: background 0.2s;
+    }
+    .sidebar-cta-btn:hover { background: #fff; }
+    .popular-list { list-style: none; }
+    .popular-list li { border-bottom: 1px solid var(--gray-border); padding: 10px 0; }
+    .popular-list li:last-child { border-bottom: none; }
+    .popular-list a {
+      text-decoration: none; color: #334155; font-size: 0.875rem; font-weight: 500;
+      line-height: 1.4; display: block; transition: color 0.2s;
+    }
+    .popular-list a:hover { color: var(--blue); }
+    .stat-rotator { text-align: center; }
+    .stat-rotator .stat-number {
+      font-size: 2.2rem; font-weight: 800; color: var(--navy); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-rotator .stat-label { font-size: 0.85rem; color: var(--gray-text); }
+    .fact-box { background: var(--blue-light); border-radius: 10px; padding: 16px; margin-top: 0; }
+    .fact-box p { font-size: 0.875rem; color: var(--navy); line-height: 1.6; }
+    .fact-box .fact-label {
+      font-size: 0.75rem; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;
+    }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      text-align: center; padding: 60px 24px; color: var(--gray-text); display: none;
+    }
+    .no-results .no-results-icon { font-size: 3rem; margin-bottom: 12px; }
+    .no-results h3 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+
+    /* ── FLOATING BANNER ── */
+    .float-banner {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px);
+      background: var(--navy); color: #fff; border-radius: 12px; padding: 16px 24px;
+      display: flex; align-items: center; gap: 16px; z-index: 800;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25); max-width: 600px; width: calc(100% - 48px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .float-banner.visible { transform: translateX(-50%) translateY(0); }
+    .float-banner p { flex: 1; font-size: 0.9rem; font-weight: 500; }
+    .float-banner a {
+      background: #60b8ff; color: var(--navy); font-weight: 700; border-radius: 8px;
+      padding: 8px 16px; text-decoration: none; font-size: 0.875rem; white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .float-banner a:hover { background: #fff; }
+    .float-close {
+      background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer;
+      font-size: 1.2rem; padding: 4px; line-height: 1; transition: color 0.2s;
+    }
+    .float-close:hover { color: #fff; }
+
+    /* ── EXIT POPUP ── */
+    .exit-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      z-index: 1000; display: none; align-items: center; justify-content: center;
+    }
+    .exit-overlay.open { display: flex; }
+    .exit-popup {
+      background: #fff; border-radius: 20px; padding: 48px 40px; max-width: 440px;
+      width: calc(100% - 48px); text-align: center; position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .exit-popup .popup-emoji { font-size: 3rem; margin-bottom: 16px; }
+    .exit-popup h2 { font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .exit-popup p { color: var(--gray-text); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.6; }
+    .popup-cta {
+      display: block; background: var(--navy); color: #fff; font-weight: 700;
+      border-radius: 10px; padding: 14px; text-decoration: none; font-size: 1rem;
+      transition: background 0.2s; margin-bottom: 12px;
+    }
+    .popup-cta:hover { background: var(--blue); }
+    .popup-skip {
+      background: none; border: none; color: var(--gray-text); cursor: pointer;
+      font-size: 0.875rem; font-family: 'Inter', sans-serif; text-decoration: underline;
+    }
+    .popup-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; color: var(--gray-text); cursor: pointer;
+      font-size: 1.4rem; line-height: 1; transition: color 0.2s;
+    }
+    .popup-close:hover { color: var(--navy); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--navy); color: rgba(255,255,255,0.75);
+      padding: 40px 24px; margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo-text { color: #fff; font-weight: 700; font-size: 1rem; }
+    .footer-logo-text span { color: #60b8ff; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .social-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .footer-copy { width: 100%; text-align: center; font-size: 0.8rem; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .header-inner { height: 56px; }
+      .hero { padding: 48px 20px 40px; }
+      .card-top { flex-direction: column; gap: 12px; }
+      .card-emoji-box { width: 56px; height: 56px; font-size: 1.6rem; }
+      .float-banner { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-icon">🛡️</span>
+      <span class="logo-text">TravelSafe <span>AI</span></span>
+    </a>
+    <nav class="header-nav">
+      <a href="/" class="back-link">
+        <span>←</span>
+        <span data-i18n="back_link">Volver a la app</span>
+      </a>
+      <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">📚 Blog de Viajes &amp; Seguros</div>
+    <h1 data-i18n="hero_h1">Todo lo que necesitas saber antes de viajar</h1>
+    <p data-i18n="hero_sub">Guías expertas, estadísticas reales y consejos prácticos para protegerte en cualquier destino.</p>
+    <div class="hero-search">
+      <input type="text" id="searchInput" placeholder="Buscar artículos..." data-i18n-placeholder="search_placeholder" oninput="filterArticles()" />
+      <button onclick="filterArticles()" data-i18n="search_btn">Buscar</button>
+    </div>
+    <div class="hero-stat">
+      <span>⚠️</span>
+      <span data-i18n="hero_stat">El <strong>65% de viajeros</strong> no tiene seguro médico suficiente para el extranjero</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap">
+  <div class="content-grid">
+
+    <!-- LEFT: articles -->
+    <main>
+      <!-- Category filter -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all" onclick="setCategory(this,'all')" data-i18n="cat_all">Todos</button>
+        <button class="filter-btn" data-cat="Consejos" onclick="setCategory(this,'Consejos')" data-i18n="cat_consejos">Consejos</button>
+        <button class="filter-btn" data-cat="Destinos" onclick="setCategory(this,'Destinos')" data-i18n="cat_destinos">Destinos</button>
+        <button class="filter-btn" data-cat="Emergencias" onclick="setCategory(this,'Emergencias')" data-i18n="cat_emergencias">Emergencias</button>
+        <button class="filter-btn" data-cat="Nómadas" onclick="setCategory(this,'Nómadas')" data-i18n="cat_nomadas">Nómadas</button>
+        <button class="filter-btn" data-cat="Familia" onclick="setCategory(this,'Familia')" data-i18n="cat_familia">Familia</button>
+      </div>
+
+      <div class="articles-section">
+        <h2 data-i18n="articles_heading">Artículos recientes</h2>
+        <div class="cards-grid" id="cardsGrid">
+
+          <!-- ─── CARD 1 ─── -->
+          <article class="article-card" data-cat="Emergencias"
+            data-title-es="Las 10 emergencias médicas más comunes en el extranjero y cuánto cuestan"
+            data-title-en="The 10 Most Common Medical Emergencies Abroad and What They Cost"
+            data-excerpt-es="¿Sabes cuánto cuesta una fractura en Estados Unidos? ¿O una apendicitis en Japón? Los costos médicos en el extranjero pueden arruinar económicamente a cualquier viajero sin la cobertura adecuada."
+            data-excerpt-en="Do you know how much a broken bone costs in the USA? Or an appendicitis in Japan? Medical costs abroad can financially devastate any traveler without proper coverage.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#fee2e2,#fca5a5)">🚨</div>
+              <div class="card-meta">
+                <span class="category-badge badge-emergencias" data-i18n-cat="Emergencias">Emergencias</span>
+                <div class="card-title" data-field="title">Las 10 emergencias médicas más comunes en el extranjero y cuánto cuestan</div>
+                <div class="card-reading-time">⏱️ <span data-i18n="min_read_8">8 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">¿Sabes cuánto cuesta una fractura en Estados Unidos? ¿O una apendicitis en Japón? Los costos médicos en el extranjero pueden arruinar económicamente a cualquier viajero sin la cobertura adecuada.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>Las emergencias no avisan — pero los costos sí importan</h3>
+              <p>Cada año, millones de viajeros enfrentan emergencias médicas fuera de su país de origen. La mayoría asume que "algo les cubrirá" — la tarjeta de crédito, el seguro local, o que simplemente no les pasará a ellos. Los datos cuentan otra historia. Según la IATA, el <strong>1 de cada 10 viajeros internacionales</strong> necesita atención médica durante su viaje.</p>
+              <p>A continuación, te presentamos las 10 emergencias más frecuentes con sus costos reales aproximados en distintas regiones del mundo:</p>
+
+              <h3>1. Fractura ósea (brazo o pierna)</h3>
+              <table class="cost-table">
+                <tr><th>Región</th><th>Costo estimado</th></tr>
+                <tr><td>Estados Unidos</td><td>$10,000 – $35,000 USD</td></tr>
+                <tr><td>Europa Occidental</td><td>$2,000 – $8,000 USD</td></tr>
+                <tr><td>Asia (Tailandia, Vietnam)</td><td>$1,500 – $5,000 USD</td></tr>
+                <tr><td>América Latina</td><td>$800 – $3,000 USD</td></tr>
+              </table>
+
+              <h3>2. Apendicitis con cirugía</h3>
+              <table class="cost-table">
+                <tr><th>Región</th><th>Costo estimado</th></tr>
+                <tr><td>Estados Unidos</td><td>$25,000 – $75,000 USD</td></tr>
+                <tr><td>Europa Occidental</td><td>$5,000 – $15,000 USD</td></tr>
+                <tr><td>Asia</td><td>$3,000 – $10,000 USD</td></tr>
+                <tr><td>América Latina</td><td>$2,000 – $6,000 USD</td></tr>
+              </table>
+
+              <h3>3. Infarto de miocardio</h3>
+              <p>Una de las emergencias más costosas. En EE.UU., el tratamiento completo incluyendo stent y UCI puede superar los <strong>$150,000 USD</strong>. En Europa, entre €20,000 y €60,000. La evacuación médica internacional puede añadir otros $50,000–$100,000.</p>
+
+              <h3>4. Reacción alérgica severa (anafilaxia)</h3>
+              <p>Incluye ambulancia, adrenalina, observación en UCI. Costo en EE.UU.: <strong>$5,000–$15,000 USD</strong>. En Europa: $1,500–$5,000. Especialmente crítica para viajeros con alergias alimentarias desconocidas al idioma local.</p>
+
+              <h3>5. Intoxicación alimentaria severa</h3>
+              <p>Con deshidratación y hospitalización de 2-3 días. En Asia: $500–$2,500. En EE.UU.: $8,000–$20,000. Muy común en destinos de food street como México, India o Marruecos.</p>
+
+              <h3>6. Accidente de tráfico</h3>
+              <p>Lesiones múltiples, cirugía, UCI, rehabilitación. Es la causa número 1 de muerte en viajeros de 15-44 años según la OMS. Costo total en EE.UU.: <strong>$100,000–$500,000+</strong>. En Tailandia (riesgo alto por motocicletas): $3,000–$20,000.</p>
+
+              <h3>7. Emergencia dental</h3>
+              <p>Infección, extracción o tratamiento de canal. En EE.UU.: $2,000–$5,000. En Europa: $500–$2,000. Muchos seguros básicos NO cubren dental en el extranjero.</p>
+
+              <h3>8. Hospitalización por COVID-19</h3>
+              <p>En EE.UU. sin seguro: <strong>$30,000–$80,000 USD</strong> por hospitalización de 5-7 días. En Europa con hospital privado: $10,000–$25,000. La cobertura COVID en seguros de viaje varía enormemente — verifica siempre antes de comprar.</p>
+
+              <h3>9. Meningitis bacteriana</h3>
+              <p>UCI + antibióticos IV + estancia prolongada. Una de las emergencias más graves. Costo en EE.UU.: $50,000–$120,000. Común en viajeros a África Subsahariana y zonas del "cinturón de la meningitis".</p>
+
+              <h3>10. ACV (accidente cerebrovascular)</h3>
+              <p>Tratamiento urgente, neurología, rehabilitación inicial. En EE.UU.: $150,000–$400,000. En Europa: $30,000–$80,000. El tiempo es crítico — la evacuación médica puede duplicar el costo.</p>
+
+              <div class="stat-callout">
+                <strong>📊 Dato clave</strong>
+                El costo promedio de una evacuación médica internacional es de $50,000–$250,000 USD. Sin seguro, esta cifra sale directamente de tu bolsillo.
+              </div>
+
+              <div class="warning-box">
+                ⚠️ <strong>Importante:</strong> Estos costos son estimados basados en datos de 2024-2025. Los precios reales pueden variar según el hospital, la gravedad y el país. Un seguro de viaje con cobertura de $250,000+ médicos y repatriación puede costar desde $2.50/día.
+              </div>
+
+              <div class="article-cta">
+                <p>No arriesgues tu seguridad financiera. Cotiza tu seguro de viaje ahora — desde $2.50/día.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar gratis en 2 minutos</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 2 ─── -->
+          <article class="article-card" data-cat="Emergencias"
+            data-title-es="¿Qué pasa si te hospitalizan en Estados Unidos sin seguro? (costos reales)"
+            data-title-en="What Happens if You're Hospitalized in the US Without Insurance?"
+            data-excerpt-es="Una visita a urgencias en EE.UU. puede costarte más de $20,000 dólares. Descubre los costos reales y la historia de un viajero que aprendió esta lección de la peor manera."
+            data-excerpt-en="An ER visit in the US can cost you over $20,000. Discover the real costs and the story of a traveler who learned this lesson the hard way.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏥</div>
+              <div class="card-meta">
+                <span class="category-badge badge-emergencias">Emergencias</span>
+                <div class="card-title" data-field="title">¿Qué pasa si te hospitalizan en Estados Unidos sin seguro? (costos reales)</div>
+                <div class="card-reading-time">⏱️ <span data-i18n="min_read_7">7 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">Una visita a urgencias en EE.UU. puede costarte más de $20,000 dólares. Descubre los costos reales y la historia de un viajero que aprendió esta lección de la peor manera.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>El sistema de salud más caro del mundo</h3>
+              <p>Estados Unidos tiene el sistema de salud más costoso del mundo. A diferencia de Europa o Canadá, no existe cobertura universal — y los hospitales pueden cobrarte tarifas astronómicas que no tienen límite legal. Para un extranjero sin seguro, esto puede significar la ruina financiera total.</p>
+
+              <h3>Desglose de costos reales (2025)</h3>
+              <table class="cost-table">
+                <tr><th>Servicio</th><th>Costo estimado sin seguro</th></tr>
+                <tr><td>Visita a urgencias (ER) — básica</td><td>$3,000 – $7,000</td></tr>
+                <tr><td>Visita a urgencias — grave</td><td>$10,000 – $20,000</td></tr>
+                <tr><td>Hospitalización (por noche)</td><td>$4,000 – $10,000</td></tr>
+                <tr><td>UCI / cuidados intensivos (por día)</td><td>$10,000 – $25,000</td></tr>
+                <tr><td>Ambulancia (transporte local)</td><td>$1,500 – $3,500</td></tr>
+                <tr><td>Cirugía abdominal</td><td>$30,000 – $80,000</td></tr>
+                <tr><td>Cirugía cardíaca</td><td>$100,000 – $400,000</td></tr>
+                <tr><td>Resonancia magnética (MRI)</td><td>$1,500 – $5,000</td></tr>
+                <tr><td>Tomografía (CT Scan)</td><td>$1,000 – $4,000</td></tr>
+                <tr><td>Repatriación médica a Europa</td><td>$50,000 – $120,000</td></tr>
+              </table>
+
+              <h3>Caso real: Martín, 28 años, Madrid → Nueva York</h3>
+              <p>Martín viajó a Nueva York para una conferencia de diseño. Al tercer día, empezó con dolor abdominal intenso. Fue en taxi al hospital más cercano. Diagnóstico: apendicitis aguda. Cirugía de urgencia.</p>
+              <p>Factura total: <strong>$68,400 USD</strong>. Desglose: urgencias $4,200, cirugía $42,000, anestesia $8,500, 2 noches de hospitalización $10,800, medicamentos $1,900, seguimiento ambulatorio $1,000. Martín no tenía seguro de viaje. Sí tenía seguro de salud en España — que no le cubría nada fuera de la UE.</p>
+              <p>El hospital le ofreció un plan de pago: $1,500/mes durante 5 años. Martín tardó 4 años en saldar la deuda.</p>
+
+              <div class="stat-callout">
+                <strong>💡 ¿Por qué tan caro?</strong>
+                En EE.UU., los hospitales negocian precios con las aseguradoras locales. Sin seguro, te aplican el "chargemaster rate" — la tarifa de catálogo sin descuento, que puede ser 3-5 veces mayor que el precio negociado.
+              </div>
+
+              <h3>¿La tarjeta EHIC te cubre en EE.UU.?</h3>
+              <p><strong>No.</strong> La Tarjeta Sanitaria Europea (TSE/EHIC) solo funciona en países de la UE/EEE. En EE.UU., Canadá, México, Asia o cualquier país fuera de Europa, no tiene validez. Este es uno de los errores más comunes de los viajeros europeos.</p>
+
+              <h3>¿El seguro de salud de tu país te cubre?</h3>
+              <p>En la mayoría de los casos, <strong>no</strong> o de forma muy limitada. Los seguros nacionales de salud (el español, el francés, el alemán) son de cobertura territorial — cubren servicios dentro del país o la UE. Algunos seguros privados tienen cláusulas de "emergencia internacional", pero con límites muy bajos ($5,000-$20,000) insuficientes para EE.UU.</p>
+
+              <div class="tip-box">
+                ✅ <strong>Solución:</strong> Un seguro de viaje específico para EE.UU./Canadá con cobertura mínima de $250,000 médicos cuesta entre $3-$8/día para la mayoría de viajeros. Comparado con el riesgo de $68,000+, es la decisión financiera más inteligente.
+              </div>
+
+              <div class="article-cta">
+                <p>¿Viajas a Estados Unidos? Asegúrate con una cobertura adecuada. Cotiza en 2 minutos.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar seguro para EE.UU.</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 3 ─── -->
+          <article class="article-card" data-cat="Consejos"
+            data-title-es="Por qué tu seguro de salud local NO te cubre en el extranjero"
+            data-title-en="Why Your Local Health Insurance Does NOT Cover You Abroad"
+            data-excerpt-es="Millones de viajeros cometen este error: asumir que su seguro de salud local funciona igual en el extranjero. La realidad es muy diferente, y puede costarte muy caro."
+            data-excerpt-en="Millions of travelers make this mistake: assuming their local health insurance works the same abroad. The reality is very different, and it can cost you dearly.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#dbeafe,#93c5fd)">📋</div>
+              <div class="card-meta">
+                <span class="category-badge badge-consejos">Consejos</span>
+                <div class="card-title" data-field="title">Por qué tu seguro de salud local NO te cubre en el extranjero</div>
+                <div class="card-reading-time">⏱️ <span>6 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">Millones de viajeros cometen este error: asumir que su seguro de salud local funciona igual en el extranjero. La realidad es muy diferente, y puede costarte muy caro.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>El principio de territorialidad</h3>
+              <p>Todo seguro de salud opera bajo el principio de <strong>territorialidad</strong>: es válido dentro de un área geográfica determinada. El seguro público español cubre España y, por reciprocidad, otros países de la UE (con la TSE). El seguro público mexicano (IMSS) cubre México. El seguro privado que contrataste en tu país tiene en su letra pequeña una cláusula que limita la cobertura a tu país de residencia.</p>
+
+              <h3>¿Qué significa "solo emergencias"?</h3>
+              <p>Algunos seguros tienen cláusulas de cobertura de emergencia internacional, pero con condiciones muy restrictivas:</p>
+              <ul>
+                <li>Solo cubre las primeras 24-72 horas de una emergencia, no el tratamiento completo</li>
+                <li>Límite máximo de $5,000-$20,000 (insuficiente para EE.UU., Japón o Australia)</li>
+                <li>Requiere reembolso posterior — pagas primero tú, luego reclamas</li>
+                <li>Excluye condiciones preexistentes en el extranjero</li>
+                <li>No cubre evacuación médica ni repatriación</li>
+              </ul>
+
+              <h3>El mito de la tarjeta de crédito</h3>
+              <p>Muchos viajeros creen que "la tarjeta Visa/Mastercard Platinum incluye seguro de viaje". Esto es parcialmente cierto pero engañoso:</p>
+              <ul>
+                <li>La cobertura médica suele ser de $10,000–$50,000 máximo</li>
+                <li>Solo aplica si pagaste el viaje con esa tarjeta</li>
+                <li>Excluye condiciones preexistentes</li>
+                <li>No incluye repatriación médica ($50,000–$120,000)</li>
+                <li>Requiere proceso de reclamación complejo con papeleo extenso</li>
+              </ul>
+
+              <div class="warning-box">
+                ⚠️ <strong>La trampa más común:</strong> Leer "cobertura internacional" en tu póliza y asumir que estás protegido. Siempre revisa el límite máximo, las exclusiones geográficas específicas, y si cubre evacuación médica. Un límite de $20,000 no es suficiente para una hospitalización en EE.UU.
+              </div>
+
+              <h3>Seguro de salud vs. seguro de viaje: diferencias clave</h3>
+              <table class="cost-table">
+                <tr><th>Característica</th><th>Seguro de salud local</th><th>Seguro de viaje</th></tr>
+                <tr><td>Cobertura geográfica</td><td>País/región de origen</td><td>Mundial</td></tr>
+                <tr><td>Límite médico</td><td>$0–$20,000 fuera</td><td>$100,000–$1,000,000</td></tr>
+                <tr><td>Evacuación médica</td><td>Generalmente NO</td><td>SÍ incluida</td></tr>
+                <tr><td>Repatriación</td><td>NO</td><td>SÍ incluida</td></tr>
+                <tr><td>Cancelación de viaje</td><td>NO</td><td>SÍ (según plan)</td></tr>
+                <tr><td>Equipaje perdido</td><td>NO</td><td>SÍ (según plan)</td></tr>
+              </table>
+
+              <h3>¿Cuándo SÍ te cubre tu seguro local?</h3>
+              <p>Tu seguro de salud español/europeo te cubre sin problema en otros países de la UE/EEE presentando la TSE, y en países con convenio bilateral (algunos de América Latina). Pero para EE.UU., Canadá, Australia, Japón, China, o la mayoría del mundo no-europeo, necesitas un seguro de viaje específico.</p>
+
+              <div class="article-cta">
+                <p>No te quedes con dudas. Cotiza un seguro de viaje que realmente te cubra donde necesitas.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Ver cobertura completa</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 4 ─── -->
+          <article class="article-card" data-cat="Nómadas"
+            data-title-es="Guía completa para nómadas digitales: el seguro que necesitas en 2026"
+            data-title-en="Complete Guide for Digital Nomads: The Insurance You Need in 2026"
+            data-excerpt-es="Si trabajas desde cualquier país del mundo, tu seguro de viaje necesita ser tan flexible como tu estilo de vida. Aquí te explicamos exactamente qué buscar."
+            data-excerpt-en="If you work from any country in the world, your travel insurance needs to be as flexible as your lifestyle. Here we explain exactly what to look for.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">💻</div>
+              <div class="card-meta">
+                <span class="category-badge badge-nomadas">Nómadas</span>
+                <div class="card-title" data-field="title">Guía completa para nómadas digitales: el seguro que necesitas en 2026</div>
+                <div class="card-reading-time">⏱️ <span>9 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">Si trabajas desde cualquier país del mundo, tu seguro de viaje necesita ser tan flexible como tu estilo de vida. Aquí te explicamos exactamente qué buscar.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>El nómada digital y el seguro: un desafío único</h3>
+              <p>En 2026, se estima que hay <strong>más de 35 millones de nómadas digitales</strong> en el mundo según MBO Partners. Este colectivo enfrenta desafíos únicos de seguros: viajan constantemente, trabajan remotamente, pueden pasar meses en el mismo país, y sus necesidades van mucho más allá del seguro turístico estándar.</p>
+
+              <h3>¿Seguro de viaje o seguro de salud internacional?</h3>
+              <p>Para estancias de más de 3-6 meses en un país, el seguro de viaje tradicional (pensado para vacaciones de 1-4 semanas) puede no ser la mejor opción. Considera:</p>
+              <ul>
+                <li><strong>Seguro de viaje multi-trip anual:</strong> Cubre múltiples viajes, generalmente con límite de 30-90 días por viaje. Ideal si tienes base fija.</li>
+                <li><strong>Seguro de salud internacional:</strong> Sin límite temporal, cobertura continua globalmente. Más caro pero más completo.</li>
+                <li><strong>Planes específicos para nómadas:</strong> SafetyWing Nomad Insurance ($45.08/mes), World Nomads Explorer, Genki World.</li>
+              </ul>
+
+              <h3>Cobertura para tu equipo de trabajo</h3>
+              <p>Como nómada, tu laptop y dispositivos son tu herramienta de trabajo. Verifica si tu seguro incluye:</p>
+              <ul>
+                <li>Robo de electrónicos (muy común en destinos turísticos)</li>
+                <li>Daño accidental (caídas, derrames)</li>
+                <li>Robo con violencia</li>
+                <li>Límite por ítem (muchos planes limitan $500-$1,500 por dispositivo)</li>
+              </ul>
+              <div class="warning-box">
+                ⚠️ La mayoría de seguros de viaje básicos tienen exclusiones para equipos electrónicos de "uso profesional". Si tu laptop de $2,000 es tu herramienta de trabajo, asegúrate de que esté cubierta explícitamente.
+              </div>
+
+              <h3>Requisitos de visa para nómadas en 2026</h3>
+              <p>Países como Portugal (Visado D8), Estonia, Georgia, Tailandia (LTR Visa), Costa Rica y más de 50 países ofrecen visas específicas para nómadas digitales. Muchas de ellas <strong>requieren un seguro de salud válido</strong> como condición para la aprobación. Los requisitos típicos:</p>
+              <ul>
+                <li>Cobertura médica mínima: $30,000–$100,000 según el país</li>
+                <li>Incluir repatriación</li>
+                <li>Certificado de cobertura en inglés o en el idioma del país</li>
+                <li>Sin período de espera para emergencias</li>
+              </ul>
+
+              <h3>Coberturas recomendadas para nómadas</h3>
+              <table class="cost-table">
+                <tr><th>Cobertura</th><th>Mínimo recomendado</th></tr>
+                <tr><td>Gastos médicos</td><td>$250,000 USD</td></tr>
+                <tr><td>Evacuación médica</td><td>Incluida sin límite</td></tr>
+                <tr><td>Equipaje/electrónicos</td><td>$3,000 USD</td></tr>
+                <tr><td>Responsabilidad civil</td><td>$100,000 USD</td></tr>
+                <tr><td>Cancelación/interrupción</td><td>$5,000 USD</td></tr>
+                <tr><td>Salud mental</td><td>Incluida (burnout es real)</td></tr>
+              </table>
+
+              <h3>Consejos específicos para multi-país</h3>
+              <ul>
+                <li>Verifica que el seguro cubra el tránsito entre países, no solo el destino final</li>
+                <li>Comprueba las exclusiones por país (algunos planes no cubren ciertos países)</li>
+                <li>Guarda siempre la póliza en digital (Google Drive + email) — el papel se pierde</li>
+                <li>Activa las notificaciones cuando tu cobertura esté por expirar</li>
+                <li>Considera un seguro con telemedicina 24/7 para consultas sin visitar hospital</li>
+              </ul>
+
+              <div class="tip-box">
+                ✅ <strong>Pro tip:</strong> Muchos nómadas combinan SafetyWing (cobertura básica de salud a bajo costo) + un seguro de electrónicos específico (como Ensurance o Laptop Travel Insurance) para maximizar cobertura con costo controlado.
+              </div>
+
+              <div class="article-cta">
+                <p>¿Eres nómada digital? Cotiza un plan adaptado a tu estilo de vida en minutos.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar plan para nómadas</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 5 ─── -->
+          <article class="article-card" data-cat="Destinos"
+            data-title-es="Los 5 destinos más peligrosos sin seguro de viaje (y cuánto te puede costar)"
+            data-title-en="The 5 Most Dangerous Destinations Without Travel Insurance"
+            data-excerpt-es="No hablamos de peligrosidad en términos de seguridad, sino de riesgo financiero. Estos 5 destinos pueden generarte facturas médicas que cambiarán tu vida."
+            data-excerpt-en="We're not talking about physical safety, but financial risk. These 5 destinations can generate medical bills that will change your life.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#fef3c7,#fbbf24)">🌍</div>
+              <div class="card-meta">
+                <span class="category-badge badge-destinos">Destinos</span>
+                <div class="card-title" data-field="title">Los 5 destinos más peligrosos sin seguro de viaje (y cuánto te puede costar)</div>
+                <div class="card-reading-time">⏱️ <span>7 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">No hablamos de peligrosidad en términos de seguridad, sino de riesgo financiero. Estos 5 destinos pueden generarte facturas médicas que cambiarán tu vida.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>Riesgo financiero vs. riesgo físico</h3>
+              <p>Cuando pensamos en destinos "peligrosos", pensamos en crimen o inestabilidad política. Pero desde el punto de vista del seguro de viaje, el peligro más real es el <strong>riesgo financiero de una emergencia médica no cubierta</strong>. Estos 5 destinos combinan alta probabilidad de incidente con costos potencialmente devastadores.</p>
+
+              <h3>🇺🇸 1. Estados Unidos — El más costoso del mundo</h3>
+              <p><strong>Escenario real:</strong> Ana, 34 años, Madrid. Vacaciones en Miami. Accidente en la playa: fractura de clavícula. Factura: $28,400. Seguro de viaje que hubiera costado: $85 por 10 días.</p>
+              <p>EE.UU. recibe más de 80 millones de turistas al año. Una de cada 8 visitas implica atención médica. El país no tiene cobertura universal, y los hospitales cobran tarifas sin límite legal a pacientes sin seguro local. <strong>Cobertura mínima recomendada: $500,000 USD.</strong></p>
+
+              <h3>🇯🇵 2. Japón — Barrera idiomática + costos elevados</h3>
+              <p><strong>Escenario real:</strong> Carlos, 41 años. Tokio por trabajo. Gastroenteritis severa. Hospitalización 3 días. Factura: $8,200. No hablaba japonés. Tardó 2 semanas en que su seguro español gestionara el reembolso.</p>
+              <p>Japón tiene sanidad de calidad pero costosa para extranjeros. La barrera idiomática complica enormemente la gestión. Los extranjeros pagan tarifas más altas. Sin seguro, una hospitalización básica supera fácilmente los $5,000–$15,000. <strong>Especial: considera seguro con asistencia telefónica en español 24h.</strong></p>
+
+              <h3>🇹🇭 3. Tailandia — Capital mundial de los accidentes de moto</h3>
+              <p><strong>Escenario real:</strong> Julia, 26 años. Koh Samui. Alquila moto sin casco. Accidente leve. Fractura de muñeca + heridas. Factura hospital privado Bumrungrad (Bangkok): $6,800.</p>
+              <p>Tailandia tiene la segunda tasa de mortalidad vial más alta de Asia. Las motos de alquiler son la principal causa de lesiones en turistas. Los hospitales privados (donde van los turistas) cobran tarifas internacionales elevadas. Muchos seguros <strong>excluyen accidentes en moto si no tenías licencia de motocicleta</strong> — verifica esto.</p>
+
+              <h3>🇧🇷 4. Brasil — Crimen + sistema médico mixto</h3>
+              <p><strong>Escenario real:</strong> Miguel, 38 años. Río de Janeiro. Robo de mochila con laptop, cámara y documentos. Denuncia policial + hospital para tratar golpe en la cabeza: $3,200 total entre robo y médico.</p>
+              <p>Brasil combina alto riesgo de robo (especialmente en zonas turísticas) con un sistema de salud donde los hospitales privados son de calidad pero costosos para extranjeros. El seguro de viaje aquí debe incluir sí o sí cobertura de equipaje y responsabilidad civil.</p>
+
+              <h3>🇿🇦 5. Sudáfrica — Crimen + lejanía geográfica</h3>
+              <p><strong>Escenario real:</strong> Sophie, 31 años. Safari en Kruger. Herida por caída en excursión. Evacuación médica en helicóptero a Johannesburgo: $22,000 solo el helicóptero. Cirugía: $15,000.</p>
+              <p>Sudáfrica tiene zonas de safari remotas donde la evacuación médica es la única opción en emergencias. El costo de un helicóptero médico puede superar $20,000. Además, Johannesburgo figura consistentemente entre las ciudades con mayor índice de crimen del mundo. <strong>Cobertura de evacuación ilimitada es obligatoria aquí.</strong></p>
+
+              <div class="stat-callout">
+                <strong>📊 Resumen de cobertura recomendada por destino</strong>
+                EE.UU.: $500,000 médico | Japón: $200,000 + asistencia ES | Tailandia: $150,000 + moto OK | Brasil: $100,000 + equipaje $3,000 | Sudáfrica: $150,000 + evacuación ilimitada
+              </div>
+
+              <div class="article-cta">
+                <p>¿Cuál es tu próximo destino? Cotiza el seguro adecuado para ese viaje específico.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar por destino</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 6 ─── -->
+          <article class="article-card" data-cat="Consejos"
+            data-title-es="Cómo reclamar tu seguro de viaje paso a paso (guía práctica)"
+            data-title-en="How to File a Travel Insurance Claim Step by Step"
+            data-excerpt-es="Tener seguro es solo la mitad del trabajo. Saber cómo reclamarlo correctamente es lo que determina si cobras o no. Esta guía te lo explica todo."
+            data-excerpt-en="Having insurance is only half the work. Knowing how to claim it correctly is what determines whether you get paid or not. This guide explains everything.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#e0e7ff,#a5b4fc)">📝</div>
+              <div class="card-meta">
+                <span class="category-badge badge-consejos">Consejos</span>
+                <div class="card-title" data-field="title">Cómo reclamar tu seguro de viaje paso a paso (guía práctica)</div>
+                <div class="card-reading-time">⏱️ <span>8 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">Tener seguro es solo la mitad del trabajo. Saber cómo reclamarlo correctamente es lo que determina si cobras o no. Esta guía te lo explica todo.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>Antes de salir: la lista de preparación</h3>
+              <ul>
+                <li>Guarda el número de emergencias de tu aseguradora en el móvil (internacionalmente accesible)</li>
+                <li>Lleva una copia impresa y digital de tu póliza con el número de contrato</li>
+                <li>Anota los procedimientos específicos de tu plan (algunos requieren autorización previa)</li>
+                <li>Fotografía tus documentos de identidad, póliza y tarjetas de crédito</li>
+                <li>Registra los contactos de la asistencia en viaje en tu teléfono como "Seguro Viaje - EMERGENCIA"</li>
+              </ul>
+
+              <h3>En el momento de la emergencia: qué hacer</h3>
+              <ol>
+                <li><strong>Llama a tu aseguradora PRIMERO</strong> — muchos planes requieren que contactes a la asistencia antes o durante la atención médica para coordinar el pago directo al hospital. Si no lo haces, puede complicar el reembolso.</li>
+                <li><strong>Conserva TODO el papel:</strong> facturas, recibos, informes médicos, partes de accidente, ticket de taxi al hospital. TODO.</li>
+                <li><strong>Pide los documentos en inglés</strong> o con traducción cuando sea posible.</li>
+                <li><strong>Documenta visualmente:</strong> fotos del accidente, lesiones, daño al equipaje.</li>
+                <li><strong>Denuncia a la policía</strong> en robos o accidentes — sin denuncia, la mayoría de reclamaciones no se aceptan.</li>
+              </ol>
+
+              <h3>Documentos esenciales para reclamar</h3>
+              <table class="cost-table">
+                <tr><th>Tipo de siniestro</th><th>Documentos necesarios</th></tr>
+                <tr><td>Emergencia médica</td><td>Informe médico, facturas, diagnóstico, recetas</td></tr>
+                <tr><td>Robo</td><td>Denuncia policial, lista de objetos, facturas de compra</td></tr>
+                <tr><td>Cancelación de vuelo</td><td>Comunicado de la aerolínea, gastos adicionales, billetes</td></tr>
+                <tr><td>Cancelación de viaje</td><td>Causa documentada (enfermedad/fallecimiento), reservas</td></tr>
+                <tr><td>Retraso de vuelo</td><td>Comunicado aerolínea, gastos de comida/hotel durante retraso</td></tr>
+              </table>
+
+              <h3>Proceso de reclamación: plazos y pasos</h3>
+              <ol>
+                <li><strong>Notificación inicial:</strong> Informa a la aseguradora en las primeras 24-48h del incidente.</li>
+                <li><strong>Formulario de reclamación:</strong> Complétalo dentro del plazo indicado en tu póliza (normalmente 30-60 días).</li>
+                <li><strong>Envío de documentación:</strong> Todo junto, organizado, por email certificado o plataforma digital.</li>
+                <li><strong>Seguimiento:</strong> Guarda referencia del caso. Si no hay respuesta en 15 días, llama.</li>
+                <li><strong>Resolución:</strong> El plazo legal varía por país, pero típicamente 30-90 días.</li>
+              </ol>
+
+              <h3>Las 6 razones más comunes para denegar una reclamación</h3>
+              <ul>
+                <li>❌ No llamaste a la asistencia antes/durante la emergencia</li>
+                <li>❌ La condición era preexistente y no declarada</li>
+                <li>❌ Actividad excluida (deportes extremos, moto sin licencia)</li>
+                <li>❌ Documentación incompleta o tardía</li>
+                <li>❌ El evento ocurrió antes de la fecha de inicio de la póliza</li>
+                <li>❌ Destino con alerta de viaje nivel 4 (zona de guerra)</li>
+              </ul>
+
+              <div class="tip-box">
+                ✅ <strong>Consejo de experto:</strong> Crea una carpeta "Seguro Viaje" en Google Drive antes de salir. Sube ahí tu póliza, fotos de documentos, y durante el viaje agrega cada factura o incidencia. Si necesitas reclamar, lo tendrás todo en 5 minutos.
+              </div>
+
+              <div class="article-cta">
+                <p>Un buen seguro no sirve de nada si no sabes cómo usarlo. Elige uno con asistencia en tu idioma.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar con asistencia 24/7</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 7 ─── -->
+          <article class="article-card" data-cat="Familia"
+            data-title-es="Seguro de viaje para familias con niños: todo lo que necesitas saber"
+            data-title-en="Family Travel Insurance with Kids: Everything You Need to Know"
+            data-excerpt-es="Viajar con niños multiplica la alegría, pero también el riesgo. Las emergencias pediátricas en el extranjero tienen sus propias particularidades. Prepárate bien."
+            data-excerpt-en="Traveling with kids multiplies the joy, but also the risk. Pediatric emergencies abroad have their own particularities. Prepare well.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">👨‍👩‍👧‍👦</div>
+              <div class="card-meta">
+                <span class="category-badge badge-familia">Familia</span>
+                <div class="card-title" data-field="title">Seguro de viaje para familias con niños: todo lo que necesitas saber</div>
+                <div class="card-reading-time">⏱️ <span>7 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">Viajar con niños multiplica la alegría, pero también el riesgo. Las emergencias pediátricas en el extranjero tienen sus propias particularidades. Prepárate bien.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>Por qué los niños aumentan el riesgo en viaje</h3>
+              <p>Los niños tienen sistemas inmunes en desarrollo, mayor tendencia a accidentes exploratorios, y menor capacidad para comunicar síntomas. Según la Sociedad Española de Urgencias Pediátricas, los niños entre 2 y 8 años tienen una probabilidad <strong>2.3 veces mayor</strong> de necesitar atención médica durante un viaje que los adultos.</p>
+              <p>Las emergencias más comunes en niños viajeros incluyen: otitis (infección de oído), gastroenteritis, fiebre alta por infección, alergias, fracturas por caídas, y convulsiones febriles.</p>
+
+              <h3>Emergencias pediátricas: los costos específicos</h3>
+              <table class="cost-table">
+                <tr><th>Emergencia</th><th>EE.UU.</th><th>Europa (hospital privado)</th></tr>
+                <tr><td>Otitis con visita médica</td><td>$800 – $2,500</td><td>$200 – $600</td></tr>
+                <tr><td>Gastroenteritis severa (2 días)</td><td>$8,000 – $18,000</td><td>$2,000 – $5,000</td></tr>
+                <tr><td>Fractura (brazo)</td><td>$10,000 – $28,000</td><td>$2,500 – $7,000</td></tr>
+                <tr><td>Convulsión febril con UCI</td><td>$25,000 – $60,000</td><td>$5,000 – $15,000</td></tr>
+                <tr><td>Appendicitis pediátrica</td><td>$30,000 – $70,000</td><td>$8,000 – $20,000</td></tr>
+              </table>
+
+              <h3>Qué buscar en un seguro familiar</h3>
+              <ul>
+                <li><strong>Cobertura para todos los miembros</strong> en una sola póliza (planes familia suelen ser 15-25% más baratos que pólizas individuales)</li>
+                <li><strong>Pediatra de guardia 24h:</strong> la capacidad de consultar con médico pediátrico por teléfono puede evitar una visita a urgencias</li>
+                <li><strong>Cobertura de recién nacidos:</strong> si viajas con bebé, algunos planes tienen edad mínima (14-30 días de vida)</li>
+                <li><strong>Regreso anticipado:</strong> si un hijo enferma gravemente en casa, ¿te paga el regreso?</li>
+                <li><strong>Actividades infantiles:</strong> parques temáticos, piscinas, deportes acuáticos — que no estén excluidos</li>
+              </ul>
+
+              <h3>Consejos para viajar con bebés (0-2 años)</h3>
+              <ul>
+                <li>Lleva el carné de vacunación del pediatra en el idioma del país destino (o en inglés)</li>
+                <li>Consulta con el pediatra antes del viaje si el destino requiere vacunas especiales</li>
+                <li>Lleva suero oral de rehidratación — la deshidratación es la emergencia #1 en bebés</li>
+                <li>Verifica que el seguro cubre telemedicina pediátrica — consultas a las 3AM desde el hotel</li>
+                <li>El seguro del bebé debe estar vigente DESDE el primer día de vida si viajas con recién nacido</li>
+              </ul>
+
+              <h3>Excursiones y viajes escolares</h3>
+              <p>Si tu hijo viaja con el colegio al extranjero, el seguro del centro puede no cubrir todo. Verifica los límites de cobertura médica (suelen ser básicos), si incluye responsabilidad civil del menor, y considera un suplemento personal.</p>
+
+              <div class="stat-callout">
+                <strong>💰 ¿Cuánto cuesta un seguro familiar?</strong>
+                Un plan familiar para 4 personas (2 adultos + 2 niños) para 2 semanas en Europa puede costar $120–$250. En EE.UU., $200–$400. Comparado con el costo de una sola urgencia pediátrica, es una inversión obvia.
+              </div>
+
+              <div class="article-cta">
+                <p>Protege a toda tu familia con una sola póliza. Cotiza ahora tu plan familiar.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Cotizar plan familiar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── CARD 8 ─── -->
+          <article class="article-card" data-cat="Consejos"
+            data-title-es="COVID-19 y viajes en 2026: qué cubre y qué no tu seguro"
+            data-title-en="COVID-19 and Travel in 2026: What Your Insurance Covers and What It Doesn't"
+            data-excerpt-es="En 2026, COVID-19 ya no es pandemia oficial pero sigue siendo una realidad de viaje. ¿Tu seguro te cubre si te contagias? La respuesta depende del plan que elijas."
+            data-excerpt-en="In 2026, COVID-19 is no longer an official pandemic but it's still a travel reality. Does your insurance cover you if you get infected? The answer depends on the plan you choose.">
+            <div class="card-top">
+              <div class="card-emoji-box" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🦠</div>
+              <div class="card-meta">
+                <span class="category-badge badge-consejos">Consejos</span>
+                <div class="card-title" data-field="title">COVID-19 y viajes en 2026: qué cubre y qué no tu seguro</div>
+                <div class="card-reading-time">⏱️ <span>6 min de lectura</span></div>
+              </div>
+            </div>
+            <div class="card-excerpt" data-field="excerpt">En 2026, COVID-19 ya no es pandemia oficial pero sigue siendo una realidad de viaje. ¿Tu seguro te cubre si te contagias? La respuesta depende del plan que elijas.</div>
+            <div class="card-footer">
+              <button class="read-more-btn" onclick="toggleArticle(this)">
+                <span data-i18n="read_more">Leer más</span> <span class="arrow">▼</span>
+              </button>
+            </div>
+            <div class="full-article">
+              <h3>El panorama COVID en 2026</h3>
+              <p>La OMS declaró el fin de la emergencia sanitaria por COVID-19 en mayo de 2023, pero el virus sigue circulando con nuevas variantes. En 2026, el escenario es de <strong>COVID endémico</strong>: sigue habiendo hospitalizaciones, especialmente en mayores y personas con condiciones previas, pero sin los cierres de fronteras de años anteriores.</p>
+              <p>Para los viajeros, esto significa: el riesgo existe, algunos países siguen requiriendo test o certificados de vacunación, y los seguros de viaje han adaptado (o no) su cobertura COVID con diferencias significativas entre proveedores.</p>
+
+              <h3>¿Qué planes cubren COVID en 2026?</h3>
+              <p>La industria aseguradora ha evolucionado. En términos generales:</p>
+              <ul>
+                <li><strong>Planes post-pandemia (2022+):</strong> La mayoría incluyen COVID como cualquier otra enfermedad — si te hospitalizan, está cubierto.</li>
+                <li><strong>Cancelación por COVID:</strong> Solo cubierta si el plan incluye "Cancel for Any Reason" (CFAR) o COVID está específicamente listado como causa válida.</li>
+                <li><strong>Cuarentena obligatoria:</strong> Algunos planes cubren gastos adicionales de alojamiento si te imponen cuarentena. Muchos no lo hacen.</li>
+                <li><strong>Planes legacy (anteriores a 2020):</strong> Pueden tener exclusión de "epidemia/pandemia" — a revisar urgentemente.</li>
+              </ul>
+
+              <h3>La cláusula de "exclusión epidémica": qué significa</h3>
+              <p>Algunos seguros más baratos o antiguos incluyen lenguaje como: <em>"quedan excluidas enfermedades o condiciones causadas por epidemia declarada, pandemia o alerta sanitaria oficial"</em>. Esto puede excluir COVID si tu país de origen o destino tiene algún tipo de alerta sanitaria activa.</p>
+
+              <div class="warning-box">
+                ⚠️ <strong>Verifica específicamente:</strong> Busca en tu póliza las palabras "epidemic", "pandemic", "COVID-19", "SARS-CoV-2" o "communicable disease". Si aparecen en la sección de exclusiones sin matización, ese plan podría no cubrirte en un ingreso hospitalario por COVID.
+              </div>
+
+              <h3>Costos de hospitalización por COVID en 2026</h3>
+              <table class="cost-table">
+                <tr><th>Escenario</th><th>EE.UU. (sin seguro)</th><th>Europa (hospital privado)</th></tr>
+                <tr><td>Ingreso leve (2-3 días)</td><td>$18,000 – $35,000</td><td>$4,000 – $10,000</td></tr>
+                <tr><td>Ingreso moderado (5-7 días)</td><td>$35,000 – $80,000</td><td>$8,000 – $25,000</td></tr>
+                <tr><td>UCI con ventilación</td><td>$80,000 – $200,000</td><td>$20,000 – $60,000</td></tr>
+                <tr><td>Cuarentena hotel (10 días)</td><td>$1,000 – $3,000</td><td>$800 – $2,500</td></tr>
+                <tr><td>PCR + consultas ambulatorias</td><td>$500 – $2,000</td><td>$200 – $800</td></tr>
+              </table>
+
+              <h3>Cómo elegir un plan con buena cobertura COVID</h3>
+              <ol>
+                <li>Busca planes que listen COVID-19 explícitamente como condición cubierta</li>
+                <li>Verifica que incluya gastos de cuarentena o extensión de estancia forzosa</li>
+                <li>Si viajas a destinos con requisitos de test, el plan debe cubrir el costo del test</li>
+                <li>Para cancelaciones: considera añadir CFAR (Cancel for Any Reason) — cuesta 40-60% más pero da máxima flexibilidad</li>
+                <li>Lee el proceso de reclamación — algunos requieren test positivo oficial como documento principal</li>
+              </ol>
+
+              <div class="tip-box">
+                ✅ <strong>Consejo 2026:</strong> Los mejores planes para viajeros con riesgo COVID son aquellos que tratan COVID como cualquier otra enfermedad respiratoria. Pregunta directamente al asegurador: "¿Cubre hospitalización por COVID-19 igual que influenza?" Si la respuesta es sí, adelante.
+              </div>
+
+              <div class="article-cta">
+                <p>Viaja tranquilo en 2026. Cotiza un plan que te cubra para cualquier eventualidad, incluyendo COVID.</p>
+                <a href="https://travel-insurance-agent.vercel.app/" target="_blank">→ Ver planes con cobertura COVID</a>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /cards-grid -->
+
+        <div class="no-results" id="noResults">
+          <div class="no-results-icon">🔍</div>
+          <h3 data-i18n="no_results_title">No se encontraron artículos</h3>
+          <p data-i18n="no_results_sub">Prueba con otros términos de búsqueda o selecciona otra categoría.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- RIGHT: sidebar -->
+    <aside class="sidebar">
+
+      <!-- CTA box -->
+      <div class="sidebar-card navy-bg">
+        <div class="sidebar-card-body">
+          <h3 data-i18n="sidebar_cta_title">¿Listo para protegerte?</h3>
+          <p data-i18n="sidebar_cta_sub">Cotiza tu seguro de viaje en 2 minutos. Desde $2.50/día con cobertura médica de hasta $1,000,000.</p>
+          <a href="https://travel-insurance-agent.vercel.app/" class="sidebar-cta-btn" target="_blank" data-i18n="sidebar_cta_btn">🛡️ Cotizar gratis →</a>
+        </div>
+      </div>
+
+      <!-- Popular articles -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-body">
+          <h3 data-i18n="sidebar_popular">📈 Artículos populares</h3>
+          <ul class="popular-list">
+            <li><a href="#" onclick="scrollToCard(0);return false;">Las 10 emergencias más comunes y sus costos</a></li>
+            <li><a href="#" onclick="scrollToCard(1);return false;">Hospitalización en EE.UU. sin seguro</a></li>
+            <li><a href="#" onclick="scrollToCard(3);return false;">Guía para nómadas digitales 2026</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stat rotator -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-body">
+          <h3 data-i18n="sidebar_stat_title">📊 Estadística del día</h3>
+          <div class="stat-rotator">
+            <div class="stat-number" id="statNumber">65%</div>
+            <div class="stat-label" id="statLabel">de viajeros no tiene seguro médico suficiente para el extranjero</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fact box -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-body">
+          <span class="fact-label">💡 ¿Sabías que?</span>
+          <div class="fact-box">
+            <p id="factText">Una evacuación médica internacional desde EE.UU. a España puede costar más de <strong>$120,000 USD</strong>. La mayoría de seguros de viaje la incluyen gratis con cobertura médica de $100,000+.</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span style="font-size:22px">🛡️</span>
+      <span class="footer-logo-text">TravelSafe <span>AI</span></span>
+    </div>
+    <nav class="footer-links">
+      <a href="/" data-i18n="footer_app">App</a>
+      <a href="/terms.html" data-i18n="footer_terms">Términos y condiciones</a>
+      <a href="/privacy.html" data-i18n="footer_privacy">Privacidad</a>
+      <a href="/blog.html" data-i18n="footer_blog">Blog</a>
+    </nav>
+    <div class="footer-social">
+      <a href="#" class="social-btn" aria-label="Twitter/X">𝕏</a>
+      <a href="#" class="social-btn" aria-label="Instagram">📷</a>
+      <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 TravelSafe AI. <span data-i18n="footer_rights">Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING BANNER ═══ -->
+<div class="float-banner" id="floatBanner">
+  <p data-i18n="float_text">¿Vas a viajar pronto? Protégete desde <strong>$2.50/día</strong></p>
+  <a href="https://travel-insurance-agent.vercel.app/" target="_blank" data-i18n="float_cta">→ Cotizar gratis</a>
+  <button class="float-close" onclick="dismissBanner()" aria-label="Cerrar">✕</button>
+</div>
+
+<!-- ═══ EXIT INTENT POPUP ═══ -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-popup">
+    <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">✕</button>
+    <div class="popup-emoji">✈️</div>
+    <h2 data-i18n="popup_title">¡Espera! Antes de irte...</h2>
+    <p data-i18n="popup_sub">¿Sabías que el 65% de viajeros no tiene seguro médico suficiente? Cotiza el tuyo en 2 minutos y viaja con total tranquilidad.</p>
+    <a href="https://travel-insurance-agent.vercel.app/" class="popup-cta" target="_blank" data-i18n="popup_cta">🛡️ Cotizar mi seguro ahora</a>
+    <button class="popup-skip" onclick="closePopup()" data-i18n="popup_skip">No, prefiero viajar sin protección</button>
+  </div>
+</div>
+
+<!-- Schema.org BlogPosting markup -->
+<script type="application/ld+json">
+[
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Las 10 emergencias médicas más comunes en el extranjero y cuánto cuestan",
+    "description":"Lista de las 10 emergencias médicas más frecuentes en viaje con costos reales por región.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art1",
+    "datePublished":"2026-01-15","dateModified":"2026-06-01",
+    "articleSection":"Emergencias"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"¿Qué pasa si te hospitalizan en Estados Unidos sin seguro?",
+    "description":"Costos reales de hospitalización en EE.UU. sin seguro de viaje y cómo evitarlos.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art2",
+    "datePublished":"2026-02-01","dateModified":"2026-06-01",
+    "articleSection":"Emergencias"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Por qué tu seguro de salud local NO te cubre en el extranjero",
+    "description":"Explicación de la territorialidad de los seguros de salud y por qué necesitas seguro de viaje.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art3",
+    "datePublished":"2026-02-15","dateModified":"2026-06-01",
+    "articleSection":"Consejos"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Guía completa para nómadas digitales: el seguro que necesitas en 2026",
+    "description":"Todo lo que un nómada digital necesita saber sobre seguros de viaje y salud internacional.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art4",
+    "datePublished":"2026-03-01","dateModified":"2026-06-01",
+    "articleSection":"Nómadas"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Los 5 destinos más peligrosos sin seguro de viaje",
+    "description":"Los destinos con mayor riesgo financiero médico y qué cobertura necesitas en cada uno.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art5",
+    "datePublished":"2026-03-15","dateModified":"2026-06-01",
+    "articleSection":"Destinos"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Cómo reclamar tu seguro de viaje paso a paso",
+    "description":"Guía práctica completa para reclamar correctamente tu seguro de viaje y maximizar el reembolso.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art6",
+    "datePublished":"2026-04-01","dateModified":"2026-06-01",
+    "articleSection":"Consejos"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Seguro de viaje para familias con niños: todo lo que necesitas saber",
+    "description":"Guía completa de seguro de viaje familiar con niños, emergencias pediátricas y consejos prácticos.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art7",
+    "datePublished":"2026-04-15","dateModified":"2026-06-01",
+    "articleSection":"Familia"
+  },
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"COVID-19 y viajes en 2026: qué cubre y qué no tu seguro",
+    "description":"Estado actual de la cobertura COVID en seguros de viaje y cómo elegir el plan adecuado.",
+    "author":{"@type":"Organization","name":"TravelSafe AI"},
+    "publisher":{"@type":"Organization","name":"TravelSafe AI","url":"https://travel-insurance-agent.vercel.app"},
+    "url":"https://travel-insurance-agent.vercel.app/blog.html#art8",
+    "datePublished":"2026-05-01","dateModified":"2026-06-01",
+    "articleSection":"Consejos"
+  }
+]
+</script>
+
+<script>
+// ── LANGUAGE ──────────────────────────────────────────────────────────────────
+const i18n = {
+  es: {
+    back_link: "← Volver a la app",
+    hero_badge: "📚 Blog de Viajes & Seguros",
+    hero_h1: "Todo lo que necesitas saber antes de viajar",
+    hero_sub: "Guías expertas, estadísticas reales y consejos prácticos para protegerte en cualquier destino.",
+    search_placeholder: "Buscar artículos...",
+    search_btn: "Buscar",
+    hero_stat: 'El <strong>65% de viajeros</strong> no tiene seguro médico suficiente para el extranjero',
+    cat_all: "Todos", cat_consejos: "Consejos", cat_destinos: "Destinos",
+    cat_emergencias: "Emergencias", cat_nomadas: "Nómadas", cat_familia: "Familia",
+    articles_heading: "Artículos recientes",
+    read_more: "Leer más",
+    no_results_title: "No se encontraron artículos",
+    no_results_sub: "Prueba con otros términos de búsqueda o selecciona otra categoría.",
+    sidebar_cta_title: "¿Listo para protegerte?",
+    sidebar_cta_sub: "Cotiza tu seguro de viaje en 2 minutos. Desde $2.50/día con cobertura médica de hasta $1,000,000.",
+    sidebar_cta_btn: "🛡️ Cotizar gratis →",
+    sidebar_popular: "📈 Artículos populares",
+    sidebar_stat_title: "📊 Estadística del día",
+    float_text: '¿Vas a viajar pronto? Protégete desde <strong>$2.50/día</strong>',
+    float_cta: "→ Cotizar gratis",
+    popup_title: "¡Espera! Antes de irte...",
+    popup_sub: "¿Sabías que el 65% de viajeros no tiene seguro médico suficiente? Cotiza el tuyo en 2 minutos y viaja con total tranquilidad.",
+    popup_cta: "🛡️ Cotizar mi seguro ahora",
+    popup_skip: "No, prefiero viajar sin protección",
+    footer_app: "App", footer_terms: "Términos y condiciones", footer_privacy: "Privacidad",
+    footer_blog: "Blog", footer_rights: "Todos los derechos reservados.",
+    "Emergencias": "Emergencias", "Consejos": "Consejos", "Destinos": "Destinos",
+    "Nómadas": "Nómadas", "Familia": "Familia"
+  },
+  en: {
+    back_link: "← Back to app",
+    hero_badge: "📚 Travel & Insurance Blog",
+    hero_h1: "Everything you need to know before you travel",
+    hero_sub: "Expert guides, real statistics and practical tips to protect yourself in any destination.",
+    search_placeholder: "Search articles...",
+    search_btn: "Search",
+    hero_stat: '<strong>65% of travelers</strong> don\'t have sufficient medical insurance for abroad',
+    cat_all: "All", cat_consejos: "Tips", cat_destinos: "Destinations",
+    cat_emergencias: "Emergencies", cat_nomadas: "Nomads", cat_familia: "Family",
+    articles_heading: "Recent articles",
+    read_more: "Read more",
+    no_results_title: "No articles found",
+    no_results_sub: "Try different search terms or select another category.",
+    sidebar_cta_title: "Ready to protect yourself?",
+    sidebar_cta_sub: "Get a travel insurance quote in 2 minutes. From $2.50/day with up to $1,000,000 medical coverage.",
+    sidebar_cta_btn: "🛡️ Get free quote →",
+    sidebar_popular: "📈 Popular articles",
+    sidebar_stat_title: "📊 Stat of the day",
+    float_text: 'Traveling soon? Get protected from <strong>$2.50/day</strong>',
+    float_cta: "→ Get free quote",
+    popup_title: "Wait! Before you go...",
+    popup_sub: "Did you know 65% of travelers don't have adequate medical insurance? Get your quote in 2 minutes and travel worry-free.",
+    popup_cta: "🛡️ Get my insurance now",
+    popup_skip: "No, I prefer to travel unprotected",
+    footer_app: "App", footer_terms: "Terms & conditions", footer_privacy: "Privacy",
+    footer_blog: "Blog", footer_rights: "All rights reserved.",
+    "Emergencias": "Emergencies", "Consejos": "Tips", "Destinos": "Destinations",
+    "Nómadas": "Nomads", "Familia": "Family"
+  }
+};
+
+let currentLang = (navigator.language || 'es').startsWith('en') ? 'en' : 'es';
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = lang === 'es' ? 'EN' : 'ES';
+  document.getElementById('searchInput').placeholder = i18n[lang].search_placeholder;
+
+  // i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+  });
+
+  // Article titles and excerpts
+  document.querySelectorAll('.article-card').forEach(card => {
+    const titleEl = card.querySelector('[data-field="title"]');
+    const excerptEl = card.querySelector('[data-field="excerpt"]');
+    if (titleEl) titleEl.textContent = card.getAttribute('data-title-' + lang) || card.getAttribute('data-title-es');
+    if (excerptEl) excerptEl.textContent = card.getAttribute('data-excerpt-' + lang) || card.getAttribute('data-excerpt-es');
+  });
+
+  // Category badges
+  document.querySelectorAll('[data-i18n-cat]').forEach(el => {
+    const cat = el.getAttribute('data-i18n-cat');
+    if (i18n[lang][cat]) el.textContent = i18n[lang][cat];
+  });
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const key = btn.getAttribute('data-i18n');
+    if (key && i18n[lang][key]) btn.textContent = i18n[lang][key];
+  });
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'es' ? 'en' : 'es');
+}
+
+// ── FILTER / SEARCH ───────────────────────────────────────────────────────────
+let activeCategory = 'all';
+
+function setCategory(btn, cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterArticles();
+}
+
+function filterArticles() {
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.article-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const cat = card.getAttribute('data-cat');
+    const titleEs = card.getAttribute('data-title-es').toLowerCase();
+    const titleEn = card.getAttribute('data-title-en').toLowerCase();
+    const excerptEs = card.getAttribute('data-excerpt-es').toLowerCase();
+    const excerptEn = card.getAttribute('data-excerpt-en').toLowerCase();
+
+    const matchCat = activeCategory === 'all' || cat === activeCategory;
+    const matchSearch = !query ||
+      titleEs.includes(query) || titleEn.includes(query) ||
+      excerptEs.includes(query) || excerptEn.includes(query);
+
+    if (matchCat && matchSearch) {
+      card.classList.remove('hidden');
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ── ARTICLE EXPAND ────────────────────────────────────────────────────────────
+function toggleArticle(btn) {
+  const article = btn.closest('.article-card').querySelector('.full-article');
+  const isOpen = article.classList.contains('open');
+  article.classList.toggle('open');
+  btn.classList.toggle('expanded');
+  const textSpan = btn.querySelector('[data-i18n="read_more"]');
+  if (textSpan) {
+    textSpan.textContent = isOpen
+      ? (i18n[currentLang].read_more)
+      : (currentLang === 'es' ? 'Cerrar' : 'Close');
+  }
+  if (!isOpen) {
+    setTimeout(() => article.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+function scrollToCard(index) {
+  const cards = document.querySelectorAll('.article-card');
+  if (cards[index]) cards[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── FLOATING BANNER ───────────────────────────────────────────────────────────
+function dismissBanner() {
+  const b = document.getElementById('floatBanner');
+  b.classList.remove('visible');
+  sessionStorage.setItem('bannerDismissed', '1');
+}
+
+if (!sessionStorage.getItem('bannerDismissed')) {
+  setTimeout(() => {
+    document.getElementById('floatBanner').classList.add('visible');
+  }, 5000);
+}
+
+// ── EXIT INTENT ───────────────────────────────────────────────────────────────
+let exitShown = false;
+document.addEventListener('mouseleave', e => {
+  if (e.clientY <= 0 && !exitShown && !sessionStorage.getItem('exitShown')) {
+    exitShown = true;
+    sessionStorage.setItem('exitShown', '1');
+    document.getElementById('exitOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+});
+
+function closePopup() {
+  document.getElementById('exitOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('exitOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('exitOverlay')) closePopup();
+});
+
+// ── STAT ROTATOR ──────────────────────────────────────────────────────────────
+const stats = [
+  { number: '65%', label: { es: 'de viajeros no tiene seguro médico suficiente', en: 'of travelers lack adequate medical insurance abroad' } },
+  { number: '$50K', label: { es: 'costo promedio de evacuación médica internacional', en: 'average cost of international medical evacuation' } },
+  { number: '1 de 10', label: { es: 'viajeros necesita atención médica en el extranjero', en: 'travelers need medical attention abroad' } },
+  { number: '$68K', label: { es: 'factura media de hospitalización en EE.UU. sin seguro', en: 'average US hospitalization bill without insurance' } },
+  { number: '35M', label: { es: 'nómadas digitales en el mundo en 2026', en: 'digital nomads worldwide in 2026' } }
+];
+let statIdx = 0;
+
+function rotateStats() {
+  statIdx = (statIdx + 1) % stats.length;
+  const numEl = document.getElementById('statNumber');
+  const lblEl = document.getElementById('statLabel');
+  numEl.style.opacity = '0';
+  lblEl.style.opacity = '0';
+  setTimeout(() => {
+    numEl.textContent = stats[statIdx].number;
+    lblEl.textContent = stats[statIdx].label[currentLang];
+    numEl.style.transition = 'opacity 0.5s';
+    lblEl.style.transition = 'opacity 0.5s';
+    numEl.style.opacity = '1';
+    lblEl.style.opacity = '1';
+  }, 400);
+}
+setInterval(rotateStats, 4000);
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+applyLang(currentLang);
+</script>
+</body>
+</html>
