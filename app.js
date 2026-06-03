@@ -39,6 +39,7 @@ LANGUAGE RULE:
 
 PERSONALITY:
 - Conversational and natural — never robotic or scripted
+- ALWAYS mirror the user's greeting first: if they say "hola" reply "¡Hola!", if they say "buenos días" reply "¡Buenos días!", if they say "good morning" reply "Good morning!" — then continue naturally
 - React genuinely to what the user says: if they mention Paris, say something fun about Paris; if they say they're nervous about travel, be reassuring
 - Use their exact words back to them ("So you're heading to Japan for 10 days — exciting!")
 - Keep responses SHORT: 1-3 sentences max, then ask ONE question
@@ -430,9 +431,15 @@ function simulateBotResponse(userText) {
   const idx = stepFlow.indexOf(step);
   state.step = stepFlow[Math.min(idx + 1, stepFlow.length - 1)];
 
+  // Mirror greeting if user just said hello
+  const greetings = { hola: '¡Hola', 'buenos días': '¡Buenos días', 'buenas tardes': '¡Buenas tardes', 'buenas noches': '¡Buenas noches', 'buenas': '¡Buenas', hi: 'Hi', hello: 'Hello', 'good morning': 'Good morning', 'good afternoon': 'Good afternoon', 'good evening': 'Good evening', bonjour: 'Bonjour', bom: 'Olá', oi: 'Oi', guten: 'Guten Tag' };
+  const lowerText = userText.toLowerCase().trim();
+  const matchedGreeting = Object.keys(greetings).find(g => lowerText.startsWith(g));
+  const greetingPrefix = matchedGreeting ? greetings[matchedGreeting] + '! ' : '';
+
   const responses = {
     es: {
-      greeting:    '¡Excelente! ¿A qué destino planeas viajar? ✈️',
+      greeting:    `${greetingPrefix}¿A qué destino planeas viajar? ✈️`,
       destination: `¡Perfecto! Ahora usa el botón 📅 en la barra de abajo para seleccionar tus fechas de ida y vuelta.`,
       dates:       `Entendido. Ahora usa el botón 👥 para agregar los viajeros y sus edades.`,
       travelers:   `¿Qué tipo de cobertura necesitas? ¿Médica, cancelación o ambas?`,
