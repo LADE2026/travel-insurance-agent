@@ -251,6 +251,11 @@ function showInsuranceCards() {
       <span class="trust-badge">🌍 +180 países</span>
     </div>
     <div class="trust-quote">"Me ayudó a encontrar el plan ideal en minutos. ¡Increíble!" — María G., Puerto Rico</div>
+    <div class="trust-actions">
+      <button class="trust-action-btn" onclick="document.getElementById('comparatorModal').style.display='flex'">📊 Comparar planes</button>
+      <button class="trust-action-btn" onclick="document.getElementById('riskModal').style.display='flex'">⚠️ Calcular mi riesgo</button>
+      <button class="trust-action-btn" onclick="document.getElementById('reviewsModal').style.display='flex'">⭐ Ver opiniones</button>
+    </div>
   `;
   chatContainer.appendChild(trustBlock);
 
@@ -586,6 +591,39 @@ function init() {
     showQuickReplies(i.destChips);
   }, 400);
 }
+
+// ---- MODALS: close buttons ----
+['closeComparator','closeRisk','closeReviews'].forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    document.getElementById(id).closest('.modal-overlay').style.display = 'none';
+  });
+});
+['comparatorModal','riskModal','reviewsModal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', e => {
+    if (e.target.id === id) e.target.style.display = 'none';
+  });
+});
+
+// ---- RISK CALCULATOR ----
+document.getElementById('btnCalcRisk').addEventListener('click', () => {
+  const tripCost = parseFloat(document.getElementById('riskTripCost').value) || 0;
+  const dest = document.getElementById('riskDestination').value;
+  if (!tripCost) { document.getElementById('riskTripCost').focus(); return; }
+
+  const medicalRisks = { usa: 85000, europe: 45000, latam: 20000, asia: 35000, other: 25000 };
+  const medRisk = medicalRisks[dest] || 25000;
+  const totalRisk = tripCost + medRisk;
+  const insuranceCost = Math.round(tripCost * 0.05);
+  const pct = ((insuranceCost / totalRisk) * 100).toFixed(1);
+
+  document.getElementById('riskAmount').textContent = `$${totalRisk.toLocaleString()} USD`;
+  document.getElementById('riskBreakdown').innerHTML =
+    `💊 Emergencia médica típica en ${document.getElementById('riskDestination').selectedOptions[0].text}: <strong>$${medRisk.toLocaleString()}</strong><br>
+     ✈️ Costo de tu viaje (vuelos + hotel): <strong>$${tripCost.toLocaleString()}</strong>`;
+  document.getElementById('riskInsuranceCost').textContent = `~$${insuranceCost}`;
+  document.getElementById('riskPercent').textContent = `${pct}%`;
+  document.getElementById('riskResult').style.display = 'block';
+});
 
 function restartChat() {
   state.messages = [];

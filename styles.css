@@ -1550,8 +1550,30 @@ textarea#userInput:focus { border-color: var(--blue); background: var(--white); 
 }
 
 /* =============================================
-   TRUST BLOCK
+   REVIEWS
    ============================================= */
+.review-card { background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px; }
+.review-header { display:flex;align-items:center;gap:8px;margin-bottom:8px; }
+.review-name { font-weight:600;color:#1e3a5f;font-size:14px; }
+.review-flag { font-size:16px; }
+.review-stars { color:#f59e0b;margin-left:auto;font-size:13px; }
+.review-text { font-size:13px;color:#444;line-height:1.6;margin-bottom:8px;font-style:italic; }
+.review-meta { font-size:11px;color:#888; }
+
+/* =============================================
+   EMERGENCY PULSE
+   ============================================= */
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 4px 16px rgba(220,38,38,0.5); }
+  50% { box-shadow: 0 4px 24px rgba(220,38,38,0.9), 0 0 0 8px rgba(220,38,38,0.15); }
+}
+
+/* =============================================
+   FEATURE BUTTONS IN TRUST BLOCK
+   ============================================= */
+.trust-actions { display:flex;gap:8px;flex-wrap:wrap;margin-top:10px; }
+.trust-action-btn { background:white;border:1.5px solid #1e3a5f;color:#1e3a5f;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.trust-action-btn:hover { background:#1e3a5f;color:white; }
 .trust-block {
   background: linear-gradient(135deg, #f0f7ff, #e8f4e8);
   border: 1px solid #c3daf9;

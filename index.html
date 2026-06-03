@@ -433,6 +433,106 @@
     </div>
   </div>
 
+  <!-- ===== COMPARATOR MODAL ===== -->
+  <div class="modal-overlay" id="comparatorModal" style="display:none">
+    <div class="modal" style="max-width:700px;width:95vw;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 class="modal-title">📊 Comparar Planes</h2>
+        <button id="closeComparator" style="background:none;border:none;font-size:22px;cursor:pointer;color:#666">✕</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table id="comparatorTable" style="width:100%;border-collapse:collapse;font-size:14px">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:10px 8px;border-bottom:2px solid #e2e8f0;color:#1e3a5f;width:35%">Cobertura</th>
+              <th style="text-align:center;padding:10px 8px;border-bottom:2px solid #e2e8f0;color:#1e3a5f">🛡️ Básico</th>
+              <th style="text-align:center;padding:10px 8px;border-bottom:2px solid #1e3a5f;color:#1e3a5f;background:#f0f7ff">⭐ Estándar</th>
+              <th style="text-align:center;padding:10px 8px;border-bottom:2px solid #e2e8f0;color:#1e3a5f">💎 Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Cobertura médica</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$25,000</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">$100,000</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$500,000</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Evacuación médica</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">✅</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">✅</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">✅ VIP</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Pérdida de equipaje</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$500</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">$2,000</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$5,000</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Cancelación de vuelo</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">Causas básicas</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">Cualquier causa</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">Sin límite</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Demora de vuelo</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">❌</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">+4 horas</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">+2 horas</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Deportes extremos</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">❌</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">Básico</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">✅ Completo</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">COVID-19</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">❌</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">Parcial</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">✅ Completo</td></tr>
+            <tr><td style="padding:9px 8px;border-bottom:1px solid #f0f0f0;font-weight:600">Deducible</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$200</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0;background:#f7fbff">$100</td><td style="text-align:center;padding:9px 8px;border-bottom:1px solid #f0f0f0">$0</td></tr>
+            <tr><td style="padding:9px 8px;font-weight:600">Asistencia 24/7</td><td style="text-align:center;padding:9px 8px">✅</td><td style="text-align:center;padding:9px 8px;background:#f7fbff">✅</td><td style="text-align:center;padding:9px 8px">✅</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RISK CALCULATOR MODAL ===== -->
+  <div class="modal-overlay" id="riskModal" style="display:none">
+    <div class="modal modal-sm" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 class="modal-title">⚠️ Calculadora de Riesgo</h2>
+        <button id="closeRisk" style="background:none;border:none;font-size:22px;cursor:pointer;color:#666">✕</button>
+      </div>
+      <p style="font-size:13px;color:#666;margin-bottom:16px">¿Cuánto podría costarte viajar sin seguro? Ingresa el costo de tu viaje:</p>
+      <div style="margin-bottom:12px">
+        <label style="font-size:13px;font-weight:600;color:#1e3a5f;display:block;margin-bottom:6px">Costo total del viaje (USD)</label>
+        <input id="riskTripCost" type="number" placeholder="ej. 2000" style="width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;box-sizing:border-box">
+      </div>
+      <div style="margin-bottom:16px">
+        <label style="font-size:13px;font-weight:600;color:#1e3a5f;display:block;margin-bottom:6px">Destino</label>
+        <select id="riskDestination" style="width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box">
+          <option value="usa">Estados Unidos / Canadá</option>
+          <option value="europe">Europa</option>
+          <option value="latam">América Latina / Caribe</option>
+          <option value="asia">Asia / Pacífico</option>
+          <option value="other">Otro destino</option>
+        </select>
+      </div>
+      <button id="btnCalcRisk" style="width:100%;background:#1e3a5f;color:white;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:16px">Calcular mi riesgo</button>
+      <div id="riskResult" style="display:none;background:linear-gradient(135deg,#fff0f0,#ffe8e8);border:1.5px solid #fca5a5;border-radius:12px;padding:16px">
+        <div style="font-size:13px;color:#666;margin-bottom:8px">Sin seguro, podrías perder hasta:</div>
+        <div id="riskAmount" style="font-size:2rem;font-weight:800;color:#dc2626;margin-bottom:12px"></div>
+        <div id="riskBreakdown" style="font-size:12px;color:#555;line-height:1.8"></div>
+        <div style="background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:10px;margin-top:12px;font-size:13px;color:#166534">
+          ✅ Con TravelSafe AI te cubres por <strong id="riskInsuranceCost"></strong> — solo el <strong id="riskPercent"></strong> del riesgo total.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REVIEWS MODAL ===== -->
+  <div class="modal-overlay" id="reviewsModal" style="display:none">
+    <div class="modal" style="max-width:600px;width:95vw;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 class="modal-title">⭐ Opiniones de Viajeros</h2>
+        <button id="closeReviews" style="background:none;border:none;font-size:22px;cursor:pointer;color:#666">✕</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;background:#f0f7ff;border-radius:12px;padding:14px;margin-bottom:20px">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;font-weight:800;color:#1e3a5f">4.8</div>
+          <div style="color:#f59e0b;font-size:1.2rem">★★★★★</div>
+          <div style="font-size:12px;color:#666">2,400+ reviews</div>
+        </div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:12px;width:20px">5★</span><div style="flex:1;background:#e2e8f0;border-radius:10px;height:8px"><div style="width:78%;background:#f59e0b;border-radius:10px;height:8px"></div></div><span style="font-size:12px;color:#666">78%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:12px;width:20px">4★</span><div style="flex:1;background:#e2e8f0;border-radius:10px;height:8px"><div style="width:15%;background:#f59e0b;border-radius:10px;height:8px"></div></div><span style="font-size:12px;color:#666">15%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:12px;width:20px">3★</span><div style="flex:1;background:#e2e8f0;border-radius:10px;height:8px"><div style="width:5%;background:#f59e0b;border-radius:10px;height:8px"></div></div><span style="font-size:12px;color:#666">5%</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;width:20px">1-2★</span><div style="flex:1;background:#e2e8f0;border-radius:10px;height:8px"><div style="width:2%;background:#f59e0b;border-radius:10px;height:8px"></div></div><span style="font-size:12px;color:#666">2%</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;max-height:340px;overflow-y:auto">
+        <div class="review-card"><div class="review-header"><span class="review-name">María González</span><span class="review-flag">🇵🇷</span><span class="review-stars">★★★★★</span></div><div class="review-text">"Me ayudó a encontrar el plan perfecto para mi viaje a Europa en minutos. El proceso fue increíblemente fácil y cuando tuve un problema médico en París, la asistencia fue excelente."</div><div class="review-meta">Viaje a París · Plan Premium · hace 2 semanas</div></div>
+        <div class="review-card"><div class="review-header"><span class="review-name">Carlos Mendez</span><span class="review-flag">🇲🇽</span><span class="review-stars">★★★★★</span></div><div class="review-text">"La IA entendió exactamente lo que necesitaba. Viajé con mi familia de 4 a Japón y el plan Estándar cubrió perfectamente una hospitalización de uno de mis hijos. 100% recomendado."</div><div class="review-meta">Viaje a Japón · Plan Estándar · hace 1 mes</div></div>
+        <div class="review-card"><div class="review-header"><span class="review-name">Ana Martínez</span><span class="review-flag">🇨🇴</span><span class="review-stars">★★★★★</span></div><div class="review-text">"Increíble que una IA pueda hacer esto. Me explicó las diferencias entre planes de forma tan clara. Cancelé mi vuelo por enfermedad y recuperé todo el costo sin problemas."</div><div class="review-meta">Viaje a NYC · Plan Estándar · hace 3 semanas</div></div>
+        <div class="review-card"><div class="review-header"><span class="review-name">Roberto Silva</span><span class="review-flag">🇧🇷</span><span class="review-stars">★★★★☆</span></div><div class="review-text">"Muy buena experiencia en general. El chat en portugués funcionó perfectamente. La única mejora sería más opciones de pago locales, pero el proceso fue muy ágil."</div><div class="review-meta">Viaje a Londres · Plan Básico · hace 2 meses</div></div>
+        <div class="review-card"><div class="review-header"><span class="review-name">Sophie Dubois</span><span class="review-flag">🇫🇷</span><span class="review-stars">★★★★★</span></div><div class="review-text">"J'ai adoré l'expérience en français. L'IA m'a conseillé le plan parfait pour mon aventure en Asie. Le service client était disponible 24/7 quand j'en avais besoin."</div><div class="review-meta">Viaje a Thailand · Plan Premium · hace 1 mes</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EMERGENCY BUTTON ===== -->
+  <a href="tel:+17870000000" id="btnEmergency" title="Emergencia 24/7" style="position:fixed;bottom:200px;right:16px;z-index:300;background:#dc2626;color:white;border:none;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(220,38,38,0.5);display:flex;align-items:center;justify-content:center;text-decoration:none;animation:pulse-red 2s infinite">🆘</a>
+
   <!-- ===== SUCCESS MODAL ===== -->
   <div class="modal-overlay" id="successModal" style="display:none">
     <div class="modal modal-sm" style="text-align:center">
