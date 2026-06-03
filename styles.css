@@ -1548,3 +1548,46 @@ textarea#userInput:focus { border-color: var(--blue); background: var(--white); 
   display: flex;
   align-items: center;
 }
+
+/* =============================================
+   TRUST BLOCK
+   ============================================= */
+.trust-block {
+  background: linear-gradient(135deg, #f0f7ff, #e8f4e8);
+  border: 1px solid #c3daf9;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 8px 0 12px;
+  max-width: 680px;
+}
+.trust-reviews {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.trust-stars { color: #f59e0b; font-size: 1.1rem; letter-spacing: 2px; }
+.trust-rating { font-weight: 700; color: #1e3a5f; font-size: 1rem; }
+.trust-count { font-size: 0.82rem; color: #666; }
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.trust-badge {
+  background: white;
+  border: 1px solid #c3daf9;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  color: #1e3a5f;
+  font-weight: 500;
+}
+.trust-quote {
+  font-size: 0.82rem;
+  color: #555;
+  font-style: italic;
+  border-top: 1px solid #d1e5f9;
+  padding-top: 8px;
+}

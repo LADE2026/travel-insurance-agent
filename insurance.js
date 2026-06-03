@@ -114,12 +114,24 @@ const INSURANCE_PLANS = {
   },
 };
 
-// Calculate price for given travelers and days
-function calcPrice(planId, travelers, days) {
+// Calculate price for given travelers and days, with optional age-based multiplier
+function calcPrice(planId, travelers, days, ages) {
   const plan = INSURANCE_PLANS[planId];
   if (!plan) return 0;
-  const base = plan.pricePerDay * travelers * days;
-  // Small group discount
+
+  let ageMultiplier = 1.0;
+  if (ages) {
+    const ageList = String(ages).split(/[\s,\/]+/).map(Number).filter(n => !isNaN(n) && n > 0);
+    if (ageList.length > 0) {
+      const avgAge = ageList.reduce((a, b) => a + b, 0) / ageList.length;
+      if (avgAge >= 71) ageMultiplier = 2.5;
+      else if (avgAge >= 56) ageMultiplier = 1.8;
+      else if (avgAge >= 36) ageMultiplier = 1.3;
+      else ageMultiplier = 1.0;
+    }
+  }
+
+  const base = plan.pricePerDay * travelers * days * ageMultiplier;
   const discount = travelers >= 4 ? 0.85 : travelers >= 2 ? 0.92 : 1;
   return Math.round(base * discount * 100) / 100;
 }

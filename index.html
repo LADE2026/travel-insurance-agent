@@ -327,7 +327,7 @@
         <div class="form-group cust-consent">
           <label class="consent-label">
             <input type="checkbox" id="custConsent"/>
-            <span id="consentText">Acepto los <a href="#" onclick="return false">Términos y condiciones</a> y la <a href="#" onclick="return false">Política de privacidad</a>.</span>
+            <span id="consentText">Acepto los <a href="/terms.html" target="_blank">Términos y condiciones</a> y la <a href="/privacy.html" target="_blank">Política de privacidad</a>.</span>
           </label>
         </div>
         <div class="cust-nav">
@@ -397,7 +397,7 @@
           <span id="btnPayCardLabel">🔒 Pagar ahora</span>
           <span class="pay-amount-badge" id="payAmountCard"></span>
         </button>
-        <p class="pay-legal" id="payLegalCard">Al pagar aceptas los <a href="#" onclick="return false">Términos y condiciones</a>. Pago procesado por Stripe.</p>
+        <p class="pay-legal" id="payLegalCard">Al pagar aceptas los <a href="/terms.html" target="_blank">Términos y condiciones</a>. Pago procesado por Stripe.</p>
       </div>
 
       <!-- PAYPAL PANEL -->
@@ -419,9 +419,9 @@
       <!-- TRANSFER PANEL -->
       <div class="pay-panel" id="panelTransfer" style="display:none">
         <div class="transfer-info" id="transferInfo">
-          <div class="transfer-row"><span>🏦</span><div><strong id="transferBankLabel">Banco</strong><span>TravelSafe Bank · Cuenta Empresarial</span></div></div>
-          <div class="transfer-row"><span>🔢</span><div><strong id="transferAccLabel">Cuenta</strong><span>001-234-567890</span></div></div>
-          <div class="transfer-row"><span>🌐</span><div><strong>SWIFT / IBAN</strong><span>TSAFUS33 / ES91 2100 0418 4502 0005 1332</span></div></div>
+          <div class="transfer-row"><span>📧</span><div><strong id="transferBankLabel">Email</strong><span>pagos@travelsafeai.com</span></div></div>
+          <div class="transfer-row"><span>💬</span><div><strong id="transferAccLabel">WhatsApp</strong><span>+1 (787) 000-0000</span></div></div>
+          <div class="transfer-row"><span>ℹ️</span><div><strong>Instrucciones</strong><span>Escríbenos con tu referencia y coordinaremos el pago</span></div></div>
           <div class="transfer-row" id="transferRefRow"><span>📋</span><div><strong id="transferRefLabel">Referencia</strong><span id="transferRef">TSA-000000</span></div></div>
         </div>
         <button class="btn-pay-now" id="btnPayTransfer" style="background:var(--navy)">

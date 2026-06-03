@@ -141,6 +141,7 @@ function initLangSwitcher() {
 function switchLanguage(lang) {
   if (!I18N[lang]) return;
   state.lang = lang;
+  document.documentElement.lang = lang;
 
   // Update active button
   document.querySelectorAll('.lang-btn').forEach(b => {
@@ -170,7 +171,7 @@ function switchLanguage(lang) {
 
 // ---------- INSURANCE CARDS ----------
 function showInsuranceCards() {
-  const { travelers, departureDate, returnDate } = state.quoteData;
+  const { travelers, departureDate, returnDate, ages } = state.quoteData;
   const lang = state.lang;
   const i = I18N[lang] || I18N.es;
 
@@ -187,7 +188,7 @@ function showInsuranceCards() {
 
   ['basic', 'standard', 'premium'].forEach(planId => {
     const plan = INSURANCE_PLANS[planId];
-    const price = calcPrice(planId, numTravelers, days);
+    const price = calcPrice(planId, numTravelers, days, ages);
     const features = lang === 'es' ? plan.featuresEs : plan.featuresEn;
     const name = lang === 'es' ? plan.nameEs : plan.nameEn;
     const sub = lang === 'es' ? plan.subtitleEs : plan.subtitleEn;
@@ -219,6 +220,25 @@ function showInsuranceCards() {
   });
 
   chatContainer.appendChild(wrapper);
+
+  // Trust block — reviews + badges
+  const trustBlock = document.createElement('div');
+  trustBlock.className = 'trust-block';
+  trustBlock.innerHTML = `
+    <div class="trust-reviews">
+      <div class="trust-stars">★★★★★</div>
+      <span class="trust-rating">4.8 / 5</span>
+      <span class="trust-count">(2,400+ viajeros)</span>
+    </div>
+    <div class="trust-badges">
+      <span class="trust-badge">🔒 Pago seguro</span>
+      <span class="trust-badge">✈️ Cobertura inmediata</span>
+      <span class="trust-badge">🌍 +180 países</span>
+    </div>
+    <div class="trust-quote">"Me ayudó a encontrar el plan ideal en minutos. ¡Increíble!" — María G., Puerto Rico</div>
+  `;
+  chatContainer.appendChild(trustBlock);
+
   scrollToBottom();
 
   wrapper.querySelectorAll('.btn-buy').forEach(btn => {
