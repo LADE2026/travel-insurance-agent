@@ -157,7 +157,7 @@ html, body {
 .chat-container {
   max-width: 780px;
   margin: 0 auto;
-  padding: 20px 16px 8px;
+  padding: 28px 16px 8px;
   display: flex;
   flex-direction: column;
   gap: 4px;
