@@ -148,6 +148,7 @@ html, body {
   position: fixed;
   top: 68px;
   bottom: 152px;
+  padding-top: 10px;
   left: 0; right: 0;
   overflow-y: auto;
   scroll-behavior: smooth;
