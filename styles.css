@@ -148,7 +148,6 @@ html, body {
   position: fixed;
   top: 68px;
   bottom: 152px;
-  padding-top: 24px;
   left: 0; right: 0;
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -157,7 +156,7 @@ html, body {
 .chat-container {
   max-width: 780px;
   margin: 0 auto;
-  padding: 28px 16px 8px;
+  padding: 48px 16px 8px;
   display: flex;
   flex-direction: column;
   gap: 4px;
