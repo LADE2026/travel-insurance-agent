@@ -264,7 +264,7 @@ function showInsuranceCards() {
   wrapper.querySelectorAll('.btn-buy').forEach(btn => {
     btn.addEventListener('click', () => {
       state.quoteData.selectedPlan = btn.dataset.plan;
-      window.open('https://safetywing.com/registration/nomad-insurance/basic-info?referenceID=26538312&utm_source=26538312&utm_medium=Ambassador', '_blank');
+      window.open('https://safetywing.com/nomad-insurance?referenceID=26538312&utm_source=26538312&utm_medium=Ambassador', '_blank');
     });
   });
   wrapper.querySelectorAll('.btn-quote').forEach(btn => {
