@@ -645,7 +645,25 @@ function restartChat() {
 
 window.restartChat = restartChat;
 
+// ---- COOKIE / PRIVACY BANNER ----
+function initCookieBanner() {
+  if (!localStorage.getItem('cookieConsent')) {
+    setTimeout(() => {
+      document.getElementById('cookieBanner').style.display = 'block';
+    }, 1500);
+  }
+}
+window.acceptCookies = function() {
+  localStorage.setItem('cookieConsent', 'all');
+  document.getElementById('cookieBanner').style.display = 'none';
+};
+window.rejectCookies = function() {
+  localStorage.setItem('cookieConsent', 'essential');
+  document.getElementById('cookieBanner').style.display = 'none';
+};
+
 document.getElementById('btnRestartChat').addEventListener('click', restartChat);
 document.getElementById('btnHomeRestart').addEventListener('click', restartChat);
 
 init();
+initCookieBanner();

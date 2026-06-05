@@ -117,9 +117,26 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <p class="input-disclaimer">Powered by Claude AI · TravelSafe AI no almacena datos de pago</p>
+      <p class="input-disclaimer">Powered by Claude AI · TravelSafe AI no almacena datos de pago · <a href="/terms.html" target="_blank" style="color:inherit;opacity:0.8">Términos</a> · <a href="/privacy.html" target="_blank" style="color:inherit;opacity:0.8">Privacidad</a></p>
     </div>
   </footer>
+
+  <!-- ===== COOKIE & AFFILIATE CONSENT BANNER ===== -->
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1e3a5f;color:white;padding:14px 20px;font-size:13px;line-height:1.6;box-shadow:0 -4px 20px rgba(0,0,0,0.2)">
+    <div style="max-width:900px;margin:0 auto;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <strong style="font-size:14px">🍪 Privacidad y Aviso Legal</strong><br>
+        TravelSafe AI es un <strong>agente intermediario independiente</strong> — no somos una aseguradora ni realizamos ventas directas. Actuamos como plataforma de asesoría y referidos hacia proveedores de seguros autorizados como SafetyWing. Al usar este servicio aceptas nuestras
+        <a href="/terms.html" target="_blank" style="color:#60a5fa">Condiciones de uso</a> y
+        <a href="/privacy.html" target="_blank" style="color:#60a5fa">Política de privacidad</a>.
+        Usamos cookies esenciales para el funcionamiento del sitio.
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;padding-top:4px">
+        <button onclick="acceptCookies()" style="background:#60a5fa;color:#1e3a5f;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer">Aceptar</button>
+        <button onclick="rejectCookies()" style="background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer">Solo esenciales</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== CALENDAR MODAL ===== -->
   <div class="modal-overlay" id="calendarModal" style="display:none">
