@@ -588,6 +588,9 @@ function init() {
 
   setTimeout(() => {
     addMessage('assistant', i.welcomeMsg);
+    addMessage('assistant', state.lang === 'en'
+      ? '⚖️ _Legal notice:_ I am an independent comparison service, not an insurer. By continuing you accept our [Terms](/terms-of-service.html). Policies are issued by SafetyWing, AXA, Travelex and other authorized providers.'
+      : '⚖️ _Aviso legal:_ Soy un comparador independiente, no una aseguradora. Al continuar aceptas nuestros [Términos](/terms-of-service.html). Las pólizas son emitidas por SafetyWing, AXA, Travelex y otros proveedores autorizados.', true);
     showQuickReplies(i.destChips);
   }, 400);
 }
@@ -637,6 +640,9 @@ function restartChat() {
   const i = I18N[state.lang] || I18N.es;
   setTimeout(() => {
     addMessage('assistant', i.welcomeMsg);
+    addMessage('assistant', state.lang === 'en'
+      ? '⚖️ _Legal notice:_ I am an independent comparison service, not an insurer. By continuing you accept our [Terms](/terms-of-service.html). Policies are issued by SafetyWing, AXA, Travelex and other authorized providers.'
+      : '⚖️ _Aviso legal:_ Soy un comparador independiente, no una aseguradora. Al continuar aceptas nuestros [Términos](/terms-of-service.html). Las pólizas son emitidas por SafetyWing, AXA, Travelex y otros proveedores autorizados.', true);
     showQuickReplies(i.destChips);
   }, 200);
 
