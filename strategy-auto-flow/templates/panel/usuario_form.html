@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titulo %}Añadir usuario · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<div class="titulo-pagina">
+  <div><a class="pequeno" href="{{ dealer.get_absolute_url }}">← {{ dealer.nombre }}</a><h1>Añadir usuario</h1></div>
+</div>
+<form method="post" class="tarjeta">
+  {% csrf_token %}
+  <p class="suave">Esta persona podrá entrar con su correo y solo verá los datos de <strong>{{ dealer.nombre }}</strong>.</p>
+  <div class="formulario">
+    {% include "panel/_campo.html" with campo=form.first_name %}
+    {% include "panel/_campo.html" with campo=form.last_name %}
+    {% include "panel/_campo.html" with campo=form.email %}
+    {% include "panel/_campo.html" with campo=form.password %}
+  </div>
+  <div style="margin-top:24px"><button class="boton" type="submit">Crear cuenta</button></div>
+</form>
+{% endblock %}

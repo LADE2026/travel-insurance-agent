@@ -1,0 +1,54 @@
+{% load static %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{{ EMPRESA_NOMBRE }}{% endblock %}</title>
+  <meta name="description" content="{% block descripcion %}Mercadeo con inteligencia artificial para dealers de autos en Puerto Rico y Estados Unidos.{% endblock %}">
+  <link rel="icon" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/icono-512.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/saf.css' %}">
+</head>
+<body>
+  <div class="franjas"></div>
+  <header class="encabezado">
+    <div class="contenedor">
+      <a class="logo" href="{% if user.is_authenticated %}{% url 'panel' %}{% else %}{% url 'inicio' %}{% endif %}">
+        <img src="{% static 'img/logo-oscuro.png' %}" alt="{{ EMPRESA_NOMBRE }}">
+      </a>
+      <nav class="menu">
+        {% if user.is_authenticated %}
+          <a href="{% url 'panel' %}">Panel</a>
+          <a href="{% url 'password_change' %}">Mi contraseña</a>
+          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="enlace" type="submit">Salir</button></form>
+        {% else %}
+          <a href="{% url 'inicio' %}#planes">Planes</a>
+          <a href="{% url 'inicio' %}#contacto">Contacto</a>
+          <a class="boton chico" href="{% url 'login' %}">Entrar</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    {% if messages %}
+      <ul class="mensajes">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <div>© {% now "Y" %} {{ EMPRESA_NOMBRE }}</div>
+      <div>
+        <a href="{% url 'privacidad' %}">Privacidad</a>
+        <a href="{% url 'terminos' %}">Términos</a>
+        <a href="{% url 'borrado_datos' %}">Borrado de datos</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

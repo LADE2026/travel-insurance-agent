@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block titulo %}Política de privacidad · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<article class="legal seccion">
+  {% include "sitio/_aviso_borrador.html" %}
+  <h1>Política de privacidad</h1>
+  <p class="suave">Última actualización: {% now "j \d\e F \d\e Y" %}</p>
+
+  <p>{{ EMPRESA_NOMBRE }} ("nosotros") ofrece a dealers de autos un servicio de mercadeo que publica su inventario en redes sociales y contesta mensajes de sus clientes. Esta política explica qué datos tratamos y cómo los protegemos.</p>
+
+  <h2>1. Qué datos tratamos</h2>
+  <ul>
+    <li><strong>Datos de los dealers y sus empleados:</strong> nombre, correo, teléfono, dirección y datos de facturación.</li>
+    <li><strong>Inventario:</strong> fotos y datos de los vehículos que el dealer nos entrega.</li>
+    <li><strong>Datos de cuentas conectadas:</strong> cuando un dealer conecta su página de Facebook, su cuenta de Instagram u otras plataformas, recibimos los permisos de acceso necesarios para publicar en su nombre.</li>
+    <li><strong>Mensajes de clientes del dealer:</strong> si el plan lo incluye, el contenido de los mensajes que los clientes envían al dealer por Messenger, Instagram o WhatsApp, su nombre público y los datos que compartan (por ejemplo, presupuesto o interés en un vehículo).</li>
+    <li><strong>Consentimientos:</strong> la fecha, el canal y el texto con el que un cliente aceptó recibir mensajes, y si pidió dejar de recibirlos.</li>
+  </ul>
+
+  <h2>2. Para qué los usamos</h2>
+  <p>Solo para prestar el servicio contratado por el dealer: publicar vehículos, crear descripciones y videos, contestar y dar seguimiento a clientes que lo autorizaron, agendar citas y preparar informes para el dealer. No vendemos datos personales.</p>
+
+  <h2>3. Con quién los compartimos</h2>
+  <p>Con proveedores que necesitamos para operar, bajo sus propias políticas: Meta (Facebook, Instagram, WhatsApp), Google (YouTube), TikTok, Anthropic (inteligencia artificial para textos y respuestas), Stripe (cobros), nuestro proveedor de hospedaje y almacenamiento, y nuestro proveedor de correo electrónico. También con el dealer al que pertenece la información.</p>
+
+  <h2>4. Mensajes y la ley TCPA</h2>
+  <p>Solo enviamos mensajes de mercadeo a personas que dieron su consentimiento y guardamos prueba de ese consentimiento. Si una persona responde STOP, PARAR, BAJA o pide que no le escribamos más, dejamos de enviarle mensajes de mercadeo.</p>
+
+  <h2>5. Seguridad y conservación</h2>
+  <p>Los accesos a cuentas conectadas se guardan cifrados. Cada dealer solo puede ver su propia información. Conservamos los datos mientras dure el servicio y hasta 90 días después, salvo que la ley exija guardarlos más tiempo.</p>
+
+  <h2>6. Tus derechos</h2>
+  <p>Puedes pedir una copia, corrección o eliminación de tus datos. Mira las <a href="{% url 'borrado_datos' %}">instrucciones de borrado de datos</a> o escríbenos a <a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a>.</p>
+
+  <h2>7. Contacto</h2>
+  <p>{{ EMPRESA_NOMBRE }} · <a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a></p>
+</article>
+{% endblock %}

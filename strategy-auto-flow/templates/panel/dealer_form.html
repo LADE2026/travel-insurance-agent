@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block titulo %}{{ titulo }} · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<div class="titulo-pagina">
+  <div><a class="pequeno" href="{% if dealer %}{{ dealer.get_absolute_url }}{% else %}{% url 'panel' %}{% endif %}">← Volver</a><h1>{{ titulo }}</h1></div>
+</div>
+<form method="post" enctype="multipart/form-data" class="tarjeta">
+  {% csrf_token %}
+  {% for e in form.non_field_errors %}<div class="aviso rojo">{{ e }}</div>{% endfor %}
+  <h2>Datos del dealer</h2>
+  <div class="formulario">
+    {% include "panel/_campo.html" with campo=form.nombre %}
+    {% include "panel/_campo.html" with campo=form.contacto %}
+    {% include "panel/_campo.html" with campo=form.email %}
+    {% include "panel/_campo.html" with campo=form.telefono %}
+    {% include "panel/_campo.html" with campo=form.direccion %}
+    {% include "panel/_campo.html" with campo=form.ciudad %}
+    {% include "panel/_campo.html" with campo=form.estado_region %}
+    {% include "panel/_campo.html" with campo=form.zona_horaria %}
+    {% include "panel/_campo.html" with campo=form.logo ancho=True %}
+  </div>
+  <h2 style="margin-top:28px">Plan y pago</h2>
+  <p class="suave pequeno">Al cambiar el plan, las funciones del dealer cambian en el momento. Los cambios quedan en el historial.</p>
+  <div class="formulario">
+    {% include "panel/_campo.html" with campo=form.plan %}
+    {% include "panel/_campo.html" with campo=form.modo %}
+    {% include "panel/_campo.html" with campo=form.estado_pago %}
+    {% include "panel/_campo.html" with campo=form.prueba_termina %}
+    {% include "panel/_campo.html" with campo=form.notas ancho=True %}
+  </div>
+  <div style="margin-top:24px"><button class="boton" type="submit">Guardar</button></div>
+</form>
+{% endblock %}

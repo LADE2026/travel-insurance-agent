@@ -1,0 +1,90 @@
+{% extends "base.html" %}{% load humanize_saf %}
+{% block titulo %}{{ dealer.nombre }} · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<div class="titulo-pagina">
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    {% if dealer.logo %}<img class="logo-dealer" src="{{ dealer.logo.url }}" alt="Logo de {{ dealer.nombre }}">{% endif %}
+    <div>
+      {% if user.es_admin %}<a class="pequeno" href="{% url 'panel' %}">← Todos los dealers</a>{% endif %}
+      <h1>{{ dealer.nombre }}</h1>
+    </div>
+  </div>
+  {% if user.es_admin %}<a class="boton secundario" href="{% url 'dealer_editar' dealer.pk %}">Editar dealer y plan</a>{% endif %}
+</div>
+
+{% if not dealer.servicio_activo %}
+  <div class="aviso rojo">El servicio está <strong>{{ dealer.get_estado_pago_display|lower }}</strong>{% if dealer.estado_pago == 'prueba' %} (la prueba terminó el {{ dealer.prueba_termina }}){% endif %}. Las funciones automáticas están detenidas.</div>
+{% endif %}
+
+<div class="rejilla dos">
+  <section class="tarjeta">
+    <h2>Plan</h2>
+    <p><span class="plan-{{ dealer.plan }}" style="font-family:var(--titulos);font-size:1.3rem">{{ dealer.plan_nombre }}</span>
+      <span class="suave">· ${{ dealer.precio_mensual|dinero }}/mes</span></p>
+    <dl class="datos">
+      <dt>Estado de pago</dt><dd><span class="etiqueta-estado e-{{ dealer.estado_pago }}">{{ dealer.get_estado_pago_display }}</span></dd>
+      {% if dealer.estado_pago == 'prueba' and dealer.prueba_termina %}<dt>Prueba termina</dt><dd>{{ dealer.prueba_termina }}</dd>{% endif %}
+      <dt>Modo</dt><dd>{{ dealer.get_modo_display }}</dd>
+      <dt>¿Puedes publicar?</dt><dd>{% if puede_aprobar %}Sí, puedes pulsar «Aprobar y publicar».{% else %}No. Strategy Auto Flow aprueba y publica por ti.{% endif %}</dd>
+    </dl>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Datos del dealer</h2>
+    <dl class="datos">
+      <dt>Contacto</dt><dd>{{ dealer.contacto|default:"—" }}</dd>
+      <dt>Correo</dt><dd>{{ dealer.email|default:"—" }}</dd>
+      <dt>Teléfono</dt><dd>{{ dealer.telefono|default:"—" }}</dd>
+      <dt>Dirección</dt><dd>{{ dealer.direccion_completa|default:"—" }}</dd>
+      <dt>Estado</dt><dd>{{ dealer.estado_region }} ({{ dealer.zona_horaria }})</dd>
+    </dl>
+    {% if user.es_admin and dealer.notas %}<p class="suave pequeno" style="margin-top:12px"><strong>Notas internas:</strong> {{ dealer.notas|linebreaksbr }}</p>{% endif %}
+  </section>
+</div>
+
+<section class="tarjeta" style="margin-top:16px">
+  <h2>Funciones</h2>
+  <ul class="lista-funciones">
+    {% for f in funciones %}
+    <li>
+      <span>{{ f.nombre }}</span>
+      {% if f.estado == "activa" %}<span class="etiqueta-estado e-activa">Activa</span>
+      {% elif f.estado == "proximamente" %}<span class="etiqueta-estado e-proximamente">Próximamente (fase {{ f.fase }})</span>
+      {% elif f.estado == "bloqueada" %}<span class="etiqueta-estado e-bloqueada">Detenida por pago</span>
+      {% else %}<span class="etiqueta-estado e-no_incluida">No incluida en el plan</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="tarjeta" style="margin-top:16px">
+  <div class="titulo-pagina" style="margin:0 0 12px">
+    <h2 style="margin:0">Usuarios del dealer</h2>
+    {% if user.es_admin %}<a class="boton chico" href="{% url 'usuario_crear' dealer.pk %}">+ Añadir usuario</a>{% endif %}
+  </div>
+  {% if usuarios %}
+  <div class="tabla-envoltura"><table>
+    <thead><tr><th>Nombre</th><th>Correo</th><th>Estado</th>{% if user.es_admin %}<th></th>{% endif %}</tr></thead>
+    <tbody>
+    {% for u in usuarios %}
+      <tr>
+        <td>{{ u.get_full_name|default:"—" }}</td><td>{{ u.email }}</td>
+        <td>{% if u.is_active %}<span class="etiqueta-estado e-activa">Activa</span>{% else %}<span class="etiqueta-estado e-no_incluida">Desactivada</span>{% endif %}</td>
+        {% if user.es_admin %}<td><form method="post" action="{% url 'usuario_activar' dealer.pk u.pk %}">{% csrf_token %}
+          <button class="boton chico {% if u.is_active %}peligro{% else %}secundario{% endif %}" type="submit">{% if u.is_active %}Desactivar{% else %}Activar{% endif %}</button></form></td>{% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}<p class="suave">Este dealer todavía no tiene usuarios.</p>{% endif %}
+</section>
+
+{% if cambios %}
+<section class="tarjeta" style="margin-top:16px">
+  <h2>Historial de cambios</h2>
+  <ul class="lista-funciones">
+    {% for c in cambios %}<li><span>{{ c.nombre_campo }}: {{ c.antes_legible }} → <strong>{{ c.despues_legible }}</strong></span><span class="suave pequeno">{{ c.fecha|date:"j M Y, g:i a" }} · {{ c.usuario|default:"sistema" }}</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+# Archivos que NUNCA se suben a GitHub
+.env
+*.sqlite3
+media/
+staticfiles/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+*.zip

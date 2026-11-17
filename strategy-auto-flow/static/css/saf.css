@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Strategy Auto Flow — estilo de la marca
+   Oro #D4AF37 · Plata #C9CED6 · Rojo #E10600 · Fondo negro #0E0F12
+   ========================================================================== */
+:root {
+  --oro: #D4AF37;
+  --oro-suave: rgba(212, 175, 55, .14);
+  --plata: #C9CED6;
+  --rojo: #E10600;
+  --rojo-suave: rgba(225, 6, 0, .14);
+  --verde: #3FB950;
+  --verde-suave: rgba(63, 185, 80, .14);
+  --fondo: #0E0F12;
+  --tarjeta: #16181D;
+  --tarjeta-2: #1D2027;
+  --borde: #2A2E37;
+  --texto: #ECEEF2;
+  --texto-suave: #9AA1AD;
+  --radio: 10px;
+  --titulos: "Orbitron", "Segoe UI", system-ui, sans-serif;
+  --letra: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--letra);
+  font-size: 16px;
+  line-height: 1.55;
+}
+img { max-width: 100%; height: auto; }
+a { color: var(--oro); }
+a:hover { color: #E6C55A; }
+h1, h2, h3 { font-family: var(--titulos); letter-spacing: .02em; line-height: 1.2; margin: 0 0 .6em; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); }
+h3 { font-size: 1.05rem; }
+p { margin: 0 0 1em; }
+.contenedor { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 16px; }
+.suave { color: var(--texto-suave); }
+.pequeno { font-size: .875rem; }
+
+/* --- Encabezado ---------------------------------------------------------- */
+.encabezado {
+  border-bottom: 1px solid var(--borde);
+  background: rgba(14, 15, 18, .92);
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: blur(8px);
+}
+.encabezado .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.encabezado .logo img { height: 34px; width: auto; display: block; }
+.franjas { height: 4px; background: linear-gradient(90deg, var(--oro) 0 33.3%, var(--plata) 33.3% 66.6%, var(--rojo) 66.6%); }
+.menu { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.menu a { color: var(--plata); text-decoration: none; font-weight: 500; }
+.menu a:hover { color: var(--oro); }
+.menu form { margin: 0; }
+
+/* --- Botones ------------------------------------------------------------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px; border-radius: 8px; border: 1px solid transparent;
+  font: 600 .95rem var(--letra); text-decoration: none; cursor: pointer;
+  background: var(--oro); color: #111;
+}
+.boton:hover { background: #E6C55A; color: #111; }
+.boton.secundario { background: transparent; color: var(--plata); border-color: var(--borde); }
+.boton.secundario:hover { border-color: var(--plata); color: var(--texto); }
+.boton.peligro { background: transparent; color: #FF6B66; border-color: rgba(225, 6, 0, .45); }
+.boton.peligro:hover { background: var(--rojo-suave); }
+.boton.chico { padding: 6px 12px; font-size: .85rem; }
+button.enlace { background: none; border: 0; padding: 0; color: var(--plata); font: inherit; font-weight: 500; cursor: pointer; }
+button.enlace:hover { color: var(--oro); }
+
+/* --- Tarjetas y tablas ---------------------------------------------------- */
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: var(--radio); padding: 20px; }
+.rejilla { display: grid; gap: 16px; }
+.rejilla.dos { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.rejilla.tres { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.rejilla.cifras { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.cifra .numero { font-family: var(--titulos); font-size: 1.8rem; color: var(--oro); }
+.cifra .etiqueta { color: var(--texto-suave); font-size: .85rem; }
+
+.tabla-envoltura { overflow-x: auto; border: 1px solid var(--borde); border-radius: var(--radio); }
+table { width: 100%; border-collapse: collapse; background: var(--tarjeta); }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--texto-suave); background: var(--tarjeta-2); }
+tr:last-child td { border-bottom: 0; }
+td a { text-decoration: none; font-weight: 600; }
+
+/* --- Etiquetas de estado ------------------------------------------------- */
+.etiqueta-estado { display: inline-block; white-space: nowrap; flex-shrink: 0; padding: 2px 10px; border-radius: 999px; font-size: .8rem; font-weight: 600; border: 1px solid transparent; }
+.e-activo, .e-activa { background: var(--verde-suave); color: #6EDC7F; }
+.e-prueba, .e-proximamente { background: var(--oro-suave); color: var(--oro); }
+.e-pausado, .e-no_incluida, .e-cancelado { background: rgba(201, 206, 214, .1); color: var(--plata); }
+.e-atrasado, .e-bloqueada { background: var(--rojo-suave); color: #FF6B66; }
+.plan-basico { color: var(--plata); }
+.plan-profesional { color: var(--oro); }
+.plan-premium { color: #FF4A44; }
+
+/* --- Formularios ---------------------------------------------------------- */
+.formulario { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.formulario .campo.ancho { grid-column: 1 / -1; }
+.campo label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--plata); }
+.campo .ayuda { font-size: .82rem; color: var(--texto-suave); margin-top: 4px; }
+.campo .error { font-size: .85rem; color: #FF6B66; margin-top: 4px; }
+input, select, textarea {
+  width: 100%; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--borde); background: var(--tarjeta-2); color: var(--texto);
+  font: 1rem var(--letra);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--oro); outline-offset: 1px; border-color: transparent; }
+input[type="checkbox"] { width: auto; }
+input[type="file"] { padding: 8px; }
+.filtros { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; margin-bottom: 16px; }
+.filtros > * { flex: 1 1 160px; }
+.filtros .boton { flex: 0 0 auto; }
+
+/* --- Mensajes ------------------------------------------------------------- */
+.mensajes { list-style: none; padding: 0; margin: 16px 0; }
+.mensajes li { padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; background: var(--verde-suave); border: 1px solid rgba(63, 185, 80, .35); }
+.mensajes li.error { background: var(--rojo-suave); border-color: rgba(225, 6, 0, .4); }
+.aviso { padding: 12px 16px; border-radius: 8px; background: var(--oro-suave); border: 1px solid rgba(212, 175, 55, .4); color: var(--texto); margin-bottom: 20px; }
+.aviso.rojo { background: var(--rojo-suave); border-color: rgba(225, 6, 0, .4); }
+
+/* --- Página pública ------------------------------------------------------- */
+.portada { padding: 72px 0 48px; text-align: center; }
+.portada .logo-grande { width: min(560px, 90%); margin: 0 auto 28px; display: block; }
+.portada p.lema { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--plata); max-width: 720px; margin: 0 auto 28px; }
+.seccion { padding: 48px 0; }
+.plan { display: flex; flex-direction: column; position: relative; }
+.plan .precio { font-family: var(--titulos); font-size: 2rem; color: var(--oro); margin: 4px 0 12px; }
+.plan .precio small { font-size: .9rem; color: var(--texto-suave); font-family: var(--letra); }
+.plan ul { padding-left: 1.1em; margin: 0; }
+.plan li { margin-bottom: 6px; }
+.plan.destacado { border-color: var(--oro); box-shadow: 0 0 0 1px var(--oro) inset; }
+.plan .sello { position: absolute; top: -12px; right: 16px; background: var(--rojo); color: #fff; font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.legal { max-width: 820px; }
+.legal h2 { margin-top: 1.6em; font-size: 1.15rem; }
+.pie { border-top: 1px solid var(--borde); padding: 28px 0; margin-top: 48px; color: var(--texto-suave); font-size: .9rem; }
+.pie .contenedor { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.pie a { color: var(--plata); margin-right: 16px; }
+
+/* --- Panel ---------------------------------------------------------------- */
+.titulo-pagina { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin: 28px 0 20px; }
+.titulo-pagina h1 { margin: 0; }
+.lista-funciones { list-style: none; padding: 0; margin: 0; }
+.lista-funciones li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--borde); align-items: center; }
+.lista-funciones li:last-child { border-bottom: 0; }
+.datos { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+.datos dt { color: var(--texto-suave); }
+.datos dd { margin: 0; overflow-wrap: anywhere; }
+.logo-dealer { max-height: 64px; width: auto; background: #fff; border-radius: 6px; padding: 4px; }
+.entrar { max-width: 420px; margin: 56px auto; }
+
+@media (max-width: 600px) {
+  .encabezado .logo img { height: 28px; }
+  .menu { gap: 12px; font-size: .95rem; }
+  .portada { padding: 40px 0 24px; }
+}

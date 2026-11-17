@@ -1,0 +1,6 @@
+<div class="campo{% if ancho %} ancho{% endif %}">
+  <label for="{{ campo.id_for_label }}">{{ campo.label|capfirst }}{% if campo.field.required %} *{% endif %}</label>
+  {{ campo }}
+  {% if campo.help_text %}<div class="ayuda">{{ campo.help_text }}</div>{% endif %}
+  {% for e in campo.errors %}<div class="error">{{ e }}</div>{% endfor %}
+</div>

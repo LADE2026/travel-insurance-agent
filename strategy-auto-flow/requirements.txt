@@ -1,0 +1,7 @@
+# Programas (librerías) que la app necesita. Render los instala solo.
+Django==5.2.19
+django-environ==0.14.0
+whitenoise==6.12.0
+gunicorn==27.0.1
+psycopg[binary]==3.3.9
+Pillow==13.0.0

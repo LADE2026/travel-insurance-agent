@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load static humanize_saf %}
+{% block contenido %}
+<section class="portada">
+  <img class="logo-grande" src="{% static 'img/logo-oscuro.png' %}" alt="{{ EMPRESA_NOMBRE }}">
+  <h1>Más carros vendidos, menos trabajo</h1>
+  <p class="lema">Publicamos tu inventario en Facebook, Instagram y más, con descripciones y videos creados con inteligencia artificial, y contestamos a tus clientes las 24 horas. Para dealers en Puerto Rico y Estados Unidos.</p>
+  <a class="boton" href="#planes">Ver planes</a>
+  <a class="boton secundario" href="#contacto">Hablar con nosotros</a>
+</section>
+
+<section class="seccion" id="planes">
+  <h2>Planes</h2>
+  <p class="suave">Cada plan incluye todo lo del plan anterior. 30 días de prueba gratis.</p>
+  <div class="rejilla tres">
+    {% for plan in planes %}
+    <article class="tarjeta plan {% if plan.codigo == 'profesional' %}destacado{% endif %}">
+      {% if plan.codigo == 'profesional' %}<span class="sello">Más popular</span>{% endif %}
+      <h3 class="plan-{{ plan.codigo }}">{{ plan.nombre }}</h3>
+      <div class="precio">${{ plan.precio|dinero }} <small>/ mes</small></div>
+      {% if plan.hereda %}<p class="suave pequeno">Todo lo del plan anterior, más:</p>{% endif %}
+      <ul>{% for f in plan.nuevas %}<li>{{ f }}</li>{% endfor %}</ul>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="suave pequeno" style="margin-top:16px">Usamos solamente las conexiones oficiales de Meta, Google y TikTok. Nuestro asistente nunca promete aprobaciones de crédito, tasas ni precios finales: eso lo confirma siempre una persona del dealer.</p>
+</section>
+
+<section class="seccion" id="contacto">
+  <div class="tarjeta">
+    <h2>Contacto</h2>
+    <p>Escríbenos y coordinamos una demostración para tu dealer.</p>
+    <p><a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a>{% if EMPRESA_TELEFONO %} · {{ EMPRESA_TELEFONO }}{% endif %}</p>
+  </div>
+</section>
+{% endblock %}

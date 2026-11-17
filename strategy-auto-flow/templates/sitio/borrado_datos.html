@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titulo %}Borrado de datos · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<article class="legal seccion">
+  {% include "sitio/_aviso_borrador.html" %}
+  <h1>Instrucciones para borrar tus datos</h1>
+
+  <h2>Si eres cliente de un dealer (escribiste por Messenger, Instagram o WhatsApp)</h2>
+  <ol>
+    <li>Escríbenos a <a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a> con el asunto <strong>"Borrar mis datos"</strong>.</li>
+    <li>Incluye tu nombre, el nombre del dealer y el canal por el que escribiste (y tu número, si fue por WhatsApp).</li>
+    <li>Borraremos tus mensajes y datos de contacto en un máximo de 30 días y te confirmaremos por correo.</li>
+  </ol>
+  <p>Para dejar de recibir mensajes de inmediato, responde <strong>STOP</strong> o <strong>PARAR</strong> en la conversación.</p>
+
+  <h2>Si eres un dealer o empleado de un dealer</h2>
+  <ol>
+    <li>Puedes desconectar tu página de Facebook o tu cuenta de Instagram desde la configuración de Facebook: <em>Configuración → Integraciones comerciales</em>, y quitar a {{ EMPRESA_NOMBRE }}.</li>
+    <li>Para borrar toda la información de tu dealer, escríbenos a <a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a> desde el correo registrado.</li>
+  </ol>
+</article>
+{% endblock %}

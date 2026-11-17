@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titulo %}Términos de servicio · {{ EMPRESA_NOMBRE }}{% endblock %}
+{% block contenido %}
+<article class="legal seccion">
+  {% include "sitio/_aviso_borrador.html" %}
+  <h1>Términos de servicio</h1>
+  <p class="suave">Última actualización: {% now "j \d\e F \d\e Y" %}</p>
+
+  <h2>1. El servicio</h2>
+  <p>{{ EMPRESA_NOMBRE }} ofrece a dealers de autos herramientas de mercadeo: publicación de inventario en redes sociales, textos y videos creados con inteligencia artificial y, según el plan, atención automática de mensajes, citas, seguimiento e informes.</p>
+
+  <h2>2. Planes, pagos y pausa</h2>
+  <p>El servicio se cobra por mes según el plan contratado, con una prueba gratis de 30 días. El dealer puede pausar o cancelar el servicio. Si un pago no se completa, las funciones automáticas se detienen hasta que se ponga al día.</p>
+
+  <h2>3. Responsabilidades del dealer</h2>
+  <ul>
+    <li>Que la información de los vehículos (precio, millaje, equipo, estado) sea correcta.</li>
+    <li>Tener derecho a usar las fotos y logos que nos entrega.</li>
+    <li>Cumplir las leyes aplicables de publicidad, protección al consumidor y venta de vehículos.</li>
+  </ul>
+
+  <h2>4. Inteligencia artificial</h2>
+  <p>Los textos y respuestas automáticas se generan con inteligencia artificial y pueden contener errores. El asistente nunca promete aprobaciones de crédito, tasas de interés ni precios finales; esas condiciones las confirma siempre una persona del dealer.</p>
+
+  <h2>5. Plataformas de terceros</h2>
+  <p>Usamos solamente las conexiones oficiales (API) de Meta, Google, TikTok y otras plataformas. Estas plataformas pueden cambiar sus reglas o limitar funciones, y no somos responsables de esos cambios.</p>
+
+  <h2>6. Limitación de responsabilidad</h2>
+  <p>El servicio se ofrece "tal cual". En la medida que la ley lo permita, nuestra responsabilidad total se limita a lo pagado por el dealer en los últimos tres meses.</p>
+
+  <h2>7. Contacto</h2>
+  <p><a href="mailto:{{ EMPRESA_EMAIL }}">{{ EMPRESA_EMAIL }}</a></p>
+</article>
+{% endblock %}
